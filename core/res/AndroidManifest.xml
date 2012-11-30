@@ -5082,6 +5082,9 @@
     <permission android:name="android.permission.INPUT_CONSUMER"
                 android:protectionLevel="signature" />
 
+    <permission android:name="lineage.permission.PREVENT_POWER_KEY"
+                android:protectionLevel="signature|privileged" />
+
     <!-- Attribution for Country Detector. -->
     <attribution android:tag="CountryDetector" android:label="@string/country_detector"/>
     <!-- Attribution for Location service. -->
