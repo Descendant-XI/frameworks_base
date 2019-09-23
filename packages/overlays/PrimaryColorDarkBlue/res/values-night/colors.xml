@@ -44,5 +44,6 @@
 
     <!-- The color of the background in the bottom part of QSCustomizer -->
     <color name="qs_customize_decoration">#0d2029</color>
-</resources>
 
+    <color name="vol_pan_bkg_transparent">#B3182a33</color>
+</resources>
