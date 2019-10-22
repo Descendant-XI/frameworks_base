@@ -16,6 +16,9 @@
 
 package com.android.systemui.statusbar.policy;
 
+import static com.android.systemui.statusbar.NotificationLockscreenUserManager
+        .NOTIFICATION_UNLOCKED_BY_WORK_CHALLENGE_ACTION;
+import static com.android.systemui.statusbar.NotificationLockscreenUserManager.PERMISSION_SELF;
 import static com.android.systemui.statusbar.notification.row.NotificationRowContentBinder.FLAG_CONTENT_VIEW_HEADS_UP;
 
 import android.annotation.NonNull;
@@ -32,6 +35,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.AlertingNotificationManager;
+import com.android.systemui.statusbar.NotificationLockscreenUserManager;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.statusbar.notification.row.NotificationRowContentBinder.InflationFlag;
 
@@ -55,6 +59,7 @@ public abstract class HeadsUpManager extends AlertingNotificationManager {
     protected int mSnoozeLengthMs;
     protected boolean mHasPinnedNotification;
     protected int mUser;
+    protected NotificationLockscreenUserManager mLockscreenUserManager;
 
     private final ArrayMap<String, Long> mSnoozedPackages;
     private final AccessibilityManagerWrapper mAccessibilityMgr;
@@ -75,6 +80,7 @@ public abstract class HeadsUpManager extends AlertingNotificationManager {
         ContentObserver settingsObserver = new ContentObserver(mHandler) {
             @Override
             public void onChange(boolean selfChange) {
+                int dontTouchStatus = 0;
                 final int packageSnoozeLengthMs = Settings.Global.getInt(
                         context.getContentResolver(), SETTING_HEADS_UP_SNOOZE_LENGTH_MS, -1);
                 if (packageSnoozeLengthMs > -1 && packageSnoozeLengthMs != mSnoozeLengthMs) {
@@ -83,10 +89,23 @@ public abstract class HeadsUpManager extends AlertingNotificationManager {
                         Log.v(TAG, "mSnoozeLengthMs = " + mSnoozeLengthMs);
                     }
                 }
+                try {
+                    dontTouchStatus = Settings.System.getIntForUser(context.getContentResolver(),
+                        Settings.System.DONT_TOUCH_NOTIFICATION, 0);
+                } catch (android.provider.Settings.SettingNotFoundException e) {
+                }
+                if (dontTouchStatus == 1) {
+                    mTouchAcceptanceDelay = 5200;
+                } else {
+                    mTouchAcceptanceDelay = resources.getInteger(R.integer.touch_acceptance_delay);
+                }
             }
         };
         context.getContentResolver().registerContentObserver(
                 Settings.Global.getUriFor(SETTING_HEADS_UP_SNOOZE_LENGTH_MS), false,
+                settingsObserver);
+        context.getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.DONT_TOUCH_NOTIFICATION), false,
                 settingsObserver);
     }
 

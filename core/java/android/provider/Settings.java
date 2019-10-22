@@ -4861,6 +4861,12 @@ public final class Settings {
         public static final String WEATHER_DATA = "weather_data";
 
         /**
+         * Avoid touches on heads-up
+         * @hide
+         */
+        public static final String DONT_TOUCH_NOTIFICATION = "dont_touch_notification";
+
+        /*
          * Descendant Settings Card Hiding
          */
 
