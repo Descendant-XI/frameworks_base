@@ -25,6 +25,7 @@ import static android.os.Process.FIRST_APPLICATION_UID;
 import static android.provider.Settings.Secure.VOLUME_HUSH_MUTE;
 import static android.provider.Settings.Secure.VOLUME_HUSH_OFF;
 import static android.provider.Settings.Secure.VOLUME_HUSH_VIBRATE;
+import static android.provider.Settings.Secure.VOLUME_HUSH_DND;
 
 import android.Manifest;
 import android.annotation.IntDef;
@@ -3412,18 +3413,34 @@ public class AudioService extends IAudioService.Stub
                     Settings.Secure.VOLUME_HUSH_GESTURE, VOLUME_HUSH_OFF,
                     UserHandle.USER_CURRENT);
         }
+        AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        int amStatus = am.getRingerMode();
+        NotificationManager nM = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (amStatus == AudioManager.RINGER_MODE_SILENT || amStatus == AudioManager.RINGER_MODE_VIBRATE) {
+            effect = VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK);
+            ringerMode = AudioManager.RINGER_MODE_NORMAL;
+            mStreamStates[AudioSystem.STREAM_MUSIC].mute(false);
+            toastText = com.android.internal.R.string.volume_dialog_ringer_guidance_ring;
+            nM.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL);
+        } else {
+            switch(silenceRingerSetting) {
+                case VOLUME_HUSH_MUTE:
+                    effect = VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK);
+                    ringerMode = AudioManager.RINGER_MODE_SILENT;
+                    toastText = com.android.internal.R.string.volume_dialog_ringer_guidance_silent;
+                    break;
+                case VOLUME_HUSH_VIBRATE:
+                    effect = VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK);
+                    ringerMode = AudioManager.RINGER_MODE_VIBRATE;
+                    toastText = com.android.internal.R.string.volume_dialog_ringer_guidance_vibrate;
+                    break;
+                case VOLUME_HUSH_DND:
+                    effect = VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK);
+                    nM.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_NONE);
+                    toastText = com.android.internal.R.string.volume_dialog_ringer_guidance_dnd;
+                    break;
+             }
 
-        switch(silenceRingerSetting) {
-            case VOLUME_HUSH_MUTE:
-                effect = VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK);
-                ringerMode = AudioManager.RINGER_MODE_SILENT;
-                toastText = com.android.internal.R.string.volume_dialog_ringer_guidance_silent;
-                break;
-            case VOLUME_HUSH_VIBRATE:
-                effect = VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK);
-                ringerMode = AudioManager.RINGER_MODE_VIBRATE;
-                toastText = com.android.internal.R.string.volume_dialog_ringer_guidance_vibrate;
-                break;
         }
         maybeVibrate(effect, reason);
         setRingerModeInternal(ringerMode, reason);

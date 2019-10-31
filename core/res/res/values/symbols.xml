@@ -1036,8 +1036,10 @@
   <java-symbol type="string" name="volume_icon_description_media" />
   <java-symbol type="string" name="volume_icon_description_notification" />
   <java-symbol type="string" name="volume_icon_description_ringer" />
+  <java-symbol type="string" name="volume_dialog_ringer_guidance_ring" />
   <java-symbol type="string" name="volume_dialog_ringer_guidance_vibrate" />
   <java-symbol type="string" name="volume_dialog_ringer_guidance_silent" />
+  <java-symbol type="string" name="volume_dialog_ringer_guidance_dnd" />
   <java-symbol type="string" name="wait" />
   <java-symbol type="string" name="webpage_unresponsive" />
   <java-symbol type="string" name="whichApplication" />
