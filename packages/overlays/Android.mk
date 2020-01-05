@@ -74,6 +74,7 @@ LOCAL_REQUIRED_MODULES := \
 	IconShapeVesselOverlay \
 	IconShapeCircleOverlay \
     PrimaryColorGreyOverlay \
+	PrimaryColorDarkBlueOverlay \
 	NavigationBarMode3ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
 	NavigationBarModeGesturalOverlayNarrowBack \
