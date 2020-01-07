@@ -2,4 +2,6 @@
     <string name="unknown_battery_level">Unknown</string>
     <!-- Change clockface -->
     <string name="change_clock_face">Swipe to change the clock face</string>
+    <string name="clock_title_samsung" translatable="false">Samsung</string>
+    <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
 </resources>
