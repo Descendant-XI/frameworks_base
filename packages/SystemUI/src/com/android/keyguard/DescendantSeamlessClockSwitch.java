@@ -23,6 +23,7 @@ public class DescendantSeamlessClockSwitch {
 
     private static final String[] CLOCK_FACES = {
         "com.android.keyguard.clock.DefaultClockController",
+        "com.android.keyguard.clock.SfunyClockController",
         "com.android.keyguard.clock.BubbleClockController",
         "com.android.keyguard.clock.AnalogClockController"
     };
