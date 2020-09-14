@@ -4796,6 +4796,11 @@ public final class Settings {
         public static final String PAUSE_AUDIO_STREAM = "pause_audio_stream";
 
         /**
+         * Descendant Storage Man
+         */
+        public static final String DESCENDANT_STORAGE_MANAGER = "descendant_storage_manager";
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
