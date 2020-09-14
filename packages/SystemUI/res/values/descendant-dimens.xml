@@ -1,4 +1,5 @@
 <resources>
+    <!-- volume -->
     <dimen name="borderless_button_radius">28dp</dimen>
     <dimen name="volume_dialog_row_margin_top">-121dp</dimen>
     <dimen name="volume_dialog_panel_width">25dp</dimen>
@@ -29,5 +30,6 @@
     <dimen name="bt_tool_tip_bottom_margin">150dp</dimen>
     <dimen name="expand_right_margin">38dp</dimen>
     <dimen name="expand_bottom_margin">85dp</dimen>
-<dimen name="odi_captions_margin_right">0dp</dimen>
+    <dimen name="odi_captions_margin_right">0dp</dimen>
+    <!-- volume end -->
 </resources>
