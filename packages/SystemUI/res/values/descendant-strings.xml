@@ -4,4 +4,16 @@
     <string name="change_clock_face">Swipe to change the clock face</string>
     <string name="clock_title_samsung" translatable="false">Samsung</string>
     <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
+
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Descendant Health</string>
+    <string name="descendant_health_eyestrain_title">Eyestrain alert</string>
+    <string name="descendant_health_eyestrain_summary">It seems that you\'ve used your phone for one hour continously.\nConsider to take a break, it may reduce the incidence of eye fatigue.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://en.wikipedia.org/wiki/Eye_strain</string>
+    <string name="descendant_health_eyestrain_info">About eyestrain</string>
+    <string name="descendant_health_eyestrain_nightlight">Setup Night Light</string>
+
+    <string name="descendant_health_sleep_title">Sleep advisor</string>
+    <string name="descendant_health_sleep_summary">It seems that you have an alarm set soon.\nIf your phone is avoiding your sleep with notifications, setup Do Not Disturb.</string>
+    <string name="descendant_health_sleep_dnd">Setup Do Not Disturb</string>
 </resources>

@@ -139,8 +139,10 @@ import com.android.systemui.ActivityIntentHelper;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.DemoMode;
+import com.android.systemui.DescendantHealth;
 import com.android.systemui.DescendantIdleManager;
 import com.android.systemui.DescendantStorageManager;
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.Dumpable;
 import com.android.systemui.EventLogTags;
 import com.android.systemui.InitController;
@@ -233,6 +235,7 @@ import com.android.systemui.volume.VolumeComponent;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Executor;
@@ -401,6 +404,12 @@ public class StatusBar extends SystemUI implements DemoMode,
     // expanded notifications
     // the sliding/resizing panel within the notification window
     protected NotificationPanelViewController mNotificationPanelViewController;
+
+    // Descendant Health
+    private boolean isHealthAdviceSpawned = false;
+    private Handler handlerHealth = new Handler();
+    private Calendar cal = Calendar.getInstance();
+    private static final long HRS_OF_SLEEP_EXPECTED = 25200000;
 
     // Descendant Idle
     private boolean isIdleManagerIstantiated = false;
@@ -3580,6 +3589,29 @@ public class StatusBar extends SystemUI implements DemoMode,
                 mAmbientIndicationContainer.setVisibility(View.VISIBLE);
             }
         } else {
+            if (!mPanelExpanded) {
+                if (DescendantSystemUIUtils.settingStatusBoolean("descendant_health", mContext)) {
+                    handlerHealth.postDelayed(() -> {
+                        DescendantHealth.wakeTooLong(mContext);
+                    },3600000);
+                    int hour = cal.get(Calendar.HOUR_OF_DAY);
+                    if (!isHealthAdviceSpawned) {
+                        if (hour >= 0 && hour < 9) {
+                            if (HRS_OF_SLEEP_EXPECTED > DescendantIdleManager.msTillAlarm(mContext) &&
+                                    DescendantIdleManager.msTillAlarm(mContext) != 0) {
+                                isHealthAdviceSpawned = true;
+                                Handler hSleep = new Handler();
+                                hSleep.postDelayed(() -> {
+                                    DescendantHealth.getSomeSleep(mContext);
+                                },3000);
+                            }
+                        }
+                    } else {
+                        if (hour > 9)
+                            isHealthAdviceSpawned = false;
+                    }
+                }
+            }
             if (mKeyguardUserSwitcher != null) {
                 mKeyguardUserSwitcher.setKeyguard(false,
                         mStatusBarStateController.goingToFullShade() ||
@@ -3789,6 +3821,11 @@ public class StatusBar extends SystemUI implements DemoMode,
             mBypassHeadsUpNotifier.setFullyAwake(false);
             mKeyguardBypassController.onStartedGoingToSleep();
             DejankUtils.stopDetectingBlockingIpcs(tag);
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                                              Settings.System.DESCENDANT_HEALTH, 1,
+                                              mLockscreenUserManager.getCurrentUserId()) == 1) {
+                handlerHealth.removeCallbacksAndMessages(null);
+            }
             if (Settings.System.getIntForUser(mContext.getContentResolver(),
                                               Settings.System.DESCENDANT_STORAGE_MANAGER, 1,
                                               mLockscreenUserManager.getCurrentUserId()) == 1) {
