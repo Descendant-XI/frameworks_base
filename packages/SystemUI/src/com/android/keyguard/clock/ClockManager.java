@@ -150,6 +150,8 @@ public final class ClockManager {
         LayoutInflater layoutInflater = injectionInflater.injectable(LayoutInflater.from(context));
 
         addBuiltinClock(() -> new DefaultClockController(res, layoutInflater, colorExtractor));
+        addBuiltinClock(() -> new BubbleClockController(res, layoutInflater, colorExtractor));
+        addBuiltinClock(() -> new AnalogClockController(res, layoutInflater, colorExtractor));
 
         // Store the size of the display for generation of clock preview.
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -210,8 +212,7 @@ public final class ClockManager {
         return mContentObserver;
     }
 
-    @VisibleForTesting
-    void addBuiltinClock(Supplier<ClockPlugin> pluginSupplier) {
+    private void addBuiltinClock(Supplier<ClockPlugin> pluginSupplier) {
         ClockPlugin plugin = pluginSupplier.get();
         mPreviewClocks.addClockPlugin(plugin);
         mBuiltinClocks.add(pluginSupplier);

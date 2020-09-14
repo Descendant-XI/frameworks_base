@@ -95,8 +95,6 @@ public final class ClockManagerTest extends SysuiTestCase {
                 mMockPluginManager, mMockColorExtractor, mMockContentResolver,
                 mMockCurrentUserObserable, mMockSettingsWrapper, mFakeDockManager);
 
-        mClockManager.addBuiltinClock(() -> new BubbleClockController(
-                getContext().getResources(), inflater, mMockColorExtractor));
         mClockManager.addOnClockChangedListener(mMockListener1);
         mClockManager.addOnClockChangedListener(mMockListener2);
         reset(mMockListener1, mMockListener2);
