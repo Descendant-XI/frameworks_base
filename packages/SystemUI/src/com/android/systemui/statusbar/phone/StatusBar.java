@@ -139,6 +139,7 @@ import com.android.systemui.ActivityIntentHelper;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.DemoMode;
+import com.android.systemui.DescendantIdleManager;
 import com.android.systemui.DescendantStorageManager;
 import com.android.systemui.Dumpable;
 import com.android.systemui.EventLogTags;
@@ -400,6 +401,9 @@ public class StatusBar extends SystemUI implements DemoMode,
     // expanded notifications
     // the sliding/resizing panel within the notification window
     protected NotificationPanelViewController mNotificationPanelViewController;
+
+    // Descendant Idle
+    private boolean isIdleManagerIstantiated = false;
 
     // settings
     private QSPanel mQSPanel;
@@ -3790,6 +3794,17 @@ public class StatusBar extends SystemUI implements DemoMode,
                                               mLockscreenUserManager.getCurrentUserId()) == 1) {
                     DescendantStorageManager.cacheCleaner(getPackageManagerForUser(mContext, mLockscreenUserManager.getCurrentUserId()));
             }
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                                              Settings.System.DESCENDANT_IDLE_MANAGER, 1,
+                                              mLockscreenUserManager.getCurrentUserId()) == 1) {
+                if (!isIdleManagerIstantiated) {
+                    DescendantIdleManager.initManager(mContext);
+                    isIdleManagerIstantiated = true;
+                    DescendantIdleManager.executeManager();
+                } else {
+                    DescendantIdleManager.executeManager();
+                }
+            }
 
         }
 
@@ -3812,6 +3827,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateNotificationPanelTouchState();
             mPulseExpansionHandler.onStartedWakingUp();
             DejankUtils.stopDetectingBlockingIpcs(tag);
+            if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                                              Settings.System.DESCENDANT_IDLE_MANAGER, 1,
+                                              mLockscreenUserManager.getCurrentUserId()) == 1) {
+                DescendantIdleManager.haltManager();
+            }
+
         }
 
         @Override

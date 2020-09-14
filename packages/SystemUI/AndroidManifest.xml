@@ -267,6 +267,13 @@
     <!-- Permission to make accessibility service access Bubbles -->
     <uses-permission android:name="android.permission.ADD_TRUSTED_DISPLAY" />
 
+    <!-- Permission needed for Descendant Idle Manager -->
+    <!-- Sync settings -->
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <!-- Kill the shit -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+
     <!-- Permission needed for Descendant Storage Manager -->
     <!-- Clear cache -->
     <uses-permission android:name="android.permission.INTERNAL_DELETE_CACHE_FILES"/>
