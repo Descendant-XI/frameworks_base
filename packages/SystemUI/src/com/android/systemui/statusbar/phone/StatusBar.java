@@ -66,6 +66,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -73,6 +74,7 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
+import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.media.AudioAttributes;
@@ -413,6 +415,10 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     // Descendant Idle
     private boolean isIdleManagerIstantiated = false;
+
+    // Hide notif icons
+    private boolean mHideNotificationIconsStatusBar;
+
 
     // settings
     private QSPanel mQSPanel;
@@ -885,6 +891,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         createAndAddWindows(result);
 
+        mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
+
         if (mWallpaperSupported) {
             // Make sure we always have the most current wallpaper info.
             IntentFilter wallpaperChangedFilter = new IntentFilter(Intent.ACTION_WALLPAPER_CHANGED);
@@ -1061,7 +1070,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                     mStatusBarView.setBar(this);
                     mStatusBarView.setPanel(mNotificationPanelViewController);
                     mStatusBarView.setScrimController(mScrimController);
-
+                    hideNotificationIconsStatusBar();
                     statusBarFragment.initNotificationIconArea(mNotificationIconAreaController);
                     // CollapsedStatusBarFragment re-inflated PhoneStatusBarView and both of
                     // mStatusBarView.mExpanded and mStatusBarView.mBouncerShowing are false.
@@ -1402,6 +1411,11 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void inflateShelf() {
         mNotificationShelf = mSuperStatusBarViewFactory.getNotificationShelf(mStackScroller);
         mNotificationShelf.setOnClickListener(mGoToLockedShadeListener);
+    }
+
+    private void hideNotificationIconsStatusBar() {
+        mHideNotificationIconsStatusBar = DescendantSystemUIUtils.settingStatusBoolean("hide_notification_icons_statusbar", mContext);
+        if (mStatusBarView != null) mStatusBarView.findViewById(R.id.notification_icon_area).setVisibility(mHideNotificationIconsStatusBar ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
@@ -1950,6 +1964,32 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     public NotificationPresenter getPresenter() {
         return mPresenter;
+    }
+
+    private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+    private class CustomSettingsObserver extends ContentObserver {
+
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR),
+                    false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR))) {
+                hideNotificationIconsStatusBar();
+            }
+        }
+
+        public void update() {
+            hideNotificationIconsStatusBar();
+        }
     }
 
     @VisibleForTesting
