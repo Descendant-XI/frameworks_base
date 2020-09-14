@@ -1,3 +1,5 @@
 <resources>
     <string name="unknown_battery_level">Unknown</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Swipe to change the clock face</string>
 </resources>
