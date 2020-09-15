@@ -20,6 +20,7 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -27,6 +28,8 @@ import android.util.Log;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.systemui.appops.DescendantGuardia;
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.Dumpable;
 import com.android.systemui.dagger.qualifiers.Background;
 import com.android.systemui.dump.DumpManager;
@@ -56,11 +59,13 @@ public class AppOpsControllerImpl implements AppOpsController,
     // notified to listeners.
     private static final long NOTED_OP_TIME_DELAY_MS = 5000;
     private static final String TAG = "AppOpsControllerImpl";
+    private static final String TAGGUARDIA = "DescendantGuardia";
     private static final boolean DEBUG = false;
     private final Context mContext;
 
     private final AppOpsManager mAppOps;
     private H mBGHandler;
+    private Handler mDescendantGuardiaHandler;
     private final List<AppOpsController.Callback> mCallbacks = new ArrayList<>();
     private final ArrayMap<Integer, Set<Callback>> mCallbacksByCode = new ArrayMap<>();
     private boolean mListening;
@@ -90,6 +95,7 @@ public class AppOpsControllerImpl implements AppOpsController,
         for (int i = 0; i < numOps; i++) {
             mCallbacksByCode.put(OPS[i], new ArraySet<>());
         }
+        mDescendantGuardiaHandler = new Handler();
         dumpManager.registerDumpable(TAG, this);
     }
 
@@ -208,6 +214,15 @@ public class AppOpsControllerImpl implements AppOpsController,
             active = getAppOpItemLocked(mActiveItems, code, uid, packageName) != null;
         }
         if (!active) {
+            if (DescendantSystemUIUtils.settingStatusBoolean("descendant_guardia", mContext)) {
+                if (SystemProperties.getBoolean("descendant.debug", false)) Log.d(TAGGUARDIA, "inactive remove noted");
+                mDescendantGuardiaHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DescendantGuardia.warnNotif(mContext, packageName, code, true);
+                    }
+                }, 6000);
+            }
             notifySuscribers(code, uid, packageName, false);
         }
     }
@@ -221,6 +236,18 @@ public class AppOpsControllerImpl implements AppOpsController,
                 item = new AppOpItem(code, uid, packageName, System.currentTimeMillis());
                 mNotedItems.add(item);
                 if (DEBUG) Log.w(TAG, "Added item: " + item.toString());
+                if (DescendantSystemUIUtils.settingStatusBoolean("descendant_guardia", mContext)) {
+                    if (SystemProperties.getBoolean("descendant.debug", false)) {
+                        Log.d(TAGGUARDIA, "active addnotes");
+                        Log.d(TAGGUARDIA, "passing: " + String.valueOf(packageName) + " " + String.valueOf(code));
+                    }
+                    mDescendantGuardiaHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            DescendantGuardia.warnNotif(mContext, packageName, code, false);
+                        }
+                    }, 1);
+                }
                 createdNew = true;
             }
         }
@@ -277,6 +304,29 @@ public class AppOpsControllerImpl implements AppOpsController,
         if (DEBUG) {
             Log.w(TAG, String.format("onActiveChanged(%d,%d,%s,%s", code, uid, packageName,
                     Boolean.toString(active)));
+        }
+        if (DescendantSystemUIUtils.settingStatusBoolean("descendant_guardia", mContext)) {
+            if (active) {
+                if (SystemProperties.getBoolean("descendant.debug", false)) {
+                    Log.d(TAGGUARDIA, "active");
+                    Log.d(TAGGUARDIA, "passing: " + String.valueOf(packageName) + " " + String.valueOf(code));
+                }
+                mDescendantGuardiaHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DescendantGuardia.warnNotif(mContext, packageName, code, false);
+                    }
+                }, 1);
+            } else {
+                if (SystemProperties.getBoolean("descendant.debug", false))
+                    Log.d(TAGGUARDIA, "inactive");
+                mDescendantGuardiaHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DescendantGuardia.warnNotif(mContext, packageName, code, true);
+                    }
+                }, 6000);
+            }
         }
         boolean activeChanged = updateActives(code, uid, packageName, active);
         if (!activeChanged) return; // early return

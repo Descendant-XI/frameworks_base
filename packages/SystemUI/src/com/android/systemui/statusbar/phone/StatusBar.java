@@ -137,6 +137,7 @@ import com.android.internal.view.AppearanceRegion;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.ViewMediatorCallback;
+import com.android.systemui.appops.DescendantGuardia;
 import com.android.systemui.ActivityIntentHelper;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.DejankUtils;
@@ -1418,6 +1419,14 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mStatusBarView != null) mStatusBarView.findViewById(R.id.notification_icon_area).setVisibility(mHideNotificationIconsStatusBar ? View.INVISIBLE : View.VISIBLE);
     }
 
+    private void descendantGuardia() {
+        DescendantGuardia.dismissGuardia(DescendantSystemUIUtils.settingStatusBoolean("descendant_guardia", mContext));
+    }
+
+    private void descendantGuardiaTypeNotif() {
+        if (!DescendantSystemUIUtils.settingStatusBoolean("descendant_guardia_type_notif", mContext)) DescendantGuardia.dismissGuardia(false);
+    }
+
     @Override
     public void onDensityOrFontScaleChanged() {
         // TODO: Remove this.
@@ -1984,10 +1993,17 @@ public class StatusBar extends SystemUI implements DemoMode,
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR))) {
                 hideNotificationIconsStatusBar();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_GUARDIA))) {
+                descendantGuardia();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_GUARDIA_TYPE_NOTIF))) {
+                descendantGuardiaTypeNotif();
             }
+
         }
 
         public void update() {
+            descendantGuardia();
+            descendantGuardiaTypeNotif();
             hideNotificationIconsStatusBar();
         }
     }

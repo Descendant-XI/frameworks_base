@@ -4816,6 +4816,30 @@ public final class Settings {
         public static final String HIDE_NOTIFICATION_ICONS_STATUSBAR = "hide_notification_icons_statusbar";
 
         /**
+         * Descendant Guardia
+         */
+        public static final String DESCENDANT_GUARDIA = "descendant_guardia";
+
+        /** Descendant Guardia Exclude Gapps **/
+        public static final String DESCENDANT_GUARDIA_EXCLUDE_GAPPS = "descendant_guardia_exclude_gapps";
+
+        /** Descendant Guardia Exclude System Apps **/
+        public static final String DESCENDANT_GUARDIA_EXCLUDE_SYSTEM_APPS = "descendant_guardia_exclude_system_apps";
+
+        /** Descendant Guardia Notif Type **/
+        public static final String DESCENDANT_GUARDIA_TYPE_NOTIF = "descendant_guardia_type_notif";
+
+        /** Descendant Guardia Alerts **/
+        public static final String DESCENDANT_GUARDIA_ALERT_ME = "descendant_guardia_alert_me";
+        public static final String DESCENDANT_GUARDIA_IS_GPS_ALERT = "descendant_guardia_is_gps_alert";
+        public static final String DESCENDANT_GUARDIA_IS_CAMERA_ALERT = "descendant_guardia_is_camera_alert";
+        public static final String DESCENDANT_GUARDIA_IS_RECORD_AUDIO_ALERT = "descendant_guardia_is_record_audio_alert";
+        public static final String DESCENDANT_GUARDIA_IS_PHONE_ALERT = "descendant_guardia_is_phone_alert";
+        public static final String DESCENDANT_GUARDIA_IS_CLIPBOARD_READ_ALERT = "descendant_guardia_is_clipboard_read_alert";
+        public static final String DESCENDANT_GUARDIA_IS_CLIPBOARD_WRITE_ALERT = "descendant_guardia_is_clipboard_write_alert";
+
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate

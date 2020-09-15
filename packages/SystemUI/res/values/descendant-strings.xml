@@ -16,4 +16,21 @@
     <string name="descendant_health_sleep_title">Sleep advisor</string>
     <string name="descendant_health_sleep_summary">It seems that you have an alarm set soon.\nIf your phone is avoiding your sleep with notifications, setup Do Not Disturb.</string>
     <string name="descendant_health_sleep_dnd">Setup Do Not Disturb</string>
+
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">phone</string>
+    <string name="descendant_guardia_record_audio_perm">microphone</string>
+    <string name="descendant_guardia_camera_perm">camera</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Application</string>
+    <string name="descendant_guardia_is_accessing">is accessing</string>
+    <string name="descendant_guardia_listening_state">Listening for apps...</string>
+    <string name="descendant_guardia_clipboard_read">clipboard with reading permission</string>
+    <string name="descendant_guardia_clipboard_write">clipboard with writing permission</string>
+    <string name="descendant_guardia_monitoring">Monitoring</string>
+    <string name="descendant_guardia_detection">Detection</string>
+    <string name="descendant_guardia_appname">Descendant Guardia</string>
+    <string name="descendant_guardia_acknowledge">Acknowledged</string>
+
 </resources>
