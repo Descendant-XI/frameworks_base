@@ -4838,6 +4838,20 @@ public final class Settings {
         public static final String DESCENDANT_GUARDIA_IS_CLIPBOARD_READ_ALERT = "descendant_guardia_is_clipboard_read_alert";
         public static final String DESCENDANT_GUARDIA_IS_CLIPBOARD_WRITE_ALERT = "descendant_guardia_is_clipboard_write_alert";
 
+        /**
+         * Descendant Clock Flow
+         */
+        public static final String DESCENDANT_CLOCK_FLOW = "descendant_clock_flow";
+
+        /**
+         * Descendant Clock Flow
+         */
+        public static final String DESCENDANT_CLOCK_FLOW_SELECTOR = "descendant_clock_flow_selector";
+
+        /**
+         * Descendant Clock Flow
+         */
+        public static final String DESCENDANT_CLOCK_FLOW_EXCL_HEADSUP = "descendant_clock_flow_excl_headsup";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to

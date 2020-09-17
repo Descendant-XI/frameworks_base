@@ -21,6 +21,7 @@ import android.app.IActivityManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -32,6 +33,7 @@ import android.util.Slog;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,6 +41,8 @@ import androidx.core.graphics.ColorUtils;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.systemui.Dependency;
+import com.android.systemui.DescendantSystemUIAnimations;
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 
@@ -51,10 +55,13 @@ public class KeyguardStatusView extends GridLayout implements
         ConfigurationController.ConfigurationListener {
     private static final boolean DEBUG = KeyguardConstants.DEBUG;
     private static final String TAG = "KeyguardStatusView";
+    private static final String FLOW_TAG = "DescendantClockFlow";
     private static final int MARQUEE_DELAY_MS = 2000;
 
     private final LockPatternUtils mLockPatternUtils;
     private final IActivityManager mIActivityManager;
+
+    private ImageView mAODClockBackground;
 
     private LinearLayout mStatusViewContainer;
     private TextView mLogoutView;
@@ -182,6 +189,7 @@ public class KeyguardStatusView extends GridLayout implements
         mStatusViewContainer = findViewById(R.id.status_view_container);
         mLogoutView = findViewById(R.id.logout);
         mNotificationIcons = findViewById(R.id.clock_notification_icon_container);
+        mAODClockBackground = findViewById(R.id.clock_bkg);
         if (mLogoutView != null) {
             mLogoutView.setOnClickListener(this::onLogoutClicked);
         }
@@ -454,4 +462,29 @@ public class KeyguardStatusView extends GridLayout implements
             Log.e(TAG, "Failed to logout user", re);
         }
     }
+
+    public void animateAODClockBackgroundTransition(boolean hasToBeShown) {
+        mAODClockBackground.setVisibility(hasToBeShown ? View.VISIBLE : View.GONE);
+    }
+
+    public void rotateAODClockBackground(boolean state, boolean isPinwheel) {
+        DescendantSystemUIAnimations.aodBackgroundRotation(mAODClockBackground,state,isPinwheel);
+    }
+
+    public void animateAODClockColor(float[] color) {
+        if (color == null) {
+            Log.e(FLOW_TAG, "color array is null! Returning!");
+            return;
+        }
+        mAODClockBackground.animate().alpha(0.f).setDuration(150).withEndAction(() -> {
+            mAODClockBackground.setColorFilter(new ColorMatrixColorFilter(color));
+            mAODClockBackground.animate().alpha(1f).setDuration(250).withEndAction(() -> {
+                mAODClockBackground.animate().alpha(0.f).setStartDelay(1200).setDuration(150).withEndAction(() -> {
+                    mAODClockBackground.setColorFilter(0);
+                    mAODClockBackground.animate().alpha(1f).setDuration(250).start();
+                }).start();
+            }).start();
+        }).start();
+    }
+
 }

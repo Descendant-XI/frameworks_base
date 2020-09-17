@@ -70,6 +70,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.om.IOverlayManager;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -420,6 +421,11 @@ public class StatusBar extends SystemUI implements DemoMode,
     // Hide notif icons
     private boolean mHideNotificationIconsStatusBar;
 
+    // Descendant Clock Flow
+    private boolean mDescendantClockFlow;
+    private int mDescendantClockFlowThemeSetting;
+    private int mDescendantClockFlowStyle;
+    private IOverlayManager mOverlayManager;
 
     // settings
     private QSPanel mQSPanel;
@@ -838,6 +844,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
 
         DateTimeView.setReceiverHandler(timeTickHandler);
+        mOverlayManager = IOverlayManager.Stub.asInterface(
+                ServiceManager.getService(Context.OVERLAY_SERVICE));
+
     }
 
     @Override
@@ -1427,6 +1436,20 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (!DescendantSystemUIUtils.settingStatusBoolean("descendant_guardia_type_notif", mContext)) DescendantGuardia.dismissGuardia(false);
     }
 
+    private void descendantClockFlow() {
+        mDescendantClockFlow = DescendantSystemUIUtils.settingStatusBoolean("descendant_clock_flow", mContext);
+    }
+
+    /*private void descendantClockFlowExclHeadsUp() {
+        mDisableHeadsUpPulse = DescendantSystemUIUtils.settingStatusBoolean("descendant_clock_flow_excl_headsup", mContext);
+    }*/
+
+    private void descendantClockFlowSelector() {
+        mDescendantClockFlowThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.DESCENDANT_CLOCK_FLOW_SELECTOR, 0, mLockscreenUserManager.getCurrentUserId());
+        DescendantSystemUIUtils.clockFlowSelector(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), mDescendantClockFlowThemeSetting);
+    }
+
     @Override
     public void onDensityOrFontScaleChanged() {
         // TODO: Remove this.
@@ -1997,6 +2020,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                 descendantGuardia();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_GUARDIA_TYPE_NOTIF))) {
                 descendantGuardiaTypeNotif();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_CLOCK_FLOW))) {
+                descendantClockFlow();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_CLOCK_FLOW_SELECTOR))) {
+                descendantClockFlowSelector();
+            //} else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_CLOCK_FLOW_EXCL_HEADSUP))) {
+            //    descendantClockFlowExclHeadsUp();
             }
 
         }
@@ -2005,6 +2034,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             descendantGuardia();
             descendantGuardiaTypeNotif();
             hideNotificationIconsStatusBar();
+            descendantClockFlow();
+            descendantClockFlowSelector();
+            //descendantClockFlowExclHeadsUp();
         }
     }
 
@@ -4109,6 +4141,9 @@ public class StatusBar extends SystemUI implements DemoMode,
     @VisibleForTesting
     void updateScrimController() {
         Trace.beginSection("StatusBar#updateScrimController");
+        descendantClockFlow();
+        //descendantClockFlowExclHeadsUp();
+        descendantClockFlowSelector();
 
         // We don't want to end up in KEYGUARD state when we're unlocking with
         // fingerprint from doze. We should cross fade directly from black.
@@ -4137,6 +4172,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         } else if (mBrightnessMirrorVisible) {
             mScrimController.transitionTo(ScrimState.BRIGHTNESS_MIRROR);
         } else if (mDozeServiceHost.isPulsing()) {
+            mNotificationPanelViewController.getKeyguardStatusView().animateAODClockBackgroundTransition(mDescendantClockFlow ? true : false);
+            mNotificationPanelViewController.getKeyguardStatusView().rotateAODClockBackground(mDescendantClockFlowThemeSetting == 7  || mDescendantClockFlowThemeSetting == 9 ? false : true,
+                                                                                mDescendantClockFlowThemeSetting == 9 ? true : false);
             mScrimController.transitionTo(ScrimState.PULSING,
                     mDozeScrimController.getScrimCallback());
         } else if (mDozeServiceHost.hasPendingScreenOffCallback()) {
@@ -4147,9 +4185,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                 }
             });
         } else if (mDozing && !unlocking) {
+            mNotificationPanelViewController.getKeyguardStatusView().animateAODClockBackgroundTransition(mDescendantClockFlow ? true : false);
+            mNotificationPanelViewController.getKeyguardStatusView().rotateAODClockBackground(mDescendantClockFlowThemeSetting == 7 || mDescendantClockFlowThemeSetting == 9 ? false : true,
+                                                                                mDescendantClockFlowThemeSetting == 9 ? true : false);
             mScrimController.transitionTo(ScrimState.AOD);
         } else if (mIsKeyguard && !unlocking) {
             mScrimController.transitionTo(ScrimState.KEYGUARD);
+            mNotificationPanelViewController.getKeyguardStatusView().animateAODClockBackgroundTransition(false);
         } else if (mBubbleController.isStackExpanded()) {
             mScrimController.transitionTo(ScrimState.BUBBLE_EXPANDED, mUnlockScrimCallback);
         } else {

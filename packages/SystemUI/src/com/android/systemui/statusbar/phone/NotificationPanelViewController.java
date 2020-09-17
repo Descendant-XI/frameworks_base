@@ -3775,4 +3775,8 @@ public class NotificationPanelViewController extends PanelViewController {
             return insets;
         }
     }
+
+    public KeyguardStatusView getKeyguardStatusView() {
+        return mKeyguardStatusView;
+    }
 }
