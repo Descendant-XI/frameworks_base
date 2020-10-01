@@ -4,7 +4,8 @@
     <string name="change_clock_face">Swipe to change the clock face</string>
     <string name="clock_title_samsung" translatable="false">Samsung</string>
     <string name="clock_title_samsung_bold" translatable="false">Samsung (bold)</string>
-
+    <string name="clock_title_squary_clock">Cal Clock</string>
+    <string name="clock_title_squary_clock_extended">Squary Clock Extended</string>
     <!-- Descendant Health-->
     <string name="descendant_health_appname">Descendant Health</string>
     <string name="descendant_health_eyestrain_title">Eyestrain alert</string>

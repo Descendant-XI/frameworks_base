@@ -26,6 +26,8 @@ public class DescendantSeamlessClockSwitch {
         "com.android.keyguard.clock.SfunyClockController",
         "com.android.keyguard.clock.SamsungClockController",
         "com.android.keyguard.clock.SamsungBoldClockController",
+        "com.android.keyguard.clock.SquaryClockController",
+        "com.android.keyguard.clock.SquaryExtendedClockController",
         "com.android.keyguard.clock.BubbleClockController",
         "com.android.keyguard.clock.AnalogClockController"
     };
@@ -101,5 +103,4 @@ public class DescendantSeamlessClockSwitch {
             });
         }
     }
-
 }
