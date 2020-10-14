@@ -33,4 +33,13 @@
     <string name="descendant_guardia_appname">Descendant Guardia</string>
     <string name="descendant_guardia_acknowledge">Acknowledged</string>
 
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">No events scheduled</string>
+    <string name="qsbh_calendar_events">Events scheduled</string>
+    <string name="qsbh_alarm_events">Next alarm:</string>
+
+    <!-- Weather -->
+    <string name="weather_city_unknown">Searching...</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+
 </resources>

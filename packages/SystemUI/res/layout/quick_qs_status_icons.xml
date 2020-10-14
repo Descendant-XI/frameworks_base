@@ -27,6 +27,7 @@
     android:minHeight="20dp"
     android:clickable="false"
     android:focusable="true"
+    android:visibility="gone"
     android:theme="@style/QSHeaderTheme">
 
     <com.android.systemui.statusbar.policy.DateView

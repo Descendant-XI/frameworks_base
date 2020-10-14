@@ -30,18 +30,12 @@
         />
     <com.android.systemui.settings.ToggleSeekBar
         android:id="@+id/slider"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/toggle"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:thumb="@drawable/ic_brightness_thumb"
-        android:progressDrawable="@drawable/brightness_progress_drawable"
+        android:thumb="@android:color/transparent"
+        android:background="@null"
+        android:progressDrawable="@drawable/brightness_progress_drawable_custom"
         android:splitTrack="false"
         />
     <TextView

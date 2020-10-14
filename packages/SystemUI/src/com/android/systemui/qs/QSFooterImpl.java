@@ -215,8 +215,8 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     @Nullable
     private TouchAnimator createFooterAnimator() {
         return new TouchAnimator.Builder()
-                .addFloat(mActionsContainer, "alpha", 0, 1)
-                .addFloat(mEditContainer, "alpha", 0, 1)
+                //.addFloat(mActionsContainer, "alpha", 0, 1)
+                //.addFloat(mEditContainer, "alpha", 0, 1)
                 .addFloat(mPageIndicator, "alpha", 0, 1)
                 .setStartDelay(0.9f)
                 .build();
@@ -314,12 +314,11 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     }
 
     private void updateVisibilities() {
-        mSettingsContainer.setVisibility(mQsDisabled ? View.GONE : View.VISIBLE);
-        mSettingsContainer.findViewById(R.id.tuner_icon).setVisibility(
-                TunerService.isTunerEnabled(mContext) ? View.VISIBLE : View.INVISIBLE);
+        mSettingsContainer.setVisibility(View.GONE);
+        mSettingsContainer.findViewById(R.id.tuner_icon).setVisibility(View.GONE);
         final boolean isDemo = UserManager.isDeviceInDemoMode(mContext);
         mMultiUserSwitch.setVisibility(showUserSwitcher() ? View.VISIBLE : View.INVISIBLE);
-        mEditContainer.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
+        mEditContainer.setVisibility(View.GONE);
         mSettingsButton.setVisibility(isDemo || !mExpanded ? View.INVISIBLE : View.VISIBLE);
     }
 

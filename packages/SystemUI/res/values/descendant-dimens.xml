@@ -1,41 +1,64 @@
 <resources>
     <!-- volume -->
     <dimen name="borderless_button_radius">28dp</dimen>
-    <dimen name="volume_dialog_row_margin_top">-121dp</dimen>
-    <dimen name="volume_dialog_panel_width">25dp</dimen>
-    <dimen name="volume_dialog_slider_height">220dp</dimen>
-
-    <dimen name="volume_dialog_row_height">252dp</dimen>
-
-    <dimen name="volume_dialog_ringer_size_width">54dp</dimen>
-    <dimen name="volume_dialog_ringer_size_height">108dp</dimen>
-
-    <dimen name="volume_dialog_ringer_icon_padding">160dp</dimen>
+    <dimen name="bt_tool_tip_bottom_margin">150dp</dimen>
+    <dimen name="bt_tool_tip_right_margin">26dp</dimen>
+    <dimen name="expand_bottom_margin">85dp</dimen>
+    <dimen name="expand_right_margin">38dp</dimen>
     <dimen name="extended_output_marginBottom">4dp</dimen>
-    <dimen name="extended_output_marginTop">4dp</dimen>
     <dimen name="extended_output_marginLeft">4dp</dimen>
     <dimen name="extended_output_marginRight">4dp</dimen>
+    <dimen name="extended_output_marginTop">4dp</dimen>
+    <dimen name="odi_captions_margin_right">0dp</dimen>
+    <dimen name="ringer_dialog_divider_marginLeft">8dp</dimen>
+    <dimen name="ringer_dialog_divider_marginRight">@dimen/ringer_dialog_divider_marginLeft</dimen>
     <dimen name="ringer_icon_marginBottom">4dp</dimen>
-    <dimen name="ringer_icon_marginTop">4dp</dimen>
     <dimen name="ringer_icon_marginLeft">4dp</dimen>
     <dimen name="ringer_icon_marginRight">4dp</dimen>
-    <dimen name="ringer_dialog_divider_marginRight">@dimen/ringer_dialog_divider_marginLeft</dimen>
-    <dimen name="ringer_dialog_divider_marginLeft">8dp</dimen>
-    <dimen name="volume_dialog_container_width">2000dp</dimen>
-    <dimen name="trans_start">200dp</dimen>
+    <dimen name="ringer_icon_marginTop">4dp</dimen>
     <dimen name="trans_end">175dp</dimen>
+    <dimen name="trans_start">200dp</dimen>
+    <dimen name="volume_dialog_container_width">2000dp</dimen>
+    <dimen name="volume_dialog_panel_width">25dp</dimen>
+    <dimen name="volume_dialog_ringer_icon_padding">160dp</dimen>
+    <dimen name="volume_dialog_ringer_size_height">108dp</dimen>
+    <dimen name="volume_dialog_ringer_size_width">54dp</dimen>
+    <dimen name="volume_dialog_row_height">252dp</dimen>
+    <dimen name="volume_dialog_row_margin_top">-121dp</dimen>
+    <dimen name="volume_dialog_slider_height">220dp</dimen>
     <dimen name="volume_seekbar_width">46dp</dimen>
-    <dimen name="bt_tool_tip_right_margin">26dp</dimen>
-
-    <dimen name="bt_tool_tip_bottom_margin">150dp</dimen>
-    <dimen name="expand_right_margin">38dp</dimen>
-    <dimen name="expand_bottom_margin">85dp</dimen>
-    <dimen name="odi_captions_margin_right">0dp</dimen>
     <!-- volume end -->
 
     <!-- navigation -->
+    <dimen name="navigation_edge_panel_height">20dp</dimen>
     <dimen name="navigation_handle_radius">1.25dp</dimen>
     <dimen name="navigation_home_handle_width">75dp</dimen>
-    <dimen name="navigation_edge_panel_height">20dp</dimen>
     <!-- navigation end-->
+
+    <!-- QQS start-->
+    <dimen name="brightness_drawable_button_height">15dp</dimen>
+    <dimen name="brightness_drawable_button_width">15dp</dimen>
+    <dimen name="brightness_drawable_corner">15dp</dimen>
+    <dimen name="brightness_drawable_dots_padding">15dp</dimen>
+    <dimen name="brightness_drawable_height">45dp</dimen>
+    <dimen name="brightness_mirror_height">100dp</dimen>
+    <dimen name="qqs_edit_padding_bottom_land">2dp</dimen>
+    <dimen name="qqs_edit_padding_bottom">6dp</dimen>
+    <dimen name="qqs_panel_margin_end">16dp</dimen>
+    <dimen name="qqs_panel_margin_start">16dp</dimen>
+    <dimen name="qs_panel_margin_end">0dp</dimen>
+    <dimen name="qs_panel_margin_start">0dp</dimen>
+    <dimen name="qs_tile_icon_size">20dp</dimen>
+    <dimen name="qs_tile_layout_margin_side">0dp</dimen>
+    <dimen name="qs_tile_margin_horizontal">24dp</dimen>
+    <dimen name="qs_tile_margin_vertical">12dp</dimen>
+    <dimen name="qs_tile_spacing">8dp</dimen>
+    <dimen name="qsbh_brightness_bar_padding">0dp</dimen>
+    <dimen name="slider_height">100dp</dimen>
+    <dimen name="qs_panel_padding_top">8dp</dimen>
+    <dimen name="qs_header_tooltip_height">0dp</dimen>
+
+    <!-- Notifications -->
+    <dimen name="notification_side_paddings">12dp</dimen>
+
 </resources>

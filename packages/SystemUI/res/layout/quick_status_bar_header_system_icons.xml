@@ -22,21 +22,145 @@
     android:layout_height="@*android:dimen/quick_qs_offset_height"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="horizontal"
-    android:clickable="true"
-    android:paddingTop="@dimen/status_bar_padding_top" >
+    android:paddingTop="@dimen/status_bar_padding_top"
+    android:clickable="true">
 
-    <com.android.systemui.statusbar.policy.Clock
-        android:id="@+id/clock"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="48dp"
-        android:gravity="center_vertical|start"
-        android:paddingStart="@dimen/status_bar_left_clock_starting_padding"
-        android:paddingEnd="@dimen/status_bar_left_clock_end_padding"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.StatusBar.Clock"
-        systemui:showDark="false" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout android:id="@+id/rl_clock_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextClock
+                android:id="@+id/clock"
+                style="@style/TextAppearance.ClockQSHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.android.systemui.statusbar.policy.DateView
+                android:id="@+id/date"
+                style="@style/TextAppearance.DateQSHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/clock"/>
+
+            <ImageView android:id="@+id/qqs_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_qqs_edit"
+                android:layout_toLeftOf="@id/qqs_settings"
+                android:layout_alignBottom="@+id/date"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="6dp"
+                android:visibility="gone"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                />
+
+            <ImageView
+                android:id="@+id/qqs_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_qqs_settings"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/date"
+                android:paddingBottom="@dimen/qqs_edit_padding_bottom"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout android:id="@+id/weather_widget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:layout_marginTop="4dp">
+
+            <RelativeLayout android:id="@+id/weather_first_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="end">
+
+                <TextView
+                    android:id="@+id/weather_degrees"
+                    style="@style/TextAppearance.WeatherDegreesQSHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"/>
+
+                <ImageView android:id="@+id/weather_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/weather_degrees"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout android:id="@+id/weather_city_rl"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/weather_first_line"
+                android:layout_height="wrap_content">
+
+                <TextView android:id="@+id/weather_city"
+                    style="@style/TextAppearance.WeatherCityQSHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:systemui="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/event_pill"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rl_clock_date"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/qs_background_primary"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:minHeight="20dp"
+            android:clickable="false"
+            android:focusable="true"
+            android:theme="@style/QSHeaderTheme">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/event_listener"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No event"
+                android:paddingStart="4dp"/>
+
+            <com.android.systemui.statusbar.phone.StatusIconContainer
+                android:layout_centerVertical="true"
+                android:id="@+id/statusIcons"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="4dp"
+                android:layout_toLeftOf="@+id/batteryRemainingIcon"/>
+
+            <com.android.systemui.BatteryMeterView
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/batteryRemainingIcon"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                systemui:textAppearance="@style/TextAppearance.QS.Status"
+                android:paddingEnd="4dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </FrameLayout>

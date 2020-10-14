@@ -29,6 +29,13 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
+    <com.android.systemui.qs.PageIndicator
+        android:id="@+id/footer_page_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -67,13 +74,6 @@
                 android:layout_marginEnd="4dp"
                 android:visibility="gone"/>
          </com.android.keyguard.AlphaOptimizedLinearLayout>
-
-        <com.android.systemui.qs.PageIndicator
-            android:id="@+id/footer_page_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:visibility="gone" />
 
         <com.android.keyguard.AlphaOptimizedLinearLayout
             android:id="@+id/qs_footer_actions_container"

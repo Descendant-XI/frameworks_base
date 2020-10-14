@@ -321,7 +321,7 @@ public class PagedTileLayout extends ViewPager implements QSTileLayout {
         // Update bottom padding, useful for removing extra space once the panel page indicator is
         // hidden.
         Resources res = getContext().getResources();
-        mHorizontalClipBound = res.getDimensionPixelSize(R.dimen.notification_side_paddings);
+        mHorizontalClipBound = res.getDimensionPixelSize(R.dimen.qs_panel_margin_start);
         setPadding(0, 0, 0,
                 getContext().getResources().getDimensionPixelSize(
                         R.dimen.qs_paged_tile_layout_padding_bottom));

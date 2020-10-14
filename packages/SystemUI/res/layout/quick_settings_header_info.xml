@@ -17,15 +17,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/header_text_container"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/qs_header_tooltip_height"
-    android:layout_below="@id/quick_status_bar_system_icons"
-    android:visibility="invisible"
+    android:layout_height="0dp"
+    android:visibility="gone"
     android:theme="@style/QSHeaderTheme"
     android:forceHasOverlappingRendering="false">
 
         <com.android.systemui.qs.QSHeaderInfoLayout
             android:id="@+id/status_container"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_weight="1"
             android:layout_height="match_parent">
 
@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:focusable="true"
                 android:clickable="true">
 
@@ -64,6 +65,7 @@
                 android:visibility="gone"/>
 
             <LinearLayout
+                android:visibility="gone"
                 android:id = "@+id/ringer_container"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -91,6 +93,7 @@
         </com.android.systemui.qs.QSHeaderInfoLayout>
 
         <include layout="@layout/qs_carrier_group"
+                 android:visibility="gone"
                  android:id="@+id/carrier_group"
                  android:layout_width="wrap_content"
                  android:layout_height="match_parent"

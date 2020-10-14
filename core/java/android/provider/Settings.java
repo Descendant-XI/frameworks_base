@@ -4854,6 +4854,18 @@ public final class Settings {
         public static final String DESCENDANT_CLOCK_FLOW_EXCL_HEADSUP = "descendant_clock_flow_excl_headsup";
 
         /**
+         * Descendant Weather
+         */
+
+        public static final String WEATHER_INIT = "weather_init";
+        public static final String WEATHER_DATA = "weather_data";
+
+        /**
+         * Descendant Settings Card Hiding
+         */
+
+        public static final String HIDDEN_CARDS = "hidden_cards";
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
