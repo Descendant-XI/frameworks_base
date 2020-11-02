@@ -1,7 +1,23 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="24dp"
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
     android:width="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path android:fillColor="?attr/wallpaperTextColor" android:pathData="M6,14.03A1,1 0 0,1 7,15.03C7,15.58 6.55,16.03 6,16.03C3.24,16.03 1,13.79 1,11.03C1,8.27 3.24,6.03 6,6.03C7,3.68 9.3,2.03 12,2.03C15.43,2.03 18.24,4.69 18.5,8.06L19,8.03A4,4 0 0,1 23,12.03C23,14.23 21.21,16.03 19,16.03H18C17.45,16.03 17,15.58 17,15.03C17,14.47 17.45,14.03 18,14.03H19A2,2 0 0,0 21,12.03A2,2 0 0,0 19,10.03H17V9.03C17,6.27 14.76,4.03 12,4.03C9.5,4.03 7.45,5.84 7.06,8.21C6.73,8.09 6.37,8.03 6,8.03A3,3 0 0,0 3,11.03A3,3 0 0,0 6,14.03M12,14.15C12.18,14.39 12.37,14.66 12.56,14.94C13,15.56 14,17.03 14,18C14,19.11 13.1,20 12,20A2,2 0 0,1 10,18C10,17.03 11,15.56 11.44,14.94C11.63,14.66 11.82,14.4 12,14.15M12,11.03L11.5,11.59C11.5,11.59 10.65,12.55 9.79,13.81C8.93,15.06 8,16.56 8,18A4,4 0 0,0 12,22A4,4 0 0,0 16,18C16,16.56 15.07,15.06 14.21,13.81C13.35,12.55 12.5,11.59 12.5,11.59" />
+    android:height="24dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <group android:name="ws95cs_y2jivucuyygg8a">
+        <group android:name="group"/>
+        <group android:name="group_1"/>
+    </group>
+    <path
+        android:name="path"
+        android:pathData="M 34 11 C 33.669 11 33.343 11.018 33.02 11.049 C 30.741 7.99 27.108 6 23 6 C 17.287 6 12.48 9.837 10.988 15.071 C 7.049 15.569 4 18.925 4 23 C 4 27.418 7.582 31 12 31 L 34 31 C 39.523 31 44 26.523 44 21 C 44 15.477 39.523 11 34 11 Z"
+        android:fillColor="#ffffff"
+        android:strokeColor="#e5e5e5"
+        android:strokeWidth="2"/>
+    <path
+        android:name="path_1"
+        android:pathData="M 31.049 38.649 C 30.58 39.118 29.821 39.118 29.352 38.649 C 28.883 38.18 28.883 37.421 29.352 36.952 C 29.82 36.483 32 36 32 36 C 32 36 31.517 38.18 31.049 38.649 Z M 20.414 40.414 C 19.633 41.195 18.367 41.195 17.586 40.414 C 16.805 39.633 16.805 38.367 17.586 37.586 C 18.367 36.805 22 36 22 36 C 22 36 21.195 39.633 20.414 40.414 Z"
+        android:fillColor="#199be2"
+        android:strokeWidth="1"/>
 </vector>

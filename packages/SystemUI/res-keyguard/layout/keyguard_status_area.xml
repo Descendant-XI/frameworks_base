@@ -40,13 +40,36 @@
               android:theme="@style/TextAppearance.Keyguard"
     />
 
-    <view class="com.android.keyguard.KeyguardSliceView$Row"
-              android:id="@+id/row"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:gravity="center"
-    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <view class="com.android.keyguard.KeyguardSliceView$Row"
+                android:id="@+id/row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+        />
+
+        <ImageView
+            android:id="@+id/weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/weather_degrees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="?attr/wallpaperTextColor"
+            android:theme="@style/TextAppearance.Keyguard.Secondary"/>
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/change_clock_face"

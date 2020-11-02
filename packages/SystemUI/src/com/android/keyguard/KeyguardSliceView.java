@@ -44,6 +44,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,6 +63,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.graphics.ColorUtils;
 import com.android.settingslib.Utils;
 import com.android.systemui.Dependency;
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.dagger.qualifiers.Main;
@@ -116,6 +118,11 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     private float mRowTextSize;
     private float mRowWithHeaderTextSize;
 
+    /*Weather*/
+    private ImageView mWeatherIcon;
+    private TextView mWeatherDegrees;
+
+
     @Inject
     public KeyguardSliceView(@Named(VIEW_CONTEXT) Context context, AttributeSet attrs,
             ActivityStarter activityStarter, ConfigurationController configurationController,
@@ -155,6 +162,9 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
                 R.dimen.header_row_font_size);
         mTitle.setOnClickListener(this);
         mTitle.setBreakStrategy(LineBreaker.BREAK_STRATEGY_BALANCED);
+        mWeatherDegrees = findViewById(R.id.weather_degrees);
+        mWeatherIcon = findViewById(R.id.weather_icon);
+
     }
 
     @Override
@@ -171,6 +181,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
             mLiveData.observeForever(this);
         }
         mConfigurationController.addCallback(this);
+        setupWeatherData();
     }
 
     @Override
@@ -347,6 +358,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
     public void onChanged(Slice slice) {
         mSlice = slice;
         showSlice();
+        setupWeatherData();
     }
 
     @Override
@@ -415,6 +427,7 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         }
         onChanged(slice);
         Trace.endSection();
+        setupWeatherData();
     }
 
     public void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
@@ -426,6 +439,22 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
         pw.println("  mDarkAmount: " + mDarkAmount);
         pw.println("  mSlice: " + mSlice);
         pw.println("  mHasHeader: " + mHasHeader);
+    }
+
+    private void setupWeatherData() {
+        String weatherString = DescendantSystemUIUtils.getSystemSettingString("weather_data", mContext);
+        if (weatherString != null) {
+            String[] array = weatherString.split(",");
+            if (array.length != 13) {
+                mWeatherIcon.setVisibility(View.GONE);
+                mWeatherDegrees.setVisibility(View.GONE);
+                return;
+            }
+            mWeatherIcon.setImageResource(Integer.valueOf(array[4]));
+            mWeatherDegrees.setText(array[3]);
+            mWeatherIcon.setVisibility(View.VISIBLE);
+            mWeatherDegrees.setVisibility(View.VISIBLE);
+        }
     }
 
     public static class Row extends LinearLayout {

@@ -618,4 +618,9 @@ public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Ca
         mState = newState;
         setKeyguardShowing(newState == StatusBarState.KEYGUARD);
     }
+
+    public void dismissWeatherEx() {
+        mHeader.dismissWeatherEx();
+    }
+
 }

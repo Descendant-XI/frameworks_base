@@ -429,6 +429,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     // settings
     private QSPanel mQSPanel;
+    private QSFragment mQSBH;
 
     KeyguardIndicationController mKeyguardIndicationController;
 
@@ -1224,6 +1225,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                     });
             fragmentHostManager.addTagListener(QS.TAG, (tag, f) -> {
                 QS qs = (QS) f;
+                mQSBH = (QSFragment) qs;
                 if (qs instanceof QSFragment) {
                     mQSPanel = ((QSFragment) qs).getQsPanel();
                 }
@@ -4003,6 +4005,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         public void onScreenTurnedOff() {
             mFalsingManager.onScreenOff();
             mScrimController.onScreenTurnedOff();
+            mQSBH.dismissWeatherEx();
             updateIsKeyguard();
         }
     };

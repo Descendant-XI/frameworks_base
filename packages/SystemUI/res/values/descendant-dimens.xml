@@ -61,4 +61,16 @@
     <!-- Notifications -->
     <dimen name="notification_side_paddings">12dp</dimen>
 
+    <!-- Weather extended widget -->
+    <dimen name="weather_ex_widget_icon_size">26dp</dimen>
+    <dimen name="weather_ex_widget_icon_padding">2dp</dimen>
+    <dimen name="weather_ex_widget_elevation">2dp</dimen>
+    <dimen name="weather_ex_widget_marginTop">2dp</dimen>
+    <dimen name="weather_ex_widget_marginTopBottom">8dp</dimen>
+    <dimen name="weather_ex_widget_margin">16dp</dimen>
+    <dimen name="weather_ex_widget_cards_width">130dp</dimen>
+    <dimen name="weather_ex_widget_marginTop_rl">28dp</dimen>
+    <dimen name="weather_ex_widget_text_size">18dp</dimen>
+    <dimen name="weather_ex_widget_margin_start">4dp</dimen>
+
 </resources>

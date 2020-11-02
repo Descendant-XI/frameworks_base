@@ -41,6 +41,38 @@ public class DescendantSystemUIUtils {
         }
     }
 
+    public static void setSecureSetting(String settingName, Context ctx, int value) {
+        //try {
+            android.provider.Settings.Secure.putIntForUser(ctx.getContentResolver(),settingName,value,UserHandle.USER_CURRENT);
+        /*} catch (android.provider.Settings.SettingNotFoundException e) {
+            //TODO: handle exception
+        }*/
+    }
+
+    public static void setSystemSetting(String settingName, Context ctx, int value) {
+    //try {
+        android.provider.Settings.System.putIntForUser(ctx.getContentResolver(),settingName,value,UserHandle.USER_CURRENT);
+    /*} catch (android.provider.Settings.SettingNotFoundException e) {
+        //TODO: handle exception
+    }*/
+    }
+
+    public static void setSystemSettingString(String settingName, Context ctx, String value) {
+        //try {
+            android.provider.Settings.System.putStringForUser(ctx.getContentResolver(),settingName,value,UserHandle.USER_CURRENT);
+        /*} catch (android.provider.Settings.SettingNotFoundException e) {
+            //TODO: handle exception
+        }*/
+    }
+
+    public static String getSystemSettingString(String settingName, Context ctx) {
+        //try {
+            return android.provider.Settings.System.getStringForUser(ctx.getContentResolver(),settingName,UserHandle.USER_CURRENT);
+        //} catch (android.provider.Settings.SettingNotFoundException e) {
+        //    return "0";
+        //}
+    }
+
     public static int settingStatusInt(String settingName, Context ctx) {
         try {
             return android.provider.Settings.System.getIntForUser(ctx.getContentResolver(),settingName,UserHandle.USER_CURRENT);

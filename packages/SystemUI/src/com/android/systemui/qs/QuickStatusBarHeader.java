@@ -32,8 +32,13 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Looper;
 import android.os.Handler;
 import android.provider.AlarmClock;
 import android.provider.Settings;
@@ -65,6 +70,7 @@ import com.android.settingslib.Utils;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.BatteryMeterView;
 import com.android.systemui.Dependency;
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
 import com.android.systemui.Dependency;
 import com.android.systemui.DualToneHandler;
@@ -89,6 +95,7 @@ import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.NextAlarmController;
 import com.android.systemui.statusbar.policy.ZenModeController;
 import com.android.systemui.util.RingerModeTracker;
+import com.android.systemui.WeatherWidget;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -163,9 +170,10 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private ImageView mEdit;
     private ImageView mSettings;
     private ImageView mWeatherIcon;
-    private GpsTracker mGpsTracker;
-    private Handler mGPSHandler = new Handler();
+    private RelativeLayout mWeatherWidget;
     private String mCityName;
+    private WeatherWidget mWeatherWidgetClass;
+
     /** {@link TextView} containing the actual text indicating when the next alarm will go off. */
     private TextView mNextAlarmTextView;
     private View mNextAlarmContainer;
@@ -297,8 +305,12 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mClockView.setFormat24Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m24easterClock) : Html.fromHtml(m24Clock));
         mClockView.setOnClickListener(this);
         mDateView = findViewById(R.id.date);
-        mWeatherDegrees = findViewById(R.id.weather_degrees);
         mWeatherCity = findViewById(R.id.weather_city);
+        mWeatherDegrees = findViewById(R.id.weather_degrees);
+        mWeatherIcon = findViewById(R.id.weather_icon);
+        mWeatherWidget = findViewById(R.id.weather_widget);
+        mWeatherWidget.setOnClickListener(this);
+        mWeatherWidgetClass = new WeatherWidget(mContext, mWeatherWidget, mWeatherDegrees, mWeatherIcon, mWeatherCity);
         mEventPill = findViewById(R.id.event_pill);
         mQSBHEventListener = findViewById(R.id.event_listener);
         mQSBHEventListener.setOnClickListener(this);
@@ -313,13 +325,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
         mRingerModeTextView.setSelected(true);
         mNextAlarmTextView.setSelected(true);
-        mScheduleUpdate = Executors.newScheduledThreadPool(1);
-        mScheduleUpdate.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                initWeather();
-            }
-        }, 0, 3, TimeUnit.HOURS);
     }
 
     public QuickQSPanel getHeaderQsPanel() {
@@ -402,6 +407,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateResources();
         mIsLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
         mQuickQsBrightnessExpFrac =mIsLandscape ? BRIGHTNESS_EXP_LANDSCAPE : BRIGHTNESS_EXP_PORTRAIT;
+        if (mIsLandscape)
+            mWeatherWidgetClass.dismissDialog();
         updateStyles(mIsLandscape);
     }
 
@@ -559,25 +566,9 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             }
     };
 
-    private void initWeather() {
-        mGpsTracker = new GpsTracker(mContext);
-        String city = mGpsTracker.getCity();
-        String country = mGpsTracker.getCountry();
-        if (city.isEmpty() || city == null) {
-            mWeatherCity.setText(mContext.getResources().getString(R.string.weather_city_unknown));
-            mWeatherDegrees.setText(mContext.getResources().getString(R.string.weather_degrees_unknown));
-            mGPSHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    initWeather();
-                }
-            }, 3000);
-        } else {
-            mWeatherCity.setText(city + "," + " " + country);
-            mGPSHandler.removeCallbacksAndMessages(null);
-        }
+    public void dismissWeatherEx() {
+        mWeatherWidgetClass.dismissDialog();
     }
-
 
     @Override
     public void onRtlPropertiesChanged(int layoutDirection) {
@@ -733,7 +724,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mStatusBarIconController.addIconGroup(mIconManager);
         requestApplyInsets();
         mContext.registerReceiver(mTickReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
-        initWeather();
     }
 
     @Override
@@ -862,6 +852,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         } else if (v == mIconContainer) {
             Dependency.get(ActivityStarter.class).postStartActivityDismissingKeyguard(new Intent(
                         Settings.ACTION_WIRELESS_SETTINGS),0);
+        } else if (v == mWeatherWidget) {
+            mWeatherWidgetClass.createDialog();
         }
     }
 

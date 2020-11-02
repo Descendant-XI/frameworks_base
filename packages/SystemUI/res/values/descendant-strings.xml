@@ -41,5 +41,22 @@
     <!-- Weather -->
     <string name="weather_city_unknown">Searching...</string>
     <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Tap to activate</string>
+
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Weather</string>
+    <string name="weather_ex_widget_temp">Temperature</string>
+    <string name="weather_ex_widget_temp_max">Max</string>
+    <string name="weather_ex_widget_temp_min">Min</string>
+    <string name="weather_ex_widget_wind">Wind</string>
+    <string name="weather_ex_widget_wind_speed">Speed</string>
+    <string name="weather_ex_widget_wind_degrees">Degrees</string>
+    <string name="weather_ex_widget_perception">Perception</string>
+    <string name="weather_ex_widget_perception_feels_like">Feels like</string>
+    <string name="weather_ex_widget_perception_humidity">Humidity</string>
+    <string name="weather_ex_widget_sight">Sight</string>
+    <string name="weather_ex_widget_sight_visibility">Visibility</string>
+    <string name="weather_ex_widget_sight_cloudiness">Cloudiness</string>
 
 </resources>
