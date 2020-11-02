@@ -90,7 +90,13 @@ public class DescendantSeamlessClockSwitch {
             targetView.setTextColor(color);
             targetView.setVisibility(View.VISIBLE);
         } else {
-            targetView.setVisibility(View.GONE);
+            targetView.animate().alpha(0f).setDuration(200).withEndAction(new Runnable() {
+                @Override
+                public void run() {
+                    targetView.setVisibility(View.GONE);
+                }
+            });
         }
     }
+
 }
