@@ -64,6 +64,8 @@ public final class CategoryKey {
     public static final String CATEGORY_SMART_BATTERY_SETTINGS =
             "com.android.settings.category.ia.smart_battery_settings";
 
+    public static final String CATEGORY_DESCENDANT_HEALTH =
+            "com.android.settings.category.ia.descendant.health";
     public static final Map<String, String> KEY_COMPAT_MAP;
 
     static {
