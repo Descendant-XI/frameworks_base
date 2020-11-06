@@ -141,6 +141,7 @@ import com.android.keyguard.ViewMediatorCallback;
 import com.android.systemui.appops.DescendantGuardia;
 import com.android.systemui.ActivityIntentHelper;
 import com.android.systemui.AutoReinflateContainer;
+import com.android.systemui.COVID19Helper;
 import com.android.systemui.DejankUtils;
 import com.android.systemui.DemoMode;
 import com.android.systemui.DescendantHealth;
@@ -335,6 +336,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         ONLY_CORE_APPS = onlyCoreApps;
     }
 
+    private COVID19Helper mCovidHelper;
     /**
      * The {@link StatusBarState} of the status bar.
      */
@@ -1032,6 +1034,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                         }
                     }
                 }, OverlayPlugin.class, true /* Allow multiple plugins */);
+
+                mCovidHelper = new COVID19Helper(mContext);
+                mCovidHelper.init();
     }
 
     // ================================================================================

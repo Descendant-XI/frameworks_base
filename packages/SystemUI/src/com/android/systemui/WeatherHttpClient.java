@@ -54,7 +54,7 @@ public class WeatherHttpClient {
     }
 
     public void init(Location location) {
-        mLocation = location == null ? mGpsTracker.getLocation() : location;
+        /*mLocation = location == null ? mGpsTracker.getLocation() : location;
         if (mLocation != null) {
             mLatitude = mGpsTracker.getLatitude();
             mLongitude = mGpsTracker.getLongitude();
@@ -71,7 +71,7 @@ public class WeatherHttpClient {
                 mWeatherJSONClouds = mWeatherJSON.getJSONObject("clouds");
             } catch (JSONException e) {
             }
-        }
+        }*/
     }
 
     public void setLocationListener(LocationListener LocationListener) {

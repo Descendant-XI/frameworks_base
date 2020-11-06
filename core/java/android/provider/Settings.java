@@ -4871,6 +4871,14 @@ public final class Settings {
          */
 
         public static final String HIDDEN_CARDS = "hidden_cards";
+
+        /*
+         * Descendant Health COVID 19
+         */
+
+        public static final String COVID_DATA = "covid_data";
+        public static final String COVID_SIGNALED_UPDATE = "covid_signaled_update";
+
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add

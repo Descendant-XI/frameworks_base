@@ -92,11 +92,11 @@ public class WeatherWidget implements LocationListener {
     public void scheduleWeatherDataUpdate() {
         Log.d(TAG, "scheduleWeatherDataUpdate");
         init();
-        scheduleLongUpdate();
+        //scheduleLongUpdate();
     }
 
     private void init() {
-        Log.d(TAG, "init joined");
+        /*Log.d(TAG, "init joined");
         if (mWeatherHttpClient == null) {
             Log.d(TAG, "init: mWeatherHTTPClient was null");
             mWeatherHttpClient = new WeatherHttpClient(mContext);
@@ -104,11 +104,11 @@ public class WeatherWidget implements LocationListener {
         mWeatherHttpClient.init(null);
         mWeatherHttpClient.setLocationListener(this);
         storeWeatherData();
-        setWeatherData();
+        setWeatherData();*/
     }
 
     public void setWeatherData() {
-        Log.d(TAG, "setWeatherData");
+        /*Log.d(TAG, "setWeatherData");
         getStoredWeatherData();
         if (!mCanUseStored) {
             Log.d(TAG, "setWeatherData: we can't use stored values, view gone");
@@ -150,7 +150,7 @@ public class WeatherWidget implements LocationListener {
                     }
                 }).start();
             }
-        }
+        }*/
     }
 
     private void getWeatherDetails() {
