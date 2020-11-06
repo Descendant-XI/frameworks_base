@@ -3684,14 +3684,14 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         } else {
             if (!mPanelExpanded) {
-                if (DescendantSystemUIUtils.settingStatusBoolean("descendant_health", mContext)) {
+                if (DescendantSystemUIUtils.settingStatusBoolean("descendant_health_screen_on", mContext)) {
                     handlerHealth.postDelayed(() -> {
                         DescendantHealth.wakeTooLong(mContext);
                     },3600000);
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
                     if (!isHealthAdviceSpawned) {
                         if (hour >= 0 && hour < 9) {
-                            if (HRS_OF_SLEEP_EXPECTED > DescendantIdleManager.msTillAlarm(mContext) &&
+                            if (DescendantSystemUIUtils.settingStatusBoolean("descendant_health_sleep", mContext) && HRS_OF_SLEEP_EXPECTED > DescendantIdleManager.msTillAlarm(mContext) &&
                                     DescendantIdleManager.msTillAlarm(mContext) != 0) {
                                 isHealthAdviceSpawned = true;
                                 Handler hSleep = new Handler();
@@ -3916,7 +3916,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             mKeyguardBypassController.onStartedGoingToSleep();
             DejankUtils.stopDetectingBlockingIpcs(tag);
             if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                                              Settings.System.DESCENDANT_HEALTH, 1,
+                                              Settings.System.DESCENDANT_HEALTH_SCREEN_ON, 1,
                                               mLockscreenUserManager.getCurrentUserId()) == 1) {
                 handlerHealth.removeCallbacksAndMessages(null);
             }

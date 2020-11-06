@@ -4808,7 +4808,8 @@ public final class Settings {
         /**
          * Descendant Health Man
          */
-        public static final String DESCENDANT_HEALTH = "descendant_health";
+        public static final String DESCENDANT_HEALTH_SLEEP = "descendant_health_sleep";
+        public static final String DESCENDANT_HEALTH_SCREEN_ON = "descendant_health_screen_on";
 
         /**
          * Hide notification icons in status
