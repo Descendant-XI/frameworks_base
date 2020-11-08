@@ -1,3 +1,4 @@
 <resources>
     <java-symbol type="id" name="aerr_disable" />
+    <java-symbol type="bool" name="config_has_Soli" />
 </resources>
