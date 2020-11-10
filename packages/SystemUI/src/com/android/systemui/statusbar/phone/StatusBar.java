@@ -155,6 +155,7 @@ import com.android.systemui.Prefs;
 import com.android.systemui.R;
 import com.android.systemui.SystemUI;
 import com.android.systemui.SystemUIFactory;
+import com.android.systemui.ThumbUIManager;
 import com.android.systemui.assist.AssistManager;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.bubbles.BubbleController;
@@ -357,6 +358,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     private final AutoHideController mAutoHideController;
     @Nullable
     private final KeyguardLiftController mKeyguardLiftController;
+
+    private int mThumbUI;
 
     private final Point mCurrentDisplaySize = new Point();
 
@@ -2014,6 +2017,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.THUMB_UI),
+                false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -2032,7 +2038,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR))) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.THUMB_UI))) {
+                thumbUI();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR))) {
                 hideNotificationIconsStatusBar();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.DESCENDANT_GUARDIA))) {
                 descendantGuardia();
@@ -2049,6 +2057,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         public void update() {
+            thumbUI();
             descendantGuardia();
             descendantGuardiaTypeNotif();
             hideNotificationIconsStatusBar();
@@ -3546,6 +3555,16 @@ public class StatusBar extends SystemUI implements DemoMode,
     public void finishKeyguardFadingAway() {
         mKeyguardStateController.notifyKeyguardDoneFading();
         mScrimController.setExpansionAffectsAlpha(true);
+    }
+
+    /**
+     * Descendant ThumbUI
+     */
+
+    protected void thumbUI() {
+        mThumbUI = Settings.System.getIntForUser(mContext.getContentResolver(),
+            Settings.System.THUMB_UI, 0, mLockscreenUserManager.getCurrentUserId());
+        ThumbUIManager.control(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), mThumbUI);
     }
 
     /**
