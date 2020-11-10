@@ -2016,6 +2016,18 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HIDE_NOTIFICATION_ICONS_STATUSBAR),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DESCENDANT_GUARDIA),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DESCENDANT_GUARDIA_TYPE_NOTIF),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DESCENDANT_CLOCK_FLOW),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DESCENDANT_CLOCK_FLOW_SELECTOR),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
