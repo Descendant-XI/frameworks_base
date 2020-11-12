@@ -122,6 +122,8 @@
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:systemui="http://schemas.android.com/apk/res-auto"
             android:id="@+id/event_pill"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@id/rl_clock_date"
