@@ -1,26 +1,15 @@
-<!--
-Copyright (C) 2014 The Android Open Source Project
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-         http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
--->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:width="24dp"
-        android:height="24dp"
-        android:viewportWidth="24.0"
-        android:viewportHeight="24.0"
-        android:autoMirrored="true"
-        android:tint="?attr/colorControlNormal">
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="24dp"
+    android:height="24dp"
+    android:tint="?attr/colorControlNormal"
+    android:autoMirrored="true"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
     <path
-        android:pathData="M20,11L7.8,11l5.6,-5.6L12,4l-8,8l8,8l1.4,-1.4L7.8,13L20,13L20,11z"
-        android:fillColor="@color/white"/>
+        android:name="path_1"
+        android:pathData="M 29.932 4.482 C 29.413 4.505 28.923 4.729 28.566 5.105 L 11.566 22.605 C 11.203 22.979 11 23.479 11 24 C 11 24.521 11.203 25.021 11.566 25.395 L 28.566 42.895 C 28.859 43.205 29.243 43.413 29.663 43.489 C 30.083 43.566 30.516 43.506 30.899 43.319 C 31.282 43.131 31.595 42.827 31.793 42.449 C 31.991 42.071 32.063 41.64 31.998 41.218 C 31.933 40.797 31.735 40.407 31.434 40.105 L 15.789 24 L 31.434 7.895 C 31.718 7.61 31.911 7.245 31.985 6.849 C 32.059 6.453 32.012 6.044 31.849 5.675 C 31.687 5.306 31.417 4.995 31.075 4.782 C 30.733 4.569 30.334 4.465 29.932 4.482 Z"
+        android:fillColor="@color/white"
+        android:strokeWidth="1"/>
 </vector>
