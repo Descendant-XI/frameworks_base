@@ -136,7 +136,7 @@ public class DescendantIdleManager {
         String TAG_SUBCLASS = "positionHandler";
         IdleManLog(LOG_MSGS[0] + TAG_SUBCLASS);
         LocationController mController = Dependency.get(LocationController.class);
-        mController.setLocationEnabled(state ? true : false);
+        mController.setLocationEnabled(state ? Settings.Secure.LOCATION_MODE_HIGH_ACCURACY : Settings.Secure.LOCATION_MODE_OFF);
     }
 
     public static void servicesKiller() {
@@ -176,4 +176,3 @@ public class DescendantIdleManager {
             Log.d(TAG, msg);
     }
 }
-
