@@ -20,6 +20,7 @@ import static android.view.View.GONE;
 
 import static com.android.systemui.statusbar.notification.ActivityLaunchAnimator.ExpandAnimationParameters;
 import static com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.ROWS_ALL;
+import static com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout.ROWS_HIGH_PRIORITY;
 
 import static java.lang.Float.isNaN;
 
@@ -28,6 +29,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.app.Fragment;
+import android.app.Notification;
 import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.pm.ResolveInfo;
@@ -44,6 +46,8 @@ import android.hardware.biometrics.BiometricSourceType;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.MathUtils;
 import android.view.GestureDetector;
@@ -268,6 +272,11 @@ public class NotificationPanelViewController extends PanelViewController {
     private boolean mAnimateNextPositionUpdate;
 
     private int mTrackingPointer;
+    private int mNotificationColor;// = Notification.COLOR_DEFAULT;
+    private float[] mNotificationColorVector;
+    private String mNotificationPackage;
+    private String[] mAppExceptions;
+
     private VelocityTracker mQsVelocityTracker;
     private boolean mQsTracking;
 
@@ -2895,12 +2904,21 @@ public class NotificationPanelViewController extends PanelViewController {
 
     public void setPulsing(boolean pulsing) {
         mPulsing = pulsing;
+        ExpandableNotificationRow row = mNotificationStackScroller.getFirstActiveClearableNotifications(ROWS_HIGH_PRIORITY);
         final boolean
                 animatePulse =
                 !mDozeParameters.getDisplayNeedsBlanking() && mDozeParameters.getAlwaysOn();
+        int pulseReason = Settings.System.getIntForUser(mView.getContext().getContentResolver(),
+                Settings.System.PULSE_TRIGGER_REASON, DozeLog.PULSE_REASON_NONE, UserHandle.USER_CURRENT);
+        boolean pulseReasonNotification = pulseReason == DozeLog.PULSE_REASON_NOTIFICATION;
         if (animatePulse) {
             mAnimateNextPositionUpdate = true;
         }
+        if (row != null) {
+            mNotificationColorVector = handleNotificationColor(row); //int mNotificationColor
+        }
+
+        if (pulseReasonNotification && mPulsing) mKeyguardStatusView.animateAODClockColor(mNotificationColorVector); //mNotificationColor
         // Do not animate the clock when waking up from a pulse.
         // The height callback will take care of pushing the clock to the right position.
         if (!mPulsing && !mDozing) {
@@ -3779,4 +3797,53 @@ public class NotificationPanelViewController extends PanelViewController {
     public KeyguardStatusView getKeyguardStatusView() {
         return mKeyguardStatusView;
     }
+
+    private float[] handleNotificationColor(ExpandableNotificationRow row) {
+        //grab needed infos
+        mNotificationPackage = row.getEntry().getSbn().getPackageName();
+        Log.d("Dil3mm4", String.valueOf(mNotificationPackage));
+        mNotificationColor = row.getEntry().getSbn().getNotification().color;
+        mAppExceptions = mView.getContext().getResources().getStringArray(R.array.app_exceptions);
+        int defaultColor = mView.getContext().getResources().getColor(R.color.descendant_clock_flow_default_color);
+        int hexColor;
+        int[] newColor;
+        //check if we need to override the color
+        for (int i=0; i < mAppExceptions.length; i++) {
+            if (mAppExceptions[i].contains(mNotificationPackage)) {
+                Log.d("Dil3mm4", String.valueOf(mAppExceptions[i].contains(mNotificationPackage)));
+                newColor = getRGB(Color.parseColor(mAppExceptions[i+=1]));//Integer.valueOf(mAppExceptions[i += 1])));
+                return getMatrix(newColor); //Color.parseColor(mAppExceptions[i += 1]);
+            }
+        }
+        if (mNotificationColor != Notification.COLOR_DEFAULT) {
+            return getMatrix(getRGB(mNotificationColor)); //mNotificationColor
+        }
+        //this will be reached only if mNotificationColor happens to be 0
+        return getMatrix(getRGB(defaultColor)); //defaultColor
+    }
+
+
+    public float[] getMatrix(int[] color) {
+        float[] matrix;
+                matrix =
+                               new float[] {
+                      /*             color[0] * 0.2126f/256.0f, color[0] * 0.7152f/256.0f, color[0] * 0.0722f/256.0f, 0.0f, 0.0f,
+                                   color[1] * 0.2126f/256.0f, color[1] * 0.7152f/256.0f, color[1] * 0.0722f/256.0f, 0.0f, 0.0f,
+                                   color[2] * 0.2126f/256.0f, color[2] * 0.7152f/256.0f, color[2] * 0.0722f/256.0f, 0.0f, 0.0f, */
+                                   color[0] * 0.299f/256.0f, color[0] * 0.587f/256.0f, color[0] * 0.114f/256.0f, 0.0f, 0.0f,
+                                   color[1] * 0.299f/256.0f, color[1] * 0.587f/256.0f, color[1] * 0.114f/256.0f, 0.0f, 0.0f,
+                                   color[2] * 0.299f/256.0f, color[2] * 0.587f/256.0f, color[2] * 0.114f/256.0f, 0.0f, 0.0f,
+                                    0.0f, 0.0f, 0.0f, 1.0f, 0.0f
+                                };
+        return matrix;
+    }
+
+    public static int[] getRGB(final int hex) {
+        int a = (hex & 0xFF000000) >> 24;
+        int r = (hex & 0xFF0000) >> 16;
+        int g = (hex & 0xFF00) >> 8;
+        int b = (hex & 0xFF);
+        return new int[] {r, g, b};
+    }
+
 }

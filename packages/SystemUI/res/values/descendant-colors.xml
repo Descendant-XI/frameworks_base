@@ -9,4 +9,7 @@
     <color name="ringer_icon_tint">@color/accent_mirror</color>
     <color name="ripple_colors">#9a9a9a</color>
     <color name="weather_card">#fefefe</color>
+    <!-- Descendant Clock Shine -->
+    <color name="descendant_clock_flow_default_color">#FFE0E0E0</color>
+
 </resources>

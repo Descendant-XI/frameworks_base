@@ -4855,6 +4855,13 @@ public final class Settings {
         public static final String DESCENDANT_CLOCK_FLOW_EXCL_HEADSUP = "descendant_clock_flow_excl_headsup";
 
         /**
+         * helper setting to contain the current pulse reason so we can check
+         * if it has been triggered from a notification or a gesture
+         * @hide
+         */
+        public static final String PULSE_TRIGGER_REASON = "pulse_trigger_reason";
+
+        /**
          * Descendant Weather
          */
 
