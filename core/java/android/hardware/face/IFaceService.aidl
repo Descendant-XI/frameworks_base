@@ -106,6 +106,11 @@ interface IFaceService {
 
     void userActivity();
 
+    // Moto additions
+    // Start face enrollment
+    void enrollMoto(IBinder token, in byte [] cryptoToken, IFaceServiceReceiver receiver,
+            String opPackageName, in int [] disabledFeatures);
+
     // Initialize the OEM configured biometric strength
     void initConfiguredStrength(int strength);
 }
