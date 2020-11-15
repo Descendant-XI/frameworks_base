@@ -167,7 +167,7 @@ public class COVID19Helper {
 
     private String testNumber(boolean isToday) {
         try {
-            return  !isJSONNull() ? formatInteger(isToday ? mCovidJSONDataToday.getInt("tests") : mCovidJSONDataToday.getInt("tests")) : ERROR;
+            return  !isJSONNull() ? formatInteger(isToday ? mCovidJSONDataToday.getInt("tests") : mCovidJSONDataYesterday.getInt("tests")) : ERROR;
         } catch (JSONException e) {
         }
         Log.d(TAG, "testnumber returned error");
