@@ -235,8 +235,8 @@ public class COVID19Helper {
             Log.d(TAG, "fillsettingwithdata some json isn't null");
             DescendantSystemUIUtils.setSystemSettingString("covid_data", mContext, stringFormattedData());
         } else {
-            Log.d(TAG, "fillsettingwithdata data is same as stored");
-            DescendantSystemUIUtils.setSystemSettingString("covid_data", mContext, stringFormattedDataYesterday());
+            //Log.d(TAG, "fillsettingwithdata data is same as stored");
+            //DescendantSystemUIUtils.setSystemSettingString("covid_data", mContext, stringFormattedDataYesterday());
         }
     }
 
