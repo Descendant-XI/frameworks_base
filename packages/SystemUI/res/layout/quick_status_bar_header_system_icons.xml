@@ -144,13 +144,39 @@
                 android:text="No event"
                 android:paddingStart="4dp"/>
 
+            <LinearLayout
+                android:paddingEnd="8dp"
+                android:id = "@+id/ringer_container"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_toLeftOf="@+id/batteryRemainingIcon"
+                android:focusable="true"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/ringer_mode_icon"
+                    android:layout_width="@dimen/qs_header_alarm_icon_size"
+                    android:layout_height="@dimen/qs_header_alarm_icon_size"/>
+
+                <com.android.systemui.util.AutoMarqueeTextView
+                    android:id="@+id/ringer_mode_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:layout_marginStart="@dimen/qs_header_alarm_text_margin_start"
+                    android:textAppearance="@style/TextAppearance.QS.Status"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
             <com.android.systemui.statusbar.phone.StatusIconContainer
-                android:layout_centerVertical="true"
                 android:id="@+id/statusIcons"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginRight="4dp"
-                android:layout_toLeftOf="@+id/batteryRemainingIcon"/>
+                android:layout_toLeftOf="@+id/ringer_container"
+                android:paddingEnd="@dimen/signal_cluster_battery_padding" />
 
             <com.android.systemui.BatteryMeterView
                 android:layout_centerVertical="true"

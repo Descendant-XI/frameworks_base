@@ -337,7 +337,12 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 com.android.internal.R.string.status_bar_camera));
         ignored.add(mContext.getResources().getString(
                 com.android.internal.R.string.status_bar_microphone));
-
+        ignored.add("zen");
+        ignored.add("volume");
+        ignored.add("location");
+        ignored.add("bluetooth");
+        ignored.add("alarm_clock");
+        ignored.add("speakerphone");
         return ignored;
     }
 
@@ -358,7 +363,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
         boolean ringerVisible = false;
         if (!ZenModeConfig.isZenOverridingRinger(mZenController.getZen(),
-                mZenController.getConsolidatedPolicy())) {
+                mZenController.getConsolidatedPolicy()) && mZenController.getZen() != 1 ) {
             if (mRingerMode == AudioManager.RINGER_MODE_VIBRATE) {
                 mRingerModeIcon.setImageResource(R.drawable.ic_volume_ringer_vibrate);
                 mRingerModeTextView.setText(R.string.qs_status_phone_vibrate);
@@ -368,9 +373,12 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 mRingerModeTextView.setText(R.string.qs_status_phone_muted);
                 ringerVisible = true;
             }
+        } else {
+            mRingerModeIcon.setImageResource(com.android.internal.R.drawable.ic_zen_24dp);
+            ringerVisible = true;
         }
         mRingerModeIcon.setVisibility(ringerVisible ? View.VISIBLE : View.GONE);
-        mRingerModeTextView.setVisibility(ringerVisible ? View.VISIBLE : View.GONE);
+        mRingerModeTextView.setVisibility(View.GONE);
         mRingerContainer.setVisibility(ringerVisible ? View.VISIBLE : View.GONE);
 
         return isOriginalVisible != ringerVisible ||

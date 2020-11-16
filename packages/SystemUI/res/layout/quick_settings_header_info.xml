@@ -101,4 +101,10 @@
                  android:layout_gravity="end|center_vertical"
                  android:focusable="false"/>
 
+     <com.android.systemui.statusbar.phone.StatusIconContainer
+        android:id="@+id/statusIcons"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingEnd="@dimen/signal_cluster_battery_padding" />
 </LinearLayout>

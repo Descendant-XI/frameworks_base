@@ -466,4 +466,5 @@ public class StatusIconContainer extends AlphaOptimizedLinearLayout {
             return mAnimationFilter;
         }
     }.setDuration(200);
+
 }
