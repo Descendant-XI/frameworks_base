@@ -418,6 +418,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         if (mIsLandscape)
             mWeatherWidgetClass.dismissDialog();
         updateStyles(mIsLandscape);
+        handleEvents();
     }
 
     private void updateStyles(boolean isLandscape) {
@@ -484,17 +485,20 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         } else if (alarmAvailability) {
             mQSBHEventListener.setCompoundDrawablesWithIntrinsicBounds(R.drawable.alarm_active, 0, 0, 0);
             mQSBHEventListener.setCompoundDrawablePadding(4);
-            mQSBHEventListener.setText(mNextAlarmTextView.getText());
+            mQSBHEventListener.setText(formatNextAlarm(mNextAlarm));
+            mQSBHEventListener.setTextColor(Utils.getColorAttrDefaultColor(getContext(),android.R.attr.colorForeground));
             eventsCycleStop();
         } else if (eventsAvailability) {
             mQSBHEventListener.setCompoundDrawablesWithIntrinsicBounds(R.drawable.calendar_active, 0, 0, 0);
             mQSBHEventListener.setCompoundDrawablePadding(4);
             mQSBHEventListener.setText(R.string.qsbh_calendar_events);
+            mQSBHEventListener.setTextColor(Utils.getColorAttrDefaultColor(getContext(),android.R.attr.colorForeground));
             eventsCycleStop();
         } else if (!alarmAvailability || !eventsAvailability) {
             mQSBHEventListener.setCompoundDrawablesWithIntrinsicBounds(R.drawable.calendar_unactive, 0, 0, 0);
             mQSBHEventListener.setCompoundDrawablePadding(4);
             mQSBHEventListener.setText(R.string.qsbh_calendar_noevents);
+            mQSBHEventListener.setTextColor(Utils.getColorAttrDefaultColor(getContext(),android.R.attr.colorForeground));
             eventsCycleStop();
         }
     }
@@ -868,6 +872,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     @Override
     public void onNextAlarmChanged(AlarmManager.AlarmClockInfo nextAlarm) {
         mNextAlarm = nextAlarm;
+        handleEvents();
         updateStatusText();
     }
 
