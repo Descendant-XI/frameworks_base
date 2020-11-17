@@ -4227,7 +4227,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         descendantClockFlow();
         //descendantClockFlowExclHeadsUp();
         descendantClockFlowSelector();
-
+        mQSBH.dismissWeatherEx();
         // We don't want to end up in KEYGUARD state when we're unlocking with
         // fingerprint from doze. We should cross fade directly from black.
         boolean unlocking = mBiometricUnlockController.isWakeAndUnlock()
