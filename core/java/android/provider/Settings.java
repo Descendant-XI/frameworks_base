@@ -4908,6 +4908,11 @@ public final class Settings {
          */
         public static final String VOLUME_BUTTON_MUSIC_CONTROL = "volume_button_music_control";
 
+        /**
+         * Descendant featured music
+         */
+        public static final String FEATURE_COPY = "feature_copy";
+
         /** Whether to pulse ambient on new music tracks
          *
          * @hide

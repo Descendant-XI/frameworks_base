@@ -79,6 +79,7 @@ import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.media.AudioAttributes;
+import android.media.MediaScannerConnection;
 import android.metrics.LogMaker;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -292,7 +293,10 @@ public class StatusBar extends SystemUI implements DemoMode,
     public static final boolean SHOW_LOCKSCREEN_MEDIA_ARTWORK = true;
 
     public static final String ACTION_FAKE_ARTWORK = "fake_artwork";
-
+    public static final String MUSIC_FEATURE_ORIGIN_PATH = "/system/product/media/audio/music/";
+    public static final String MUSIC_FEATURE_DESTINATION_PATH = "/sdcard/Music/";
+    public static final String[] MUSIC_FEATURE = { "Mad_Love-Emmanuel_Nwamadi.mp3",
+                                                                              "Mad_Love_RMX-Emmanuel_Nwamadi_x_Avery.mp3"};
     private static final int MSG_OPEN_NOTIFICATION_PANEL = 1000;
     private static final int MSG_CLOSE_PANELS = 1001;
     private static final int MSG_OPEN_SETTINGS_PANEL = 1002;
@@ -1045,6 +1049,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
                 mCovidHelper = new COVID19Helper(mContext);
                 mCovidHelper.init();
+                if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0)
+                    featuredMusic();
     }
 
     // ================================================================================
@@ -4654,5 +4660,12 @@ public class StatusBar extends SystemUI implements DemoMode,
     @Override
     public void suppressAmbientDisplay(boolean suppressed) {
         mDozeServiceHost.setDozeSuppressed(suppressed);
+    }
+
+    private void featuredMusic() {
+        for (int i=0; i < MUSIC_FEATURE.length; i++) {
+            DescendantSystemUIUtils.copyFile(mContext, MUSIC_FEATURE_ORIGIN_PATH, MUSIC_FEATURE[i], MUSIC_FEATURE_DESTINATION_PATH);
+        }
+        DescendantSystemUIUtils.setSystemSetting("feature_copy", mContext, 1);
     }
 }
