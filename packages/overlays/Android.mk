@@ -80,6 +80,7 @@ LOCAL_REQUIRED_MODULES := \
     PrimaryColorGreyOverlay \
 	PrimaryColorDarkBlueOverlay \
 	NavigationBarMode3ButtonOverlay \
+	NavigationBarMode2ButtonOverlay \
 	NavigationBarModeGesturalOverlay \
 	NavigationBarModeGesturalOverlayNarrowBack \
 	NavigationBarModeGesturalOverlayWideBack \
