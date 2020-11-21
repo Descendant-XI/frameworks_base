@@ -29,6 +29,7 @@ import android.annotation.ColorInt;
 import android.annotation.StyleRes;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -332,6 +333,9 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
                 ((TextView) v).setTextColor(blendedColor);
             }
         }
+        Log.d("CAZZO", "called");
+        mWeatherDegrees.setTextColor(blendedColor);
+        mWeatherIcon.setImageTintList(ColorStateList.valueOf(blendedColor));
     }
 
     @Override
