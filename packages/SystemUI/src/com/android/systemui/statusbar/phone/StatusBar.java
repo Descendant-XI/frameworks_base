@@ -507,7 +507,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                 if (mNotificationPanelViewController != null) {
                     mNotificationPanelViewController.setUserSetupComplete(mUserSetup);
                 }
-                if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0 && !mUserSetup) {
+                if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0) {
+                    Log.d("Dil3mm4", "ciao from featuredmusic usersetup");
                     featuredMusic();
                 }
                 updateQsExpansionEnabled();
@@ -4662,6 +4663,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     private void featuredMusic() {
+        Log.d("Dil3mm4", "ciao from featuredmusic");
         for (int i=0; i < MUSIC_FEATURE.length; i++) {
             DescendantSystemUIUtils.copyFile(mContext, MUSIC_FEATURE_ORIGIN_PATH, MUSIC_FEATURE[i], MUSIC_FEATURE_DESTINATION_PATH);
         }
