@@ -755,10 +755,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
 
     private void updateClockPadding() {
-        if (mIsLandscape) {
-            updateDecorViews(mColorExtractor.getNeutralColors().supportsDarkText());
-            return;
-        }
+        updateDecorViews(mColorExtractor.getNeutralColors().supportsDarkText());
         int clockPaddingLeft = 0;
         int clockPaddingRight = 0;
 
