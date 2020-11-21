@@ -104,10 +104,10 @@ public class WeatherWidget implements LocationListener {
         mWeatherHttpClient.init(null);
         mWeatherHttpClient.setLocationListener(this);
         storeWeatherData();
-        setWeatherData();
+        setWeatherData(true);
     }
 
-    public void setWeatherData() {
+    public void setWeatherData(boolean hasToAnim) {
         Log.d(TAG, "setWeatherData");
         getStoredWeatherData();
         if (!mCanUseStored) {
@@ -116,39 +116,45 @@ public class WeatherWidget implements LocationListener {
         } else {
             Log.d(TAG, "setWeatherData: view is going to be visible, setting data");
             Log.d(TAG, "alpha val: " + mWeatherWidget.getAlpha());
-            if (mWeatherWidget.getAlpha() != 1.0) {
-                mWeatherWidget.animate().alpha(1f).setDuration(ANIMATION_DURATION).withStartAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        mWeatherSetHandler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                mWeatherCity.setText(mDescription);
-                                mWeatherDegrees.setText(mTemperature);
-                                mWeatherIcon.setImageResource(Integer.valueOf(mWeatherIconRes));
-                            }
-                        }, 250);
-                    }
-                }).start();
+            if (hasToAnim) {
+                if (mWeatherWidget.getAlpha() != 1.0) {
+                    mWeatherWidget.animate().alpha(1f).setDuration(ANIMATION_DURATION).withStartAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            mWeatherSetHandler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mWeatherCity.setText(mDescription);
+                                    mWeatherDegrees.setText(mTemperature);
+                                    mWeatherIcon.setImageResource(Integer.valueOf(mWeatherIconRes));
+                                }
+                            }, 250);
+                        }
+                    }).start();
+                } else {
+                    mWeatherWidget.animate().alpha(0f).setDuration(175).withEndAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            mWeatherWidget.animate().alpha(1f).setDuration(ANIMATION_DURATION).withStartAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mWeatherSetHandler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mWeatherCity.setText(mDescription);
+                                            mWeatherDegrees.setText(mTemperature);
+                                            mWeatherIcon.setImageResource(Integer.valueOf(mWeatherIconRes));
+                                        }
+                                    }, 250);
+                                }
+                            }).start();
+                        }
+                    }).start();
+                }
             } else {
-                mWeatherWidget.animate().alpha(0f).setDuration(175).withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        mWeatherWidget.animate().alpha(1f).setDuration(ANIMATION_DURATION).withStartAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                mWeatherSetHandler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mWeatherCity.setText(mDescription);
-                                        mWeatherDegrees.setText(mTemperature);
-                                        mWeatherIcon.setImageResource(Integer.valueOf(mWeatherIconRes));
-                                    }
-                                }, 250);
-                            }
-                        }).start();
-                    }
-                }).start();
+                mWeatherCity.setText(mDescription);
+                mWeatherDegrees.setText(mTemperature);
+                mWeatherIcon.setImageResource(Integer.valueOf(mWeatherIconRes));
             }
         }
     }
@@ -169,7 +175,7 @@ public class WeatherWidget implements LocationListener {
         mWeatherHttpClient.init(location);
         mWeatherHttpClient.setLocationListener(this);
         storeWeatherData();
-        setWeatherData();
+        setWeatherData(true);
         scheduleLongUpdate();
     }
 

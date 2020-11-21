@@ -808,7 +808,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mListening = listening;
 
         if (listening) {
-            if (mWeatherWidgetClass != null) mWeatherWidgetClass.setWeatherData();
+            if (mWeatherWidgetClass != null) mWeatherWidgetClass.setWeatherData(false);
             mZenController.addCallback(this);
             mAlarmController.addCallback(this);
             mLifecycle.setCurrentState(Lifecycle.State.RESUMED);
