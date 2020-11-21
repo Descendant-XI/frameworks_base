@@ -498,13 +498,17 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Log.d(TAG, String.format("User setup changed: userSetup=%s mUserSetup=%s",
                         userSetup, mUserSetup));
             }
-
             if (userSetup != mUserSetup) {
                 mUserSetup = userSetup;
                 if (!mUserSetup && mStatusBarView != null)
                     animateCollapseQuickSettings();
+                    mCovidHelper = new COVID19Helper(mContext);
+                    mCovidHelper.init();
                 if (mNotificationPanelViewController != null) {
                     mNotificationPanelViewController.setUserSetupComplete(mUserSetup);
+                }
+                if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0 && !mUserSetup) {
+                    featuredMusic();
                 }
                 updateQsExpansionEnabled();
             }
@@ -1046,11 +1050,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                         }
                     }
                 }, OverlayPlugin.class, true /* Allow multiple plugins */);
-
-                mCovidHelper = new COVID19Helper(mContext);
-                mCovidHelper.init();
-                if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0)
-                    featuredMusic();
     }
 
     // ================================================================================
