@@ -9,6 +9,8 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.os.Build;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionListenerAdapter;
@@ -161,6 +163,8 @@ public class KeyguardClockSwitch extends RelativeLayout {
      */
     private boolean mAnimationStatus;
 
+    private PowerManager mPowerManager;
+
     private final StatusBarStateController.StateListener mStateListener =
             new StatusBarStateController.StateListener() {
                 @Override
@@ -192,7 +196,7 @@ public class KeyguardClockSwitch extends RelativeLayout {
         mStatusBarState = mStatusBarStateController.getState();
         mSysuiColorExtractor = colorExtractor;
         mClockManager = clockManager;
-
+        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         mClockTransition = new ClockVisibilityTransition().setCutoff(
                 1 - TO_BOLD_TRANSITION_FRACTION);
         mClockTransition.addTarget(R.id.default_clock_view);
@@ -743,6 +747,13 @@ public class KeyguardClockSwitch extends RelativeLayout {
                 if (mAnimationStatus) DescendantSeamlessClockSwitch.changeClockFace(mContext,1);
             }
             public void onSwipeBottom() {
+            }
+            public void onDoubleClick() {
+                if (DescendantSystemUIUtils.settingStatusBoolean("double_tap_sleep_lockscreen", mContext)) {
+                    if (mPowerManager != null) {
+                        mPowerManager.goToSleep(SystemClock.uptimeMillis());
+                    }
+                }
             }
             public void onLongClick() {
                 //if (DescendantSystemUIUtils.settingStatusBoolean("lockscreen_clock_face_change", mContext)) {
