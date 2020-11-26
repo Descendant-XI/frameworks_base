@@ -295,7 +295,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     public static final String ACTION_FAKE_ARTWORK = "fake_artwork";
     public static final String MUSIC_FEATURE_ORIGIN_PATH = "/system/product/media/audio/music/";
     public static final String MUSIC_FEATURE_DESTINATION_PATH = "/sdcard/Music/";
-    public static final String[] MUSIC_FEATURE = { "Mad_Love-Emmanuel_Nwamadi_cut.ogg",
+    public static final String[] MUSIC_FEATURE = { "Mad_Love-Emmanuel_Nwamadi.ogg",
                                                                               "Mad_Love_RMX-Emmanuel_Nwamadi_x_Avery.mp3"};
     private static final int MSG_OPEN_NOTIFICATION_PANEL = 1000;
     private static final int MSG_CLOSE_PANELS = 1001;
