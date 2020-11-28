@@ -225,22 +225,6 @@ public class FODCircleView extends ImageView {
 
         mHandler = new Handler(Looper.getMainLooper());
 
-        mParams.height = mSize;
-        mParams.width = mSize;
-        mParams.format = PixelFormat.TRANSLUCENT;
-
-        mParams.packageName = "android";
-        mParams.type = WindowManager.LayoutParams.TYPE_DISPLAY_OVERLAY;
-        mParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
-        mParams.gravity = Gravity.TOP | Gravity.LEFT;
-
-        mPressedParams.copyFrom(mParams);
-        mPressedParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
-
-        mParams.setTitle("Fingerprint on display");
-        mPressedParams.setTitle("Fingerprint on display.touched");
-
         mPressedView = new ImageView(context)  {
             @Override
             protected void onDraw(Canvas canvas) {
@@ -252,15 +236,43 @@ public class FODCircleView extends ImageView {
         };
         mPressedView.setImageResource(R.drawable.fod_icon_pressed);
 
-        mWindowManager.addView(this, mParams);
-
-        updatePosition();
-        hide();
+        initParams(true);
 
         mLockPatternUtils = new LockPatternUtils(mContext);
 
         mUpdateMonitor = Dependency.get(KeyguardUpdateMonitor.class);
         mUpdateMonitor.registerCallback(mMonitorCallback);
+    }
+
+    private void initParams(boolean fromConstruct) {
+        if (mIsKeyguard && mParams.type == WindowManager.LayoutParams.TYPE_DISPLAY_OVERLAY) return;
+
+        if (!fromConstruct) {
+            mWindowManager.removeView(this);
+        }
+        mParams.height = mSize;
+        mParams.width = mSize;
+        mParams.format = PixelFormat.TRANSLUCENT;
+
+        mParams.packageName = "android";
+        mParams.type = fromConstruct || mIsKeyguard ? WindowManager.LayoutParams.TYPE_DISPLAY_OVERLAY : WindowManager.LayoutParams.TYPE_INPUT_METHOD_DIALOG;
+        mParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+        mParams.gravity = Gravity.TOP | Gravity.LEFT;
+
+        mPressedParams.copyFrom(mParams);
+        mPressedParams.type = WindowManager.LayoutParams.TYPE_DISPLAY_OVERLAY;
+        mPressedParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH;
+
+        mParams.setTitle("Fingerprint on display");
+        mPressedParams.setTitle("Fingerprint on display.touched");
+
+        mWindowManager.addView(this, mParams);
+
+        updatePosition();
+        if (fromConstruct) {
+            hide();
+        }
     }
 
     @Override
@@ -366,6 +378,7 @@ public class FODCircleView extends ImageView {
     public void hideCircle() {
         mIsCircleShowing = false;
 
+        if (!mIsKeyguard) setVisibility(View.GONE);
         setImageResource(R.drawable.fod_icon_default);
         invalidate();
 
@@ -395,7 +408,7 @@ public class FODCircleView extends ImageView {
             return;
         }
 
-        updatePosition();
+        initParams(false);
 
         setVisibility(View.VISIBLE);
         animate().withStartAction(() -> mFading = true)
