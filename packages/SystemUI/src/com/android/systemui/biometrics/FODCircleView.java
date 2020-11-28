@@ -160,8 +160,6 @@ public class FODCircleView extends ImageView {
                 } else {
                     hide();
                 }
-            } else {
-                hide();
             }
         }
 
