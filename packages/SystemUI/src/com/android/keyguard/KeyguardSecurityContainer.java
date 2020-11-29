@@ -33,6 +33,7 @@ import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Insets;
 import android.graphics.Rect;
