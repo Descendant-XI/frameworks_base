@@ -515,11 +515,10 @@ public class KeyguardSecurityContainer extends FrameLayout implements KeyguardSe
 
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
-
         // Consume bottom insets because we're setting the padding locally (for IME and navbar.)
         int inset;
         boolean fodEquipped = mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT);
-        int minBottomMargin = mUpdateMonitor.isFingerprintDetectionRunning() && fodEquipped ? getResources().getDimensionPixelSize(
+        int minBottomMargin = !mUpdateMonitor.userNeedsStrongAuth() && mUpdateMonitor.isFingerprintDetectionRunning() && fodEquipped ? getResources().getDimensionPixelSize(
                 R.dimen.kg_security_container_min_bottom_margin) : 0;
 
         if (sNewInsetsMode == NEW_INSETS_MODE_FULL) {
