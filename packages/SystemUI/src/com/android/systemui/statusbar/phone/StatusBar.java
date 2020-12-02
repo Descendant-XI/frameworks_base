@@ -78,6 +78,8 @@ import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.hardware.display.DisplayManager;
+import android.hardware.fingerprint.IFingerprintService;
 import android.media.AudioAttributes;
 import android.media.MediaScannerConnection;
 import android.metrics.LogMaker;
@@ -158,6 +160,8 @@ import com.android.systemui.SystemUI;
 import com.android.systemui.SystemUIFactory;
 import com.android.systemui.ThumbUIManager;
 import com.android.systemui.assist.AssistManager;
+import com.android.systemui.biometrics.FODCircleViewImpl;
+import com.android.systemui.biometrics.FODCircleViewImplCallback;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.bubbles.BubbleController;
 import com.android.systemui.charging.WirelessChargingAnimation;
@@ -245,6 +249,7 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Executor;
@@ -636,6 +641,33 @@ public class StatusBar extends SystemUI implements DemoMode,
     };
 
     private FlashlightController mFlashlightController;
+    private ActivityManager mActivityManager;
+    private boolean mFodVisibility;
+    private boolean mIsDreaming;
+    private FODCircleViewImpl mFODCircleViewImpl;
+    private String mTopPkgClass;
+    private boolean mIsFPClientActive;
+    private FODCircleViewImplCallback mFODCircleViewImplCallback =
+            new FODCircleViewImplCallback() {
+                @Override
+                public void onFODStatusChange(boolean isVisible) {
+                    mFodVisibility = isVisible;
+                    try {
+                        mIsFPClientActive = mFingerprintService.isClientActive();
+                    } catch (Exception e) {
+                        mIsFPClientActive = false;
+                    }
+                    if (!mIsFPClientActive) {
+                        // if the client is not active, we have to nullify mTopPkgClass before
+                        // checking it against current foreground activity
+                        mTopPkgClass = null;
+                        return;
+                    } else if (isVisible && !mIsKeyguard && !mIsDreaming) {
+                        mTopPkgClass = getPkgNameAndClass();
+                    }
+                }
+    };
+
     private KeyguardUserSwitcher mKeyguardUserSwitcher;
     private final UserSwitcherController mUserSwitcherController;
     private final NetworkController mNetworkController;
@@ -664,6 +696,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             new KeyguardUpdateMonitorCallback() {
                 @Override
                 public void onDreamingStateChanged(boolean dreaming) {
+                    mIsDreaming = dreaming;
                     if (dreaming) {
                         maybeEscalateHeadsUp();
                     }
@@ -688,7 +721,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     private Lazy<NotificationShadeDepthController> mNotificationShadeDepthControllerLazy;
     private final BubbleController mBubbleController;
     private final BubbleController.BubbleExpandListener mBubbleExpandListener;
-
+    private IFingerprintService mFingerprintService;
     private ActivityIntentHelper mActivityIntentHelper;
 
     /**
@@ -777,7 +810,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             DismissCallbackRegistry dismissCallbackRegistry,
             Lazy<NotificationShadeDepthController> notificationShadeDepthControllerLazy,
             StatusBarTouchableRegionManager statusBarTouchableRegionManager,
-            FlashlightController flashlightController) {
+            FlashlightController flashlightController,
+            FODCircleViewImpl fodCircleViewImpl) {
         super(context);
         mNotificationsController = notificationsController;
         mLightBarController = lightBarController;
@@ -855,18 +889,19 @@ public class StatusBar extends SystemUI implements DemoMode,
         mIconPolicy = phoneStatusBarPolicy;
         mDismissCallbackRegistry = dismissCallbackRegistry;
         mFlashlightController = flashlightController;
-
+        mFODCircleViewImpl = fodCircleViewImpl;
         mBubbleExpandListener =
                 (isExpanding, key) -> {
                     mNotificationsController.requestNotificationUpdate("onBubbleExpandChanged");
                     updateScrimController();
                 };
 
-
         DateTimeView.setReceiverHandler(timeTickHandler);
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
 
+        mFingerprintService = IFingerprintService.Stub.asInterface(
+                ServiceManager.getService(Context.FINGERPRINT_SERVICE));
     }
 
     @Override
@@ -1051,6 +1086,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                         }
                     }
                 }, OverlayPlugin.class, true /* Allow multiple plugins */);
+                mActivityManager = mContext.getSystemService(ActivityManager.class);
+                mFODCircleViewImpl.registerCallback(mFODCircleViewImplCallback);
     }
 
     // ================================================================================
@@ -1353,7 +1390,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         mActivityLaunchAnimator = new ActivityLaunchAnimator(
                 mNotificationShadeWindowViewController, this, mNotificationPanelViewController,
                 mNotificationShadeDepthControllerLazy.get(),
-                (NotificationListContainer) mStackScroller, mContext.getMainExecutor());
+                (NotificationListContainer) mStackScroller, mContext.getMainExecutor(),
+                mFODCircleViewImpl);
 
         // TODO: inject this.
         mPresenter = new StatusBarNotificationPresenter(mContext, mNotificationPanelViewController,
@@ -1889,6 +1927,12 @@ public class StatusBar extends SystemUI implements DemoMode,
                 Log.v(TAG, "clearing notification effects from setExpandedHeight");
             }
             clearNotificationEffects();
+        }
+
+        if (isExpanded && mFodVisibility) {
+            mFODCircleViewImpl.hideInDisplayFingerprintView();
+        } else if (!isExpanded && getPkgNameAndClass().equals(mTopPkgClass)) {
+            mFODCircleViewImpl.showInDisplayFingerprintView();
         }
 
         if (!isExpanded) {
@@ -2620,6 +2664,13 @@ public class StatusBar extends SystemUI implements DemoMode,
     @Override
     public void onRecentsAnimationStateChanged(boolean running) {
         setInteracting(StatusBarManager.WINDOW_NAVIGATION_BAR, running);
+        if (running) {
+            mFODCircleViewImpl.hideInDisplayFingerprintView();
+        } else if (getPkgNameAndClass().equals(mTopPkgClass)) {
+            mFODCircleViewImpl.showInDisplayFingerprintView();
+        } else {
+            mFODCircleViewImpl.hideInDisplayFingerprintView();
+        }
     }
 
     protected BarTransitions getStatusBarTransitions() {
@@ -4681,5 +4732,17 @@ public class StatusBar extends SystemUI implements DemoMode,
             DescendantSystemUIUtils.copyFile(mContext, MUSIC_FEATURE_ORIGIN_PATH, MUSIC_FEATURE[i], MUSIC_FEATURE_DESTINATION_PATH);
         }
         DescendantSystemUIUtils.setSystemSetting("feature_copy", mContext, 1);
+    }
+
+    private String getPkgNameAndClass() {
+        List<ActivityManager.RunningTaskInfo> tasks =
+                mActivityManager.getRunningTasks(1);
+        ActivityManager.RunningTaskInfo currentTask = tasks.get(0);
+        ComponentName currentActivity = currentTask.topActivity;
+        if (currentActivity.getPackageName() != null) {
+            return currentActivity.getPackageName().trim() +
+                  currentActivity.getShortClassName().trim();
+        }
+        return null;
     }
 }
