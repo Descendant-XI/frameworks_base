@@ -1,3 +1,5 @@
 <resources>
     <bool name="config_has_Soli">false</bool>
+    <!-- Whether device supports in-display fingerprint when screen is turned off -->
+    <bool name="config_supportsScreenOffInDisplayFingerprint">false</bool>
 </resources>
