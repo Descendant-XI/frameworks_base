@@ -476,7 +476,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         boolean eventsAvailability = EventsProvider.areThereCalendarEvents(mContext);
         boolean alarmAvailability = EventsProvider.areThereAlarms(mContext);
         if (alarmAvailability && eventsAvailability) {
-            if (!mListening) {
+            if (mListening) {
                 eventsCycleStart();
                 return;
             } else {
@@ -510,7 +510,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             if (mEventsVisibleNow) {
                 mEventsVisibleNow = false;
                 mAlarmVisibleNow = true;
-                handleEventListenerAnimations(mQSBHEventListener, getResources().getString(R.string.qsbh_alarm_events)  + " " + mNextAlarmTextView.getText(), true);
+                handleEventListenerAnimations(mQSBHEventListener, formatNextAlarm(mNextAlarm), true);
                 if (mEventsCycleStarted)
                     eventsCycleStart();
                 } else {
