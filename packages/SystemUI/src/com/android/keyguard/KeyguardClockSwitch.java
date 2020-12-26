@@ -11,6 +11,7 @@ import android.graphics.Paint.Style;
 import android.os.Build;
 import android.os.PowerManager;
 import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionListenerAdapter;
@@ -698,9 +699,13 @@ public class KeyguardClockSwitch extends RelativeLayout {
 
         @Override
         public void onKeyguardVisibilityChanged(boolean showing) {
-            Log.d("Dil3mm4", "event called");
+            if (SystemProperties.getBoolean("descendant.debug", false)) {
+                Log.d(TAG, "onKeyguardVisibilityChanged");
+            }
             if (!showing) {
-                Log.d("Dil3mm4", "not showing");
+                if (SystemProperties.getBoolean("descendant.debug", false)) {
+                    Log.d(TAG, "onKeyguardVisibilityChanged value of boolean is false");
+                }
                 if (mAnimationStatus) {
                     DescendantSeamlessClockSwitch.blinkInfo(mChangeClockface, false, getCurrentTextColor(), mContext);
                     DescendantSeamlessClockSwitch.shakeClock(mSmallClockFrame, false);

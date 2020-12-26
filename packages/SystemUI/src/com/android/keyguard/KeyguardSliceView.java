@@ -36,6 +36,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.text.LineBreaker;
 import android.net.Uri;
 import android.os.Trace;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.TextUtils.TruncateAt;
@@ -333,7 +334,6 @@ public class KeyguardSliceView extends LinearLayout implements View.OnClickListe
                 ((TextView) v).setTextColor(blendedColor);
             }
         }
-        Log.d("CAZZO", "called");
         mWeatherDegrees.setTextColor(blendedColor);
         mWeatherIcon.setImageTintList(ColorStateList.valueOf(blendedColor));
     }

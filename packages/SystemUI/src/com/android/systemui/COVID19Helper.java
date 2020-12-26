@@ -200,10 +200,8 @@ public class COVID19Helper {
                     yesterdayData = 0;
                     todayData = 0;
                 }
-                Log.d("Dil3mm4", "help me: yest " + String.valueOf(yesterdayData) + " " + String.valueOf(todayData));
                 if (yesterdayData == 0 || todayData == 0) return ERROR;
                 diff = todayData - yesterdayData;
-                Log.d("Dil3mm4", "help me: yest " + String.valueOf(yesterdayData) + " " + String.valueOf(todayData));
                 return formatInteger(diff);
 
             case "cases":
@@ -293,14 +291,11 @@ public class COVID19Helper {
             String data = DescendantSystemUIUtils.getSystemSettingString("weather_data", mContext);
             String[] array = data.split(",");
             if (array.length > 0 && array[1] != ERROR) {
-                Log.d("Dil3mm4", "returning: " + array[1]);
                 return array[1];
             } else {
-                Log.d("Dil3mm4", "returning: " + ERROR);
                 return ERROR;
             }
         }
-        Log.d("Dil3mm4", "returning telman");
         return cISO;
     }
 
@@ -340,7 +335,6 @@ public class COVID19Helper {
         }
 
         private void signaledChange() {
-            Log.d("Dil3mm4", "signaled");
             connectAndGather("today");
             connectAndGather("yesterday");
         }
