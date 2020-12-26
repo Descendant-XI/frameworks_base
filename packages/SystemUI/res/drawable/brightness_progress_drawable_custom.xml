@@ -17,7 +17,7 @@
         <shape android:shape="rectangle"
             android:tint="#90808080">
             <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
-                     android:bottomLeftRadius="?android:attr/dialogCornerRadius" android:bottomRightRadius="?android:attr/dialogCornerRadius"/>
+                     android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
             <size android:height="@dimen/brightness_drawable_height" />
             <solid android:color="#90808080" />
         </shape>
@@ -32,7 +32,7 @@
                     <shape android:shape="rectangle"
                         android:tint="?android:attr/colorAccent">
                         <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
-                                 android:bottomLeftRadius="?android:attr/dialogCornerRadius" android:bottomRightRadius="?android:attr/dialogCornerRadius"/>
+                                 android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
                         <size android:height="@dimen/brightness_drawable_height" />
                         <solid android:color="?android:attr/colorAccent" />
                     </shape>
