@@ -36,6 +36,7 @@ import com.android.systemui.qs.tiles.DataSaverTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
 import com.android.systemui.qs.tiles.HotspotTile;
+import com.android.systemui.qs.tiles.HeadphonesBuddyTile;
 import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.LocationTile;
 import com.android.systemui.qs.tiles.MonoToggleTile;
@@ -82,6 +83,7 @@ public class QSFactoryImpl implements QSFactory {
     private final Provider<ScreenRecordTile> mScreenRecordTileProvider;
     private final Provider<HeadsUpTile> mHeadsUpTileProvider;
     private final Provider<MonoToggleTile> mMonoToggleTileProvider;
+    private final Provider<HeadphonesBuddyTile> mHeadphonesBuddyTile;
 
     private final Lazy<QSHost> mQsHostLazy;
 
@@ -108,7 +110,8 @@ public class QSFactoryImpl implements QSFactory {
             Provider<UiModeNightTile> uiModeNightTileProvider,
             Provider<HeadsUpTile> headsupTileProvider,
             Provider<ScreenRecordTile> screenRecordTileProvider,
-            Provider<MonoToggleTile> monoToggleTileProvider) {
+            Provider<MonoToggleTile> monoToggleTileProvider,
+            Provider<HeadphonesBuddyTile> headphonesBuddyTile) {
         mQsHostLazy = qsHostLazy;
         mWifiTileProvider = wifiTileProvider;
         mBluetoothTileProvider = bluetoothTileProvider;
@@ -132,6 +135,7 @@ public class QSFactoryImpl implements QSFactory {
         mScreenRecordTileProvider = screenRecordTileProvider;
         mHeadsUpTileProvider = headsupTileProvider;
         mMonoToggleTileProvider = monoToggleTileProvider;
+        mHeadphonesBuddyTile = headphonesBuddyTile;
     }
 
     public QSTile createTile(String tileSpec) {
@@ -187,6 +191,8 @@ public class QSFactoryImpl implements QSFactory {
                 return mHeadsUpTileProvider.get();
             case "mono":
                 return mMonoToggleTileProvider.get();
+            case "headphonesbuddy":
+                return mHeadphonesBuddyTile.get();
         }
 
         // Custom tiles
