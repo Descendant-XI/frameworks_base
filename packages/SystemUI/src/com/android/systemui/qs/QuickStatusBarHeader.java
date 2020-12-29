@@ -72,6 +72,7 @@ import com.android.systemui.BatteryMeterView;
 import com.android.systemui.Dependency;
 import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.colorextraction.SysuiColorExtractor;
+import com.android.systemui.dump.DumpManager;
 import com.android.systemui.Dependency;
 import com.android.systemui.DualToneHandler;
 import com.android.systemui.GpsTracker;
@@ -84,6 +85,7 @@ import com.android.systemui.qs.QSDetail.Callback;
 import com.android.systemui.qs.QSPanel;
 import com.android.systemui.settings.BrightnessController;
 import com.android.systemui.qs.carrier.QSCarrierGroup;
+import com.android.systemui.statusbar.BlurUtils;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.phone.StatusBarIconController.TintedIconManager;
@@ -137,6 +139,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private final ZenModeController mZenController;
     private final StatusBarIconController mStatusBarIconController;
     private final ActivityStarter mActivityStarter;
+    private final BlurUtils mBlurUtils;
     private ScheduledExecutorService mScheduleUpdate;
     private DeviceProvisionedController mDeviceProvisionedController;
 
@@ -239,6 +242,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mCommandQueue = commandQueue;
         mRingerModeTracker = ringerModeTracker;
         mQuickQsBrightnessExpFrac = BRIGHTNESS_EXP_PORTRAIT;
+        mBlurUtils = new BlurUtils(mContext.getResources(), new DumpManager());
     }
 
     @Override
@@ -690,8 +694,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mQuickQsBrightness.setTranslationY(expansionFraction * mQuickQsBrightnessExpFrac);
 
         mEdit.setAlpha(expansionFraction);
-
         if (forceExpanded) {
+            if (mBlurUtils.supportsBlursOnWindows()) {
+                mBlurUtils.applyBlur(getViewRootImpl(),
+                        mBlurUtils.blurRadiusOfRatio(expansionFraction));
+            }
             // If the keyguard is showing, we want to offset the text so that it comes in at the
             // same time as the panel as it slides down.
             //mHeaderTextContainerView.setTranslationY(panelTranslationY);
