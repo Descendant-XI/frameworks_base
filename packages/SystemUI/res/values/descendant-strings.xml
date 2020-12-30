@@ -81,4 +81,7 @@
     <string name="hp_buddy_center">Both</string>
     <string name="hp_buddy_not_connected">Connect your headphones</string>
 
+    <!-- Autobrightness tile -->
+    <string name="quick_settings_autobrightness_label">Auto \nbrightness</string>
+
 </resources>
