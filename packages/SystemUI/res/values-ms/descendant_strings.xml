@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_battery_level">Tidak diketahui</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Leret untuk menukar wajah jam</string>
+    <string name="clock_title_squary_clock">Cal Clock</string>
+    <string name="clock_title_squary_clock_extended">Squary Clock Extended</string>
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Descendant Health</string>
+    <string name="descendant_health_eyestrain_title">Amaran keletihan mata</string>
+    <string name="descendant_health_eyestrain_summary">Nampaknya anda telah menggunakan telefon anda selama satu jam secara berterusan. \nPertimbangkan untuk berehat, ia dapat mengurangkan kejadian keletihan mata.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://en.wikipedia.org/wiki/Eye_strain</string>
+    <string name="descendant_health_eyestrain_info">Mengenai keletihan mata</string>
+    <string name="descendant_health_eyestrain_nightlight">Persediaan cahaya malam</string>
+    <string name="descendant_health_sleep_title">Penasihat tidur</string>
+    <string name="descendant_health_sleep_summary">Nampaknya anda ada memasang penggera yang akan berbunyi 
+tidak lama lagi . \ nJika telefon anda menganggu tidur anda dengan pemberitahuan, sediakan Jangan Ganggu.</string>
+    <string name="descendant_health_sleep_dnd">Persediaan Jangan Ganggu</string>
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">Telefon</string>
+    <string name="descendant_guardia_record_audio_perm">mikrofon</string>
+    <string name="descendant_guardia_camera_perm">kamera</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Aplikasi</string>
+    <string name="descendant_guardia_is_accessing">sedang mengakses</string>
+    <string name="descendant_guardia_listening_state">Mendengarkan aplikasi...</string>
+    <string name="descendant_guardia_clipboard_read">papan keratan dengan kebenaran membaca</string>
+    <string name="descendant_guardia_clipboard_write">papan keratan dengan kebenaran menulis</string>
+    <string name="descendant_guardia_monitoring">Pemantauan</string>
+    <string name="descendant_guardia_detection">Pengesanan</string>
+    <string name="descendant_guardia_appname">Descendant Guardia</string>
+    <string name="descendant_guardia_acknowledge">Diperakui</string>
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">Tiada acara dijadualkan</string>
+    <string name="qsbh_calendar_events">Acara dijadualkan</string>
+    <string name="qsbh_alarm_events">Penggera seterusnya:</string>
+    <!-- Weather -->
+    <string name="weather_city_unknown">Mencari…</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Ketik untuk mengaktifkan</string>
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Cuaca</string>
+    <string name="weather_ex_widget_temp">Suhu</string>
+    <string name="weather_ex_widget_temp_max">maks</string>
+    <string name="weather_ex_widget_temp_min">MIn</string>
+    <string name="weather_ex_widget_wind">Angin</string>
+    <string name="weather_ex_widget_wind_speed">Kelajuan</string>
+    <string name="weather_ex_widget_wind_degrees">Darjah</string>
+    <string name="weather_ex_widget_perception">Persepsi</string>
+    <string name="weather_ex_widget_perception_feels_like">terasa seperti</string>
+    <string name="weather_ex_widget_perception_humidity">Kelembapan</string>
+    <string name="weather_ex_widget_sight">Penglihatan</string>
+    <string name="weather_ex_widget_sight_visibility">Kebolehlihatan</string>
+    <string name="weather_ex_widget_sight_cloudiness">Kekaburan</string>
+    <!-- Mono QS Tile -->
+    <string name="quick_settings_monotoggle_tile">mod audio</string>
+    <string name="quick_settings_monotoggle_tile_mono">Audio mono</string>
+    <string name="quick_settings_monotoggle_tile_stereo">Audio stereo</string>
+    <!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Penjimatan Bateri</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Pelaporan lokasi: mod penjimatan bateri.</string>
+    <string name="quick_settings_location_secondary_gps_only">Pengesan Sahaja</string>
+    <string name="accessibility_quick_settings_location_gps_only">Pelaporan lokasi: mod pengesan sahaja.</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Ketepatan Tinggi</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Pelaporan lokasi: mod ketepatan tinggi.</string>
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Notifikasi Intai</string>
+    <string name="accessibility_quick_settings_heads_up_off">Notifikasi Intai dinyahaktifkan.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Notifikasi Intai dibenarkan</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Notifikasi Intai dipadamkan</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Notifikasi Intai dihidupkan</string>
+</resources>

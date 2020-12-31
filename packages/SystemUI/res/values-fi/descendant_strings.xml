@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_battery_level">Tuntematon</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Pyyhkäise vaihtaaksesi kellotaulua</string>
+    <string name="clock_title_squary_clock">Kalenterikello</string>
+    <string name="clock_title_squary_clock_extended">Laajennettu neliökello</string>
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Descendant Health</string>
+    <string name="descendant_health_eyestrain_title">Silmien rasittumisen hälytys</string>
+    <string name="descendant_health_eyestrain_summary">Näyttää siltä, että olet käyttänyt puhelinta tunnin putkeen. Harkitse taukoa, se saattaa vähentää silmien väsymistä.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://en.wikipedia.org/wiki/Eye_strain</string>
+    <string name="descendant_health_eyestrain_info">Tietoa silmien rasittumisesta</string>
+    <string name="descendant_health_eyestrain_nightlight">Aseta Yövalo</string>
+    <string name="descendant_health_sleep_title">Nukkumisen avustaja</string>
+    <string name="descendant_health_sleep_summary">Näyttää siltä, että sinulla on kohta herätys. Jos puhelimesi estää nukahtamistasi ilmoituksilla, aseta Älä häiritse -tila.</string>
+    <string name="descendant_health_sleep_dnd">Aseta Älä häiritse ‑tila</string>
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">puhelin</string>
+    <string name="descendant_guardia_record_audio_perm">mikrofoni</string>
+    <string name="descendant_guardia_camera_perm">kamera</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Sovellus</string>
+    <string name="descendant_guardia_is_accessing">käyttää</string>
+    <string name="descendant_guardia_listening_state">Kuunnellaan sovelluksia...</string>
+    <string name="descendant_guardia_clipboard_read">leikepöydän lukuoikeutta</string>
+    <string name="descendant_guardia_clipboard_write">leikepöydän kirjoitusoikeutta</string>
+    <string name="descendant_guardia_monitoring">Seuranta</string>
+    <string name="descendant_guardia_detection">Tunnistus</string>
+    <string name="descendant_guardia_appname">Descendant Guardia</string>
+    <string name="descendant_guardia_acknowledge">Hyväksytty</string>
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">Ei ajoitettuja tapahtumia</string>
+    <string name="qsbh_calendar_events">Ajoitetut tapahtumat</string>
+    <string name="qsbh_alarm_events">Seuraava hälytys:</string>
+    <!-- Weather -->
+    <string name="weather_city_unknown">Haetaan...</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Napauta aktivoidaksesi</string>
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Sää</string>
+    <string name="weather_ex_widget_temp">Lämpötila</string>
+    <string name="weather_ex_widget_temp_max">Max</string>
+    <string name="weather_ex_widget_temp_min">Min</string>
+    <string name="weather_ex_widget_wind">Tuuli</string>
+    <string name="weather_ex_widget_wind_speed">Nopeus</string>
+    <string name="weather_ex_widget_wind_degrees">Astetta</string>
+    <string name="weather_ex_widget_perception">Havainto</string>
+    <string name="weather_ex_widget_perception_feels_like">Tuntuu kuin</string>
+    <string name="weather_ex_widget_perception_humidity">Kosteus</string>
+    <string name="weather_ex_widget_sight">Näkymä</string>
+    <string name="weather_ex_widget_sight_visibility">Näkyvyys</string>
+    <string name="weather_ex_widget_sight_cloudiness">Pilvisyys</string>
+    <!-- Mono QS Tile -->
+    <string name="quick_settings_monotoggle_tile">Äänitila</string>
+    <string name="quick_settings_monotoggle_tile_mono">Monoääni</string>
+    <string name="quick_settings_monotoggle_tile_stereo">Stereoääni</string>
+    <!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Virransäästö</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Sijainnin raportointi: virransäästötila.</string>
+    <string name="quick_settings_location_secondary_gps_only">Vain sensorit </string>
+    <string name="accessibility_quick_settings_location_gps_only">Sijainnin raportointi: vain sensorit.</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Korkea Tarkkuus</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Sijainnin raportointi: korkea tarkkuus.</string>
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Kurkistusilmoitukset</string>
+    <string name="accessibility_quick_settings_heads_up_off">Kurkistusilmoitukset estetty.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Kurkistusilmoitukset sallittu.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Kurkistusilmoitukset poistettiin käytöstä.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Kurkistusilmoitukset otettiin käyttöön.</string>
+</resources>

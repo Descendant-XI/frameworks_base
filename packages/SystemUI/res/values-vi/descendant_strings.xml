@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_battery_level">Không rõ</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Vuốt để thay đổi mặt đồng hồ</string>
+    <string name="clock_title_squary_clock">Đồng hồ Cal</string>
+    <string name="clock_title_squary_clock_extended">Đồng hồ bình phương mở rộng</string>
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Descendant sức khỏe</string>
+    <string name="descendant_health_eyestrain_title">Cảnh báo mỏi mắt</string>
+    <string name="descendant_health_eyestrain_summary">Có vẻ như bạn đã sử dụng điện thoại trong một giờ liên tục.\nHãy cân nhắc để nghỉ ngơi, điều này có thể làm giảm tỷ lệ mỏi mắt.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://en.wikipedia.org/wiki/Eye_strain</string>
+    <string name="descendant_health_eyestrain_info">Thông tin về mỏi mắt</string>
+    <string name="descendant_health_eyestrain_nightlight">Thiết lập ánh sáng ban đêm</string>
+    <string name="descendant_health_sleep_title">Tư vấn giấc ngủ</string>
+    <string name="descendant_health_sleep_summary">Có vẻ như bạn sắp đặt báo thức.\nNếu điện thoại của bạn đang tránh để bạn ở chế độ ngủ có thông báo, hãy thiết lập chế độ Không làm phiền.</string>
+    <string name="descendant_health_sleep_dnd">Thiết lập Không làm phiền</string>
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">Điện thoại</string>
+    <string name="descendant_guardia_record_audio_perm">micrô</string>
+    <string name="descendant_guardia_camera_perm">máy chụp hình</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Ứng dụng</string>
+    <string name="descendant_guardia_is_accessing">đang truy cập</string>
+    <string name="descendant_guardia_listening_state">Đang nghe ứng dụng ...</string>
+    <string name="descendant_guardia_clipboard_read">khay nhớ tạm với quyền đọc</string>
+    <string name="descendant_guardia_clipboard_write">khay nhớ tạm với quyền ghi</string>
+    <string name="descendant_guardia_monitoring">Giám sát</string>
+    <string name="descendant_guardia_detection">Phát hiện</string>
+    <string name="descendant_guardia_appname">Descendant giám sát</string>
+    <string name="descendant_guardia_acknowledge">Đã nhận</string>
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">Không có sự kiện nào được lên lịch</string>
+    <string name="qsbh_calendar_events">Sự kiện đã lên lịch</string>
+    <string name="qsbh_alarm_events">Báo thức tiếp theo:</string>
+    <!-- Weather -->
+    <string name="weather_city_unknown">Đang tìm kiếm...</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Chạm để kích hoạt.</string>
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Thời tiết</string>
+    <string name="weather_ex_widget_temp">Nhiệt độ</string>
+    <string name="weather_ex_widget_temp_max">Tối đa</string>
+    <string name="weather_ex_widget_temp_min">Nhỏ nhất</string>
+    <string name="weather_ex_widget_wind">Gió</string>
+    <string name="weather_ex_widget_wind_speed">Tốc độ</string>
+    <string name="weather_ex_widget_wind_degrees">độ</string>
+    <string name="weather_ex_widget_perception">Nhận thức</string>
+    <string name="weather_ex_widget_perception_feels_like">Cảm thấy như</string>
+    <string name="weather_ex_widget_perception_humidity">Độ ẩm</string>
+    <string name="weather_ex_widget_sight">Tầm nhìn</string>
+    <string name="weather_ex_widget_sight_visibility">Có thể hiển thị</string>
+    <string name="weather_ex_widget_sight_cloudiness">Có mây</string>
+    <!-- Mono QS Tile -->
+    <string name="quick_settings_monotoggle_tile">Chế độ âm thanh</string>
+    <string name="quick_settings_monotoggle_tile_mono">Âm thanh đơn</string>
+    <string name="quick_settings_monotoggle_tile_stereo">Âm thanh đa kênh</string>
+    <!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Tiết kiệm pin</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Báo cáo vị trí: chế độ tiết kiệm pin.</string>
+    <string name="quick_settings_location_secondary_gps_only">Chỉ cảm biến</string>
+    <string name="accessibility_quick_settings_location_gps_only">Báo cáo vị trí: chế độ chỉ cám biến.</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Chính xác cao</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Báo cáo vị trí: chế độ chính xác cao.</string>
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Hiển thị thông báo</string>
+    <string name="accessibility_quick_settings_heads_up_off">Đã tắt thông báo nổi.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Cho phép hiển thị thông báo.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Tắt hiển thị thông báo.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Bật hiển thị thông báo.</string>
+</resources>

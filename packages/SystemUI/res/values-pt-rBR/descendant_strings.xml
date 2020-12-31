@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_battery_level">Desconhecido</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Deslize para alterar o estilo do relógio</string>
+    <string name="clock_title_squary_clock">Relógio de kCal</string>
+    <string name="clock_title_squary_clock_extended">Relógio Quadrado Estendido</string>
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Descendant Health</string>
+    <string name="descendant_health_eyestrain_title">Alerta de Eyestrain</string>
+    <string name="descendant_health_eyestrain_summary">Parece que você usou seu telefone por uma hora contínua.\nConsidere fazer uma pausa, isso pode reduzir a incidência de fadiga ocular.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://pt.wikipedia.org/wiki/Astenopia</string>
+    <string name="descendant_health_eyestrain_info">Sobre fadiga ocular (ou astenopia)</string>
+    <string name="descendant_health_eyestrain_nightlight">Configurar luz noturna</string>
+    <string name="descendant_health_sleep_title">Conselheiro de sono</string>
+    <string name="descendant_health_sleep_summary">Parece que você tem um alarme definido em breve.\nSe o seu telefone está evitando que você durma com notificações, configure o Não perturbe.</string>
+    <string name="descendant_health_sleep_dnd">Configurar o modo \"Não perturbe\"</string>
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">telefone</string>
+    <string name="descendant_guardia_record_audio_perm">microfone</string>
+    <string name="descendant_guardia_camera_perm">câmera</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Aplicação</string>
+    <string name="descendant_guardia_is_accessing">está acessando</string>
+    <string name="descendant_guardia_listening_state">Escutando apps...</string>
+    <string name="descendant_guardia_clipboard_read">área de transferência com permissão de leitura</string>
+    <string name="descendant_guardia_clipboard_write">área de transferência com permissão de escrita</string>
+    <string name="descendant_guardia_monitoring">Monitoramento</string>
+    <string name="descendant_guardia_detection">Detecção</string>
+    <string name="descendant_guardia_appname">Descendant Guardia</string>
+    <string name="descendant_guardia_acknowledge">Reconhecido</string>
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">Não há eventos agendados</string>
+    <string name="qsbh_calendar_events">Eventos agendados</string>
+    <string name="qsbh_alarm_events">Próximo alarme:</string>
+    <!-- Weather -->
+    <string name="weather_city_unknown">Pesquisando...</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Toque para ativar.</string>
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Clima</string>
+    <string name="weather_ex_widget_temp">Temperatura</string>
+    <string name="weather_ex_widget_temp_max">Máxima</string>
+    <string name="weather_ex_widget_temp_min">Mínima</string>
+    <string name="weather_ex_widget_wind">Vento</string>
+    <string name="weather_ex_widget_wind_speed">Velocidade</string>
+    <string name="weather_ex_widget_wind_degrees">Graus</string>
+    <string name="weather_ex_widget_perception">Percepção</string>
+    <string name="weather_ex_widget_perception_feels_like">Sensação térmica</string>
+    <string name="weather_ex_widget_perception_humidity">Umidade</string>
+    <string name="weather_ex_widget_sight">Posição</string>
+    <string name="weather_ex_widget_sight_visibility">Visibilidade</string>
+    <string name="weather_ex_widget_sight_cloudiness">Nuvens</string>
+    <!-- Mono QS Tile -->
+    <string name="quick_settings_monotoggle_tile">Modo de áudio</string>
+    <string name="quick_settings_monotoggle_tile_mono">Áudio mono</string>
+    <string name="quick_settings_monotoggle_tile_stereo">Áudio estéreo</string>
+    <!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Economia de Bateria</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Relatório de localização: modo de economia de bateria.</string>
+    <string name="quick_settings_location_secondary_gps_only">Somente sensores</string>
+    <string name="accessibility_quick_settings_location_gps_only">Relatório de localização: modo somente sensores.</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Alta precisão</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Relatório de localização: alta precisão.</string>
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Espiar notificações</string>
+    <string name="accessibility_quick_settings_heads_up_off">Espiar notificações desativado.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Espiar notificações permitido.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Espiar notificações desligado.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Espiar notificações ligado.</string>
+</resources>

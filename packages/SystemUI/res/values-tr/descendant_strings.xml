@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="unknown_battery_level">Bilinmiyor</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Saat kadranını değiştirmek için kaydırın</string>
+    <string name="clock_title_squary_clock">Kare Saat</string>
+    <string name="clock_title_squary_clock_extended">Kare Saat</string>
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Descendant Sağlık</string>
+    <string name="descendant_health_eyestrain_title">Göz yorgunluğu uyarısı</string>
+    <string name="descendant_health_eyestrain_summary">Telefonunuzu bir saat boyunca kesintisiz kullandınız.\nMola vermeyi unutmayın, gözünüz yorulabilir.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://en.wikipedia.org/wiki/Eye_strain</string>
+    <string name="descendant_health_eyestrain_info">Göz yorgunluğu nedir</string>
+    <string name="descendant_health_eyestrain_nightlight">Gece Işığını ayarla</string>
+    <string name="descendant_health_sleep_title">Uyku yardımcısı</string>
+    <string name="descendant_health_sleep_summary">Alarmınız yakına ayarlı gibi görünüyor.\nTelefonunuz uyumanıza engel oluyorsa, Rahatsız Etmeyin modunu ayarlayın.</string>
+    <string name="descendant_health_sleep_dnd">Rahatsız Etmeyin modunu ayarla</string>
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">Telefon</string>
+    <string name="descendant_guardia_record_audio_perm">mikrofon</string>
+    <string name="descendant_guardia_camera_perm">kamera</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Uygulama</string>
+    <string name="descendant_guardia_is_accessing">erişiyor: </string>
+    <string name="descendant_guardia_listening_state">Uygulamalar izleniyor...</string>
+    <string name="descendant_guardia_clipboard_read">okuma izniyle pano</string>
+    <string name="descendant_guardia_clipboard_write">yazma izniyle pano</string>
+    <string name="descendant_guardia_monitoring">İzleme</string>
+    <string name="descendant_guardia_detection">Tespit</string>
+    <string name="descendant_guardia_appname">Descendant Guardia</string>
+    <string name="descendant_guardia_acknowledge">Kabul edildi</string>
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">Takvim boş</string>
+    <string name="qsbh_calendar_events">Takvimde etkinlik var</string>
+    <string name="qsbh_alarm_events">Sonraki alarm:</string>
+    <!-- Weather -->
+    <string name="weather_city_unknown">Aranıyor...</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Etkinleştirmek için dokun</string>
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Hava Durumu</string>
+    <string name="weather_ex_widget_temp">Sıcaklık</string>
+    <string name="weather_ex_widget_temp_max">Maks</string>
+    <string name="weather_ex_widget_temp_min">Min</string>
+    <string name="weather_ex_widget_wind">Rüzgar</string>
+    <string name="weather_ex_widget_wind_speed">Hız</string>
+    <string name="weather_ex_widget_wind_degrees">Derece</string>
+    <string name="weather_ex_widget_perception">Hissedilen</string>
+    <string name="weather_ex_widget_perception_feels_like">Hissedilen</string>
+    <string name="weather_ex_widget_perception_humidity">Nem</string>
+    <string name="weather_ex_widget_sight">Görüş</string>
+    <string name="weather_ex_widget_sight_visibility">Görüş</string>
+    <string name="weather_ex_widget_sight_cloudiness">Bulutluluk</string>
+    <!-- Mono QS Tile -->
+    <string name="quick_settings_monotoggle_tile">Ses modu</string>
+    <string name="quick_settings_monotoggle_tile_mono">Mono ses</string>
+    <string name="quick_settings_monotoggle_tile_stereo">Stereo ses</string>
+    <!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Pil Tasarrufu</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Konum bildirimi: pil tasarrufu modu.</string>
+    <string name="quick_settings_location_secondary_gps_only">Yalnızca sensörler</string>
+    <string name="accessibility_quick_settings_location_gps_only">Konum bildirimi: sadece sensörler modu.</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Yüksek Doğruluk</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Konum bildirimi: yüksek doğruluk modu.</string>
+    <!-- Heads Up QS Tile -->
+    <string name="quick_settings_heads_up_label">Kayan bildirimler</string>
+    <string name="accessibility_quick_settings_heads_up_off">Kayan bildirimler devre dışı.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Kayan bildirimlere izin veriliyor.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Kayan bildirimler kapatıldı.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Kayan bildirimler açıldı.</string>
+</resources>
