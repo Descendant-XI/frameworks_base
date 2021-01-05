@@ -75,6 +75,12 @@
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_max"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_first_row"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -85,6 +91,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/degrees_max"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -115,6 +127,12 @@
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_min"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_second_row"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -125,6 +143,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/degrees_min"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -179,6 +203,12 @@
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_wind_speed"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_first_row_second_block"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -189,6 +219,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/wind_speed"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -219,6 +255,12 @@
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_angle"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_second_row_second_block"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -229,6 +271,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/wind_degrees"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -283,6 +331,12 @@
                             android:padding="@dimen/weather_ex_widget_icon_padding"
                             android:src="@drawable/ic_feels_like"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_first_row_third_block"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -293,6 +347,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/feels_like"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -323,6 +383,12 @@
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_humidity"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_second_row_third_block"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -333,6 +399,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/humidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -388,6 +460,12 @@
                             android:padding="@dimen/weather_ex_widget_icon_padding"
                             android:src="@drawable/ic_visibility"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_first_row_fourth_block"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -398,6 +476,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/visibility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -429,6 +513,12 @@
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/ic_cloudiness"/>
                         <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                             android:id="@+id/text_second_row_fourth_block"
                             android:layout_marginStart="@dimen/weather_ex_widget_margin_start"
                             android:layout_width="wrap_content"
@@ -439,6 +529,12 @@
                     </LinearLayout>
 
                     <TextView
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
                         android:id="@+id/cloudiness"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
