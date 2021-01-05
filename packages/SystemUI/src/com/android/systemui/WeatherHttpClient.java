@@ -138,7 +138,15 @@ public class WeatherHttpClient {
 
     public String getTemperatureFeel() {
         try {
-            return isJSONnull() ? EMPTY_STRING : String.format("%.0f", mWeatherJSONMain.getDouble("feels_like")) + "" + getMetrics();
+            if (!isJSONnull()) {
+                if (getMetrics() == FAHRENHEIT) {
+                    return String.format("%.0f", reCalcF(mWeatherJSONMain.getDouble("feels_like"))) + "" + getMetrics();
+                } else {
+                    return String.format("%.0f", mWeatherJSONMain.getDouble("feels_like")) + "" + getMetrics();
+                }
+            } else {
+                return EMPTY_STRING;
+            }
         } catch (JSONException e) {
         }
         return EMPTY_STRING;
@@ -146,7 +154,15 @@ public class WeatherHttpClient {
 
     public String getMaxTemp() {
         try {
-            return isJSONnull() ? EMPTY_STRING : String.format("%.0f", mWeatherJSONMain.getDouble("temp_max")) + "" + getMetrics();
+            if (!isJSONnull()) {
+                if (getMetrics() == FAHRENHEIT) {
+                    return String.format("%.0f", reCalcF(mWeatherJSONMain.getDouble("temp_max"))) + "" + getMetrics();
+                } else {
+                    return String.format("%.0f", mWeatherJSONMain.getDouble("temp_max")) + "" + getMetrics();
+                }
+            } else {
+                return EMPTY_STRING;
+            }
         } catch (JSONException e) {
         }
         return EMPTY_STRING;
@@ -154,7 +170,15 @@ public class WeatherHttpClient {
 
     public String getMinTemp() {
         try {
-            return isJSONnull() ? EMPTY_STRING : String.format("%.0f", mWeatherJSONMain.getDouble("temp_min")) + "" + getMetrics();
+            if (!isJSONnull()) {
+                if (getMetrics() == FAHRENHEIT) {
+                    return String.format("%.0f", reCalcF(mWeatherJSONMain.getDouble("temp_min"))) + "" + getMetrics();
+                } else {
+                    return String.format("%.0f", mWeatherJSONMain.getDouble("temp_min")) + "" + getMetrics();
+                }
+            } else {
+                return EMPTY_STRING;
+            }
         } catch (JSONException e) {
         }
         return EMPTY_STRING;
