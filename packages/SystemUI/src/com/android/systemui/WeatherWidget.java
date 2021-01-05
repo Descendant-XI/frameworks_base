@@ -285,4 +285,46 @@ public class WeatherWidget implements LocationListener {
             mDialog.dismiss();
         }
     }
+
+    public void convertData(boolean isFahrenheit) {
+        String yourString = DescendantSystemUIUtils.getSystemSettingString("weather_data", mContext);
+        String[] array = yourString.split(",");
+        if (array.length != INFO_LENGTH) {
+            return;
+        }
+        mTemperature = reCalc(mTemperature, isFahrenheit);
+        mTemperatureFeel = reCalc(mTemperatureFeel, isFahrenheit);
+        mMaxTemp = reCalc(mMaxTemp, isFahrenheit);
+        mMinTemp = reCalc(mMinTemp, isFahrenheit);
+        String tempString = mCity + "," + mCountry + "," + mDescription + "," + mTemperature + "," + mWeatherIconRes + "," +
+                                         mHumidity + "," + mWindSpeed + "," + mTemperatureFeel + "," + mMaxTemp + "," + mMinTemp + "," +
+                                         mVisibility + "," + mCloudiness + "," + mWindDegrees;
+        DescendantSystemUIUtils.setSystemSettingString("weather_data", mContext, tempString);
+        setWeatherData(false);
+    }
+
+    private String getOnlyNumerics(String str) {
+        if (str == null) {
+            return null;
+        }
+        StringBuffer strBuff = new StringBuffer();
+        char c;
+        for (int i = 0; i < str.length() ; i++) {
+            c = str.charAt(i);
+            if (Character.isDigit(c) || c == '.') {
+                strBuff.append(c);
+            }
+        }
+        return strBuff.toString();
+    }
+
+    private double reCalcDouble(double c, boolean isFahrenheit) {
+        return isFahrenheit ? c * 1.8 + 32 : (c-32)/1.8;
+    }
+
+    private String reCalc(String str, boolean isFahrenheit) {
+        str = getOnlyNumerics(str);
+        double c = Double.parseDouble(str);
+        return isFahrenheit ? String.valueOf(String.format("%.0f",reCalcDouble(c,isFahrenheit)) + "°F ") : String.valueOf(String.format("%.0f",reCalcDouble(c,isFahrenheit)) + "°C ");
+    }
 }

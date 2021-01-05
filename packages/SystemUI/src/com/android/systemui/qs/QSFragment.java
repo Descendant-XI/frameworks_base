@@ -623,4 +623,8 @@ public class QSFragment extends LifecycleFragment implements QS, CommandQueue.Ca
         mHeader.dismissWeatherEx();
     }
 
+    public void refreshWeatherMetrics(boolean isFahrenheit) {
+        mHeader.refreshWeatherMetrics(isFahrenheit);
+    }
+
 }

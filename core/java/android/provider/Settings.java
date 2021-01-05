@@ -4873,6 +4873,7 @@ public final class Settings {
 
         public static final String WEATHER_INIT = "weather_init";
         public static final String WEATHER_DATA = "weather_data";
+        public static final String WEATHER_METRICS = "weather_metrics";
 
         /**
          * Avoid touches on heads-up

@@ -2101,6 +2101,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.WEATHER_METRICS),
+                    false, this, UserHandle.USER_ALL);
 
         }
 
@@ -2126,6 +2129,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN))) {
                 dt2sls();
+            } else if (uri.equals(Settings.System.getUriFor(
+                Settings.System.WEATHER_METRICS))) {
+                weatherMetrics();
             }
         }
 
@@ -2139,6 +2145,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             //descendantClockFlowExclHeadsUp();
             setPulseOnNewTracks();
             dt2sls();
+            weatherMetrics();
         }
     }
 
@@ -2166,6 +2173,10 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    private void weatherMetrics() {
+        if (mQSBH != null)
+            mQSBH.refreshWeatherMetrics(DescendantSystemUIUtils.settingStatusBoolean("weather_metrics", mContext));
+    }
     /**
      * All changes to the status bar and notifications funnel through here and are batched.
      */

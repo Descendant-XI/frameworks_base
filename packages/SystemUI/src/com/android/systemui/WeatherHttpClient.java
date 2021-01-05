@@ -13,12 +13,13 @@ import java.lang.StringBuffer;
 import java.util.Date;
 import java.util.Locale;
 
-import android.text.format.DateFormat;
 import android.location.Location;
 import android.location.LocationListener;
 
 import org.json.JSONObject;
 import org.json.JSONException;
+
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.R;
 
 public class WeatherHttpClient {
@@ -223,7 +224,8 @@ public class WeatherHttpClient {
     }
 
     private String getMetrics() {
-        return DateFormat.is24HourFormat(mContext) ? CELSIUS : FAHRENHEIT;
+        /* check for user settings, implement settings change listener, reassign values*/
+        return !DescendantSystemUIUtils.settingStatusBoolean("weather_metrics", mContext) ? CELSIUS : FAHRENHEIT;
     }
 
     public boolean isDaylight() {

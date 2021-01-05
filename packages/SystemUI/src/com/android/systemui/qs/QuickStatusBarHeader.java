@@ -978,4 +978,10 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             updateHeaderTextContainerAlphaAnimator();
         }
     }
+
+    public void refreshWeatherMetrics(boolean isFahrenheit) {
+        if (mWeatherWidgetClass != null)
+            mWeatherWidgetClass.convertData(isFahrenheit);
+    }
+
 }
