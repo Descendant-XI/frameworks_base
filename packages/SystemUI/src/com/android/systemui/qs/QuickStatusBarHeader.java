@@ -800,11 +800,19 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             int contentMarginRight = isLayoutRtl() ? mContentMarginStart : mContentMarginEnd;
             clockPaddingRight = Math.max(cutoutPadding - contentMarginRight - rightMargin, 0);
         }
-
-        mSystemIconsView.setPadding(clockPaddingLeft,
+        //checkdis
+        mClockView.setPadding(clockPaddingLeft,
                 mWaterfallTopInset + mStatusBarPaddingTop,
                 clockPaddingRight,
                 0);
+        mDateView.setPadding(clockPaddingLeft,
+                mWaterfallTopInset + mStatusBarPaddingTop,
+                clockPaddingRight,
+                0);
+        /*mSystemIconsView.setPadding(clockPaddingLeft,
+                mWaterfallTopInset + mStatusBarPaddingTop,
+                clockPaddingRight,
+                0);*/
 
 
     }
