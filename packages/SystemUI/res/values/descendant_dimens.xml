@@ -52,11 +52,11 @@
     <dimen name="qs_tile_icon_size">20dp</dimen>
     <dimen name="qs_tile_layout_margin_side">0dp</dimen>
     <dimen name="qs_tile_margin_horizontal">24dp</dimen>
-    <dimen name="qs_tile_margin_vertical">12dp</dimen>
+    <dimen name="qs_tile_margin_vertical">0dp</dimen>
     <dimen name="qs_tile_spacing">8dp</dimen>
     <dimen name="qsbh_brightness_bar_padding">0dp</dimen>
     <dimen name="slider_height">100dp</dimen>
-    <dimen name="qs_panel_padding_top">8dp</dimen>
+    <dimen name="qs_panel_padding_top">24dp</dimen>
     <dimen name="qs_header_tooltip_height">0dp</dimen>
 
     <!-- Notifications -->
