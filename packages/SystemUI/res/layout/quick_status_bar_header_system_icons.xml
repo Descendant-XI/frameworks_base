@@ -54,10 +54,9 @@
                 android:src="@drawable/ic_qqs_edit"
                 android:layout_toLeftOf="@id/qqs_settings"
                 android:layout_alignBottom="@+id/date"
-                android:layout_marginRight="10dp"
-                android:paddingBottom="6dp"
+                android:layout_marginRight="@dimen/qqs_edit_margin_right"
+                android:layout_marginBottom="@dimen/qqs_edit_padding_bottom"
                 android:visibility="gone"
-                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 />
 
@@ -68,8 +67,7 @@
                 android:src="@drawable/ic_qqs_settings"
                 android:layout_alignParentEnd="true"
                 android:layout_alignBottom="@+id/date"
-                android:paddingBottom="@dimen/qqs_edit_padding_bottom"
-                android:background="?android:attr/selectableItemBackground"
+                android:layout_marginBottom="@dimen/qqs_edit_padding_bottom"
                 android:clickable="true"
                 />
 

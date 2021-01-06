@@ -43,7 +43,8 @@
     <dimen name="brightness_drawable_height">45dp</dimen>
     <dimen name="brightness_mirror_height">100dp</dimen>
     <dimen name="qqs_edit_padding_bottom_land">2dp</dimen>
-    <dimen name="qqs_edit_padding_bottom">6dp</dimen>
+    <dimen name="qqs_edit_padding_bottom">4dp</dimen>
+    <dimen name="qqs_edit_margin_right">10dp</dimen>
     <dimen name="qqs_panel_margin_end">16dp</dimen>
     <dimen name="qqs_panel_margin_start">16dp</dimen>
     <dimen name="qs_panel_margin_end">0dp</dimen>
