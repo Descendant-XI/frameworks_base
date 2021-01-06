@@ -208,7 +208,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private boolean mHasTopCutout = false;
     private int mStatusBarPaddingTop = 0;
     private int mRoundedCornerPadding = 0;
-    private final int BRIGHTNESS_EXP_PORTRAIT = 380;
+    private final int BRIGHTNESS_EXP_PORTRAIT = 800;
     private final int BRIGHTNESS_EXP_LANDSCAPE = 0;
     private int mQuickQsBrightnessExpFrac;
     private int mContentMarginStart;
