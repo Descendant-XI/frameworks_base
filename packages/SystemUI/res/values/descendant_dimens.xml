@@ -36,10 +36,10 @@
     <!-- navigation end-->
 
     <!-- QQS start-->
-    <dimen name="brightness_drawable_button_height">15dp</dimen>
-    <dimen name="brightness_drawable_button_width">15dp</dimen>
+    <dimen name="brightness_drawable_button_height">18dp</dimen>
+    <dimen name="brightness_drawable_button_width">18dp</dimen>
     <dimen name="brightness_drawable_corner">15dp</dimen>
-    <dimen name="brightness_drawable_dots_padding">15dp</dimen>
+    <dimen name="brightness_drawable_dots_padding">18dp</dimen>
     <dimen name="brightness_drawable_height">45dp</dimen>
     <dimen name="brightness_mirror_height">100dp</dimen>
     <dimen name="qqs_edit_padding_bottom_land">2dp</dimen>

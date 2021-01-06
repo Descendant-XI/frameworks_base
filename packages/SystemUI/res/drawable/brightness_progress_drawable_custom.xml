@@ -15,11 +15,21 @@
 
     <item android:id="@android:id/background">
         <shape android:shape="rectangle"
-            android:tint="#90808080">
+            android:tint="?android:attr/colorAccent">
             <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
                      android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
             <size android:height="@dimen/brightness_drawable_height" />
-            <solid android:color="#90808080" />
+            <solid android:color="?android:attr/colorAccent" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle"
+            android:tint="@color/brightness_bkg">
+            <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
+                     android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
+            <size android:height="@dimen/brightness_drawable_height" />
+            <solid android:color="@color/brightness_bkg" />
         </shape>
     </item>
 
@@ -42,22 +52,11 @@
     </item>
 
     <item android:gravity="center_vertical|end"
-          android:right="@dimen/brightness_drawable_dots_padding">
-           <shape android:shape="oval">
-                <stroke android:width="2.0dip" android:color="#ffc0c0c0" />
-                <size android:height="@dimen/brightness_drawable_button_height" />
-                <size android:width="@dimen/brightness_drawable_button_width" />
-                <solid android:color="#95c0c0c0" />
-            </shape>
-    </item>
+          android:right="@dimen/brightness_drawable_dots_padding"
+          android:drawable="@drawable/ic_brightness_right"/>
 
     <item android:gravity="center_vertical|start"
-          android:left="@dimen/brightness_drawable_dots_padding">
-            <shape android:shape="oval">
-                <stroke android:width="2.0dip" android:color="#ffc0c0c0" />
-                <size android:height="@dimen/brightness_drawable_button_height" />
-                <size android:width="@dimen/brightness_drawable_button_width" />
-                <solid android:color="#49c0c0c0" />
-            </shape>
-    </item>
+          android:left="@dimen/brightness_drawable_dots_padding"
+          android:drawable="@drawable/ic_brightness_left"/>
+
 </layer-list>

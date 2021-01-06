@@ -12,4 +12,5 @@
     <!-- Descendant Clock Shine -->
     <color name="descendant_clock_flow_default_color">#FFE0E0E0</color>
     <color name="qs_tile_background_color_disabled">#f2f2f2</color>
+    <color name="brightness_bkg">#ccffffff</color>
 </resources>
