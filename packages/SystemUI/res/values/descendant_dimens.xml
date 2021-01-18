@@ -79,4 +79,9 @@
     etc. -->
     <dimen name="qs_footer_height">24dp</dimen>
 
+    <!-- Fonts height -->
+    <dimen name="weather_city_qs">22dp</dimen>
+    <dimen name="date_qs">14dp</dimen>
+    <dimen name="weather_degrees_qs">26dp</dimen>
+
 </resources>
