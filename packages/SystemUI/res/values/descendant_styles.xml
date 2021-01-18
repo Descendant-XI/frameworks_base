@@ -18,18 +18,21 @@
 
     <style
         name="TextAppearance.ClockQSHeader">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">36dp</item>
     </style>
 
     <style
         name="TextAppearance.DateQSHeader">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">14dp</item>
     </style>
 
     <style
         name="TextAppearance.WeatherDegreesQSHeader">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">26dp</item>
         <item name="android:textStyle">bold</item>
@@ -37,6 +40,7 @@
 
     <style
         name="TextAppearance.WeatherCityQSHeader">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">22dp</item>
     </style>
@@ -44,24 +48,28 @@
 <!-- Land -->
     <style
         name="TextAppearance.ClockQSHeaderLand">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">18dp</item>
     </style>
 
     <style
         name="TextAppearance.DateQSHeaderLand">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">7dp</item>
     </style>
 
     <style
         name="TextAppearance.WeatherDegreesQSHeaderLand">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">13dp</item>
     </style>
 
     <style
         name="TextAppearance.WeatherCityQSHeaderLand">
+        <item name="android:fontFamily">@*android:string/config_headlineFontFamilyMedium</item>
         <item name="android:textColor">?attr/wallpaperTextColor</item>
         <item name="android:textSize">11dp</item>
     </style>
