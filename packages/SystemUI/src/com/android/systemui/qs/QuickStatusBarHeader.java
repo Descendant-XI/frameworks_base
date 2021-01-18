@@ -175,6 +175,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private ImageView mSettings;
     private ImageView mWeatherIcon;
     private RelativeLayout mWeatherWidget;
+    private RelativeLayout mWeatherFL;
     private String mCityName;
     private WeatherWidget mWeatherWidgetClass;
 
@@ -280,6 +281,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mEdit.setOnClickListener(this);
         mSettings = findViewById(R.id.qqs_settings);
         mSettings.setOnClickListener(this);
+        mWeatherFL = findViewById(R.id.weather_first_line);
         mWeatherIcon = findViewById(R.id.weather_icon);
         updateResources();
 
@@ -802,18 +804,17 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         }
         //checkdis
         mClockView.setPadding(clockPaddingLeft,
-                mWaterfallTopInset + mStatusBarPaddingTop,
+                mWaterfallTopInset,
                 clockPaddingRight,
                 0);
         mDateView.setPadding(clockPaddingLeft,
-                mWaterfallTopInset + mStatusBarPaddingTop,
+                mWaterfallTopInset,
                 clockPaddingRight,
                 0);
-        /*mSystemIconsView.setPadding(clockPaddingLeft,
-                mWaterfallTopInset + mStatusBarPaddingTop,
+        mWeatherFL.setPadding(clockPaddingLeft,
+                mWaterfallTopInset,
                 clockPaddingRight,
-                0);*/
-
+                0);
 
     }
 
