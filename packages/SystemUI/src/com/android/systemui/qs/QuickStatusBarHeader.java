@@ -348,6 +348,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         ignored.add("bluetooth");
         ignored.add("alarm_clock");
         ignored.add("speakerphone");
+        ignored.add("vpn");
+        ignored.add("hotspot");
         return ignored;
     }
 
