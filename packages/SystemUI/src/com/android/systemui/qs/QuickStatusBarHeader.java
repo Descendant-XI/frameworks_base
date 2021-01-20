@@ -350,6 +350,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         ignored.add("speakerphone");
         ignored.add("vpn");
         ignored.add("hotspot");
+        ignored.add("networktraffic");
         return ignored;
     }
 
