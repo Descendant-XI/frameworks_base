@@ -314,8 +314,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mWeatherDegrees = findViewById(R.id.weather_degrees);
         mWeatherIcon = findViewById(R.id.weather_icon);
         mWeatherWidget = findViewById(R.id.weather_widget);
-        mWeatherWidget.setOnClickListener(this);
         mWeatherWidgetClass = new WeatherWidget(mContext, mWeatherWidget, mWeatherDegrees, mWeatherIcon, mWeatherCity);
+        mWeatherCity.setOnClickListener(this);
+        mWeatherDegrees.setOnClickListener(this);
+        mWeatherIcon.setOnClickListener(this);
+        mWeatherFL.setOnClickListener(this);
         mEventPill = findViewById(R.id.event_pill);
         mQSBHEventListener = findViewById(R.id.event_listener);
         mQSBHEventListener.setOnClickListener(this);
@@ -909,7 +912,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         } else if (v == mIconContainer) {
             Dependency.get(ActivityStarter.class).postStartActivityDismissingKeyguard(new Intent(
                         Settings.ACTION_WIRELESS_SETTINGS),0);
-        } else if (v == mWeatherWidget) {
+        } else if (v == mWeatherCity || v == mWeatherDegrees ||
+                     v == mWeatherIcon || v == mWeatherFL) {
             mWeatherWidgetClass.createDialog();
         }
     }
