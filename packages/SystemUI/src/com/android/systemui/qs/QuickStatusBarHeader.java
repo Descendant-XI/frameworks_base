@@ -513,20 +513,29 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             mQSBHEventListener.setCompoundDrawablePadding(4);
             mQSBHEventListener.setText(formatNextAlarm(mNextAlarm));
             mQSBHEventListener.setTextColor(Utils.getColorAttrDefaultColor(getContext(),android.R.attr.colorForeground));
-            eventsCycleStop();
+            mAlarmVisibleNow = true;
+            mEventsVisibleNow = false;
+            if (mEventsCycleStarted)
+                eventsCycleStop();
         } else if (eventsAvailability) {
             mQSBHEventListener.setCompoundDrawablesWithIntrinsicBounds(R.drawable.calendar_active, 0, 0, 0);
             mQSBHEventListener.setCompoundDrawablePadding(4);
             mQSBHEventListener.setText(R.string.qsbh_calendar_events);
             mQSBHEventListener.setTextColor(Utils.getColorAttrDefaultColor(getContext(),android.R.attr.colorForeground));
-            eventsCycleStop();
+            mAlarmVisibleNow = false;
+            mEventsVisibleNow = true;
+            if (mEventsCycleStarted)
+                eventsCycleStop();
         } else if (!alarmAvailability || !eventsAvailability) {
             mQSBHEventListener.setCompoundDrawablesWithIntrinsicBounds(R.drawable.calendar_unactive, 0, 0, 0);
             mQSBHEventListener.setCompoundDrawablePadding(4);
             mQSBHEventListener.setText(R.string.qsbh_calendar_noevents);
             mQSBHEventListener.setTextColor(Utils.getColorAttrDefaultColor(getContext(),android.R.attr.colorForeground));
-            eventsCycleStop();
-        }
+            mAlarmVisibleNow = false;
+            mEventsVisibleNow = true;
+            if (mEventsCycleStarted)
+                eventsCycleStop();
+            }
     }
 
     private Handler eventsCycleHandler = new Handler();
