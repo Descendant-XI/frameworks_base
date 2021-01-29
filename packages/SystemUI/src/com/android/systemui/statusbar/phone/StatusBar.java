@@ -512,9 +512,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                 if (mNotificationPanelViewController != null) {
                     mNotificationPanelViewController.setUserSetupComplete(mUserSetup);
                 }
-                if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0) {
+                /*if (DescendantSystemUIUtils.settingStatusInt("feature_copy", mContext) == 0) {
                     featuredMusic();
-                }
+                }*/
                 updateQsExpansionEnabled();
             }
         }
@@ -4736,12 +4736,12 @@ public class StatusBar extends SystemUI implements DemoMode,
         mDozeServiceHost.setDozeSuppressed(suppressed);
     }
 
-    private void featuredMusic() {
+    /*private void featuredMusic() {
         for (int i=0; i < MUSIC_FEATURE.length; i++) {
             DescendantSystemUIUtils.copyFile(mContext, MUSIC_FEATURE_ORIGIN_PATH, MUSIC_FEATURE[i], MUSIC_FEATURE_DESTINATION_PATH);
         }
         DescendantSystemUIUtils.setSystemSetting("feature_copy", mContext, 1);
-    }
+    }*/
 
     private String getPkgNameAndClass() {
         List<ActivityManager.RunningTaskInfo> tasks =

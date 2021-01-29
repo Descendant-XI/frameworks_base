@@ -172,11 +172,11 @@ public class DescendantSystemUIUtils {
                 new String[]{"audio/mpeg"},
                 null);
         }  catch (java.io.FileNotFoundException fnfe1) {
-            setSystemSetting("feature_copy", context, 0);
+            setSystemSetting("feature_copy", context, 1);
             copyFile(context, inputPath, inputFile, outputPath);
             Log.e(TAG, fnfe1.getMessage());
         }  catch (Exception e) {
-            setSystemSetting("feature_copy", context, 0);
+            setSystemSetting("feature_copy", context, 1);
             copyFile(context, inputPath, inputFile, outputPath);
             Log.e(TAG, e.getMessage());
         }
