@@ -98,7 +98,6 @@ public class COVID19Helper {
                         Log.d(TAG, "data value " + data.toString());
                     } catch(Throwable t) {
                         Log.d(TAG, "throwable");
-                        t.printStackTrace();
                         if (day == "today") {
                             mCovidJSONDataToday = null;
                         } else {
