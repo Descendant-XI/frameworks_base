@@ -19,29 +19,37 @@
     xmlns:systemui="http://schemas.android.com/apk/res-auto"
     android:id="@+id/quick_status_bar_system_icons"
     android:layout_width="match_parent"
-    android:layout_height="@*android:dimen/quick_qs_offset_height"
+    android:layout_height="wrap_content"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
-    android:paddingTop="@dimen/status_bar_padding_top"
+    android:paddingTop="0dp"
     android:clickable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    <Space
+        android:id="@+id/space_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_top_qs"/>
+
         <RelativeLayout android:id="@+id/rl_clock_date"
             android:layout_width="wrap_content"
+            android:layout_below="@+id/space_top"
             android:layout_height="wrap_content">
 
             <TextClock
                 android:id="@+id/clock"
+                android:includeFontPadding="false"
                 style="@style/TextAppearance.ClockQSHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <com.android.systemui.statusbar.policy.DateView
+                android:includeFontPadding="false"
                 android:id="@+id/date"
                 style="@style/TextAppearance.DateQSHeader"
                 android:layout_width="wrap_content"
@@ -75,6 +83,7 @@
 
 
         <RelativeLayout android:id="@+id/weather_widget"
+            android:layout_below="@+id/space_top"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
@@ -87,6 +96,7 @@
                 android:layout_gravity="end">
 
                 <TextView
+                    android:includeFontPadding="false"
                     android:id="@+id/weather_degrees"
                     style="@style/TextAppearance.WeatherDegreesQSHeader"
                     android:layout_width="wrap_content"
@@ -109,6 +119,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView android:id="@+id/weather_city"
+                    android:includeFontPadding="false"
                     style="@style/TextAppearance.WeatherCityQSHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -135,6 +146,7 @@
             android:theme="@style/QSHeaderTheme">
 
             <TextView
+                android:includeFontPadding="false"
                 android:layout_centerVertical="true"
                 android:id="@+id/event_listener"
                 android:layout_width="wrap_content"
@@ -159,6 +171,7 @@
                     android:layout_height="@dimen/qs_header_alarm_icon_size"/>
 
                 <com.android.systemui.util.AutoMarqueeTextView
+                    android:includeFontPadding="false"
                     android:id="@+id/ringer_mode_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -191,11 +204,11 @@
     </RelativeLayout>
 
         <android.widget.Space
-           android:id="@+id/space"
-           android:layout_width="0dp"
-           android:layout_height="match_parent"
-           android:layout_weight="1"
-           android:gravity="center_vertical|center_horizontal" />
+            android:id="@+id/space"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal" />
 
         <com.android.systemui.statusbar.policy.NetworkTraffic
             android:id="@+id/networkTraffic"

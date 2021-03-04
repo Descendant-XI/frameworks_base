@@ -4898,6 +4898,12 @@ public final class Settings {
         public static final String DESCENDANT_CLOCK_FLOW_EXCL_HEADSUP = "descendant_clock_flow_excl_headsup";
 
         /**
+         * Compact layout
+         */
+
+        public static final String QS_COMPACT_LAYOUT = "qs_compact_layout";
+
+        /**
          * helper setting to contain the current pulse reason so we can check
          * if it has been triggered from a notification or a gesture
          * @hide
@@ -4942,7 +4948,7 @@ public final class Settings {
          */
         public static final String SCREENSHOT_SOUND = "screenshot_sound";
 
-        /** Whether to skip music track with volume rocker 
+        /** Whether to skip music track with volume rocker
         /**
          * @hide
          */

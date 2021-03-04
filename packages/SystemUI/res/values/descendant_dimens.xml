@@ -58,6 +58,9 @@
     <dimen name="slider_height">100dp</dimen>
     <dimen name="qs_panel_padding_top">24dp</dimen>
     <dimen name="qs_header_tooltip_height">0dp</dimen>
+    <dimen name="quick_qs_offset_height_vertical_system">180dp</dimen>
+    <dimen name="quick_qs_offset_height_horizontal_system">134dp</dimen>
+    <dimen name="space_top_qs">14dp</dimen>
 
     <!-- Notifications -->
     <dimen name="notification_side_paddings">14dp</dimen>

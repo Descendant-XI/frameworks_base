@@ -19,9 +19,15 @@ package com.android.systemui.qs;
 import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 
+import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.net.Uri;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -29,6 +35,7 @@ import android.widget.FrameLayout;
 import androidx.dynamicanimation.animation.FloatPropertyCompat;
 import androidx.dynamicanimation.animation.SpringForce;
 
+import com.android.systemui.DescendantSystemUIUtils;
 import com.android.systemui.R;
 import com.android.systemui.qs.customize.QSCustomizer;
 import com.android.systemui.util.animation.PhysicsAnimator;
@@ -68,9 +75,11 @@ public class QSContainerImpl extends FrameLayout {
 
     private int mSideMargins;
     private boolean mQsDisabled;
+    private boolean mCompactLayout;
     private int mContentPaddingStart = -1;
     private int mContentPaddingEnd = -1;
     private boolean mAnimateBottomOnNextLayout;
+    private final Handler mHandler = new Handler();
 
     public QSContainerImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -97,7 +106,8 @@ public class QSContainerImpl extends FrameLayout {
                 mAnimateBottomOnNextLayout = true;
             }
         });
-
+        mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
 
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
@@ -193,8 +203,8 @@ public class QSContainerImpl extends FrameLayout {
 
     private void updateResources() {
         LayoutParams layoutParams = (LayoutParams) mQSPanelContainer.getLayoutParams();
-        layoutParams.topMargin = mContext.getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.quick_qs_offset_height);
+        layoutParams.topMargin = mCompactLayout ? mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
+                                                                                      : mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
         mQSPanelContainer.setLayoutParams(layoutParams);
 
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);
@@ -292,4 +302,37 @@ public class QSContainerImpl extends FrameLayout {
         }
         return mSizePoint.y;
     }
+
+        private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+    private class CustomSettingsObserver extends ContentObserver {
+
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.QS_COMPACT_LAYOUT),
+                false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.QS_COMPACT_LAYOUT))) {
+                compactLayout();
+            }
+        }
+
+        public void update() {
+            compactLayout();
+        }
+    }
+
+    private void compactLayout() {
+        mCompactLayout = DescendantSystemUIUtils.settingStatusBoolean("qs_compact_layout", mContext);
+        mQSCustomizer.compactLayoutSignal(mCompactLayout);
+        updateResources();
+    }
+
 }

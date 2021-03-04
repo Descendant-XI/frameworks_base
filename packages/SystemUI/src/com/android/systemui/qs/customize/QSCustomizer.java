@@ -76,6 +76,7 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
     private final View mTransparentView;
 
     private boolean isShown;
+    private boolean mCompactLayout;
     private QSTileHost mHost;
     private RecyclerView mRecyclerView;
     private TileAdapter mTileAdapter;
@@ -150,9 +151,14 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
 
     private void updateResources() {
         LayoutParams lp = (LayoutParams) mTransparentView.getLayoutParams();
-        lp.height = mContext.getResources().getDimensionPixelSize(
-                com.android.internal.R.dimen.quick_qs_offset_height);
+        lp.height = mCompactLayout ? mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
+                                                        : mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
         mTransparentView.setLayoutParams(lp);
+    }
+
+    public void compactLayoutSignal(boolean isCompact) {
+        mCompactLayout = isCompact;
+        updateResources();
     }
 
     private void updateNavBackDrop(Configuration newConfig) {

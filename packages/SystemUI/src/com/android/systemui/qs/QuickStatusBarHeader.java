@@ -24,12 +24,14 @@ import android.annotation.ColorInt;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.location.Location;
@@ -40,6 +42,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.provider.AlarmClock;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
@@ -207,6 +210,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private final LifecycleRegistry mLifecycle = new LifecycleRegistry(this);
 
     private boolean mHasTopCutout = false;
+    private boolean mCompactLayout;
     private int mStatusBarPaddingTop = 0;
     private int mRoundedCornerPadding = 0;
     private final int BRIGHTNESS_EXP_PORTRAIT = 800;
@@ -227,6 +231,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private String m24easterClock;
     private String m12easterClock;
 
+    private View mSpaceTop;
+
     @Inject
     public QuickStatusBarHeader(@Named(VIEW_CONTEXT) Context context, AttributeSet attrs,
             NextAlarmController nextAlarmController, ZenModeController zenModeController,
@@ -245,6 +251,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mRingerModeTracker = ringerModeTracker;
         mQuickQsBrightnessExpFrac = BRIGHTNESS_EXP_PORTRAIT;
         mBlurUtils = new BlurUtils(mContext.getResources(), new DumpManager());
+
     }
 
     @Override
@@ -302,8 +309,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mClockView = findViewById(R.id.clock);
         m24ClockLand = "<strong>HH</strong>:mm";
         m12ClockLand = "<strong>hh</strong>:mm";
-        m24Clock = "<strong>HH</strong><br>mm";
-        m12Clock = "<strong>hh</strong><br>mm";
+        m24Clock = !mCompactLayout ? "<strong>HH</strong><br>mm" : m24ClockLand;
+        m12Clock = !mCompactLayout ? "<strong>hh</strong><br>mm" : m12ClockLand;
         m24easterClock = "<strong><font color='#0069ba'>HH</font></strong><br>mm";
         m12easterClock = "<strong><font color='#0069ba'>hh</font></strong><br>mm";
         mClockView.setFormat12Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m12easterClock) : Html.fromHtml(m12Clock));
@@ -316,10 +323,12 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mWeatherWidget = findViewById(R.id.weather_widget);
         mWeatherWidgetClass = new WeatherWidget(mContext, mWeatherWidget, mWeatherDegrees, mWeatherIcon, mWeatherCity);
         mWeatherCity.setOnClickListener(this);
+        mWeatherCity.setVisibility(mCompactLayout ? View.GONE : View.VISIBLE);
         mWeatherDegrees.setOnClickListener(this);
         mWeatherIcon.setOnClickListener(this);
         mWeatherFL.setOnClickListener(this);
         mEventPill = findViewById(R.id.event_pill);
+        mSpaceTop = findViewById(R.id.space_top);
         mQSBHEventListener = findViewById(R.id.event_listener);
         mQSBHEventListener.setOnClickListener(this);
 
@@ -333,6 +342,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mBatteryRemainingIcon.setPercentShowMode(BatteryMeterView.MODE_ESTIMATE);
         mRingerModeTextView.setSelected(true);
         mNextAlarmTextView.setSelected(true);
+        mCustomSettingsObserver.observe();
+        mCustomSettingsObserver.update();
     }
 
     public QuickQSPanel getHeaderQsPanel() {
@@ -439,18 +450,24 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mDateView.setTextAppearance(mContext,isLandscape ? R.style.TextAppearance_DateQSHeaderLand : R.style.TextAppearance_DateQSHeader);
         mWeatherCity.setTextAppearance(mContext,isLandscape ? R.style.TextAppearance_WeatherCityQSHeaderLand : R.style.TextAppearance_WeatherCityQSHeader);
         mWeatherDegrees.setTextAppearance(mContext,isLandscape ? R.style.TextAppearance_WeatherDegreesQSHeaderLand : R.style.TextAppearance_WeatherDegreesQSHeader);
-        mWeatherCity.setVisibility(isLandscape ? View.GONE : View.VISIBLE);
+        mWeatherCity.setVisibility(isLandscape || mCompactLayout ? View.GONE : View.VISIBLE);
         mWeatherDegrees.setVisibility(isLandscape ? View.GONE : View.VISIBLE);
         mWeatherIcon.setVisibility(isLandscape ? View.GONE : View.VISIBLE);
         int qqsIconsMarginBottomPortrait = mContext.getResources().getDimensionPixelSize(R.dimen.qqs_edit_padding_bottom);
         int qqsIconsMarginBottomLand = mContext.getResources().getDimensionPixelSize(R.dimen.qqs_edit_padding_bottom_land);
         int qqsIconsMarginRight = mContext.getResources().getDimensionPixelSize(R.dimen.qqs_edit_margin_right);
+        mSpaceTop.setVisibility(isLandscape ? View.GONE : View.VISIBLE);
+        if (mCompactLayout && !isLandscape) {
+             setMargins(mSettings,0,0,0,0);
+             setMargins(mEdit,0,0,qqsIconsMarginRight,0);
+             return;
+        }
         if (isLandscape) {
             setMargins(mSettings,0,qqsIconsMarginBottomLand,0,qqsIconsMarginBottomLand);
             setMargins(mEdit,0,qqsIconsMarginBottomLand,qqsIconsMarginRight,0);
-        } else {
-            setMargins(mSettings,0,0,0,qqsIconsMarginBottomPortrait);
-            setMargins(mEdit,0,0,qqsIconsMarginRight,qqsIconsMarginBottomPortrait);
+        } else if (!mCompactLayout) {
+             setMargins(mSettings,0,0,0,qqsIconsMarginBottomPortrait);
+             setMargins(mEdit,0,0,qqsIconsMarginRight,qqsIconsMarginBottomPortrait);
         }
 
     }
@@ -603,7 +620,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     }
 
     private void easterCheck() {
-        if (mIsLandscape) return;
+        if (mIsLandscape || !mCompactLayout) return;
         mClockView.setFormat12Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m12easterClock) : Html.fromHtml(m12Clock));
         mClockView.setFormat24Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m24easterClock) : Html.fromHtml(m24Clock));
     }
@@ -650,14 +667,15 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mRoundedCornerPadding = resources.getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
         mStatusBarPaddingTop = resources.getDimensionPixelSize(R.dimen.status_bar_padding_top);
-
+        m24Clock = !mCompactLayout ? "<strong>HH</strong><br>mm" : m24ClockLand;
+        m12Clock = !mCompactLayout ? "<strong>hh</strong><br>mm" : m12ClockLand;
         // Update height for a few views, especially due to landscape mode restricting space.
         /*mHeaderTextContainerView.getLayoutParams().height =
                 resources.getDimensionPixelSize(R.dimen.qs_header_tooltip_height);
         mHeaderTextContainerView.setLayoutParams(mHeaderTextContainerView.getLayoutParams());*/
 
-        mSystemIconsView.getLayoutParams().height = resources.getDimensionPixelSize(
-                com.android.internal.R.dimen.quick_qs_offset_height);
+        mSystemIconsView.getLayoutParams().height = mCompactLayout ?  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
+                                                                                                                       :  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
         mSystemIconsView.setLayoutParams(mSystemIconsView.getLayoutParams());
             RelativeLayout.LayoutParams lpQuickQsBrightness = (RelativeLayout.LayoutParams)
         mQuickQsBrightness.getLayoutParams();
@@ -671,8 +689,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mQuickQsBrightness.setVisibility(View.VISIBLE);
         ViewGroup.LayoutParams lp = getLayoutParams();
         if (mQsDisabled) {
-            lp.height = resources.getDimensionPixelSize(
-                    com.android.internal.R.dimen.quick_qs_offset_height);
+            lp.height = mCompactLayout ?  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
+                                                                :  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
         } else {
             lp.height = WRAP_CONTENT;
         }
@@ -1038,6 +1056,38 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     public void refreshWeatherMetrics(boolean isFahrenheit) {
         if (mWeatherWidgetClass != null)
             mWeatherWidgetClass.convertData(isFahrenheit);
+    }
+
+    private CustomSettingsObserver mCustomSettingsObserver = new CustomSettingsObserver(mHandler);
+    private class CustomSettingsObserver extends ContentObserver {
+
+        CustomSettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                Settings.System.QS_COMPACT_LAYOUT),
+                false, this, UserHandle.USER_ALL);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.System.getUriFor(Settings.System.QS_COMPACT_LAYOUT))) {
+                compactLayout();
+            }
+        }
+
+        public void update() {
+            compactLayout();
+        }
+    }
+
+    private void compactLayout() {
+        mCompactLayout = DescendantSystemUIUtils.settingStatusBoolean("qs_compact_layout", mContext);
+        updateResources();
+        updateStyles(mIsLandscape);
     }
 
 }
