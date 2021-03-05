@@ -24,7 +24,6 @@
     android:clipToPadding="false"
     android:gravity="center_horizontal"
     android:orientation="horizontal"
-    android:paddingTop="0dp"
     android:clickable="true">
 
     <RelativeLayout

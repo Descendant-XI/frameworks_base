@@ -61,6 +61,7 @@
     <dimen name="quick_qs_offset_height_vertical_system">180dp</dimen>
     <dimen name="quick_qs_offset_height_horizontal_system">134dp</dimen>
     <dimen name="space_top_qs">14dp</dimen>
+    <dimen name="qqs_padding_top">0dp</dimen>
 
     <!-- Notifications -->
     <dimen name="notification_side_paddings">14dp</dimen>

@@ -87,6 +87,8 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
     private int mX;
     private int mY;
     private boolean mOpening;
+    private boolean mIsLandscape;
+    private int mQQsPaddingTop;
     private boolean mIsShowingNavBackdrop;
     private UiEventLogger mUiEventLogger = new UiEventLoggerImpl();
 
@@ -139,20 +141,23 @@ public class QSCustomizer extends LinearLayout implements OnMenuItemClickListene
         mLightBarController = lightBarController;
         mKeyguardStateController = keyguardStateController;
         mScreenLifecycle = screenLifecycle;
+        mQQsPaddingTop = mContext.getResources().getDimensionPixelSize(R.dimen.qqs_padding_top);
         updateNavBackDrop(getResources().getConfiguration());
     }
 
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        mIsLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+        mQQsPaddingTop = mIsLandscape ? 0 : mContext.getResources().getDimensionPixelSize(R.dimen.qqs_padding_top);
         updateNavBackDrop(newConfig);
         updateResources();
     }
 
     private void updateResources() {
         LayoutParams lp = (LayoutParams) mTransparentView.getLayoutParams();
-        lp.height = mCompactLayout ? mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
-                                                        : mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
+        lp.height = mCompactLayout ? mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system) + mQQsPaddingTop
+                                                        : mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system) + mQQsPaddingTop;
         mTransparentView.setLayoutParams(lp);
     }
 

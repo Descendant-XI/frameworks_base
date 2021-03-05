@@ -76,6 +76,8 @@ public class QSContainerImpl extends FrameLayout {
     private int mSideMargins;
     private boolean mQsDisabled;
     private boolean mCompactLayout;
+    private boolean mIsLandscape;
+    private int mQQsPaddingTop;
     private int mContentPaddingStart = -1;
     private int mContentPaddingEnd = -1;
     private boolean mAnimateBottomOnNextLayout;
@@ -95,6 +97,7 @@ public class QSContainerImpl extends FrameLayout {
         mQSCustomizer = findViewById(R.id.qs_customize);
         mDragHandle = findViewById(R.id.qs_drag_handle_view);
         mBackground = findViewById(R.id.quick_settings_background);
+        mQQsPaddingTop = mContext.getResources().getDimensionPixelSize(R.dimen.qqs_padding_top);
         updateResources();
         mHeader.getHeaderQsPanel().setMediaVisibilityChangedListener((visible) -> {
             if (mHeader.getHeaderQsPanel().isShown()) {
@@ -108,7 +111,6 @@ public class QSContainerImpl extends FrameLayout {
         });
         mCustomSettingsObserver.observe();
         mCustomSettingsObserver.update();
-
         setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
     }
 
@@ -129,6 +131,8 @@ public class QSContainerImpl extends FrameLayout {
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        mIsLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+        mQQsPaddingTop = mIsLandscape ? 0 :  mContext.getResources().getDimensionPixelSize(R.dimen.qqs_padding_top);
         updateResources();
         mSizePoint.set(0, 0); // Will be retrieved on next measure pass.
     }
@@ -203,8 +207,8 @@ public class QSContainerImpl extends FrameLayout {
 
     private void updateResources() {
         LayoutParams layoutParams = (LayoutParams) mQSPanelContainer.getLayoutParams();
-        layoutParams.topMargin = mCompactLayout ? mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
-                                                                                      : mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
+        layoutParams.topMargin = mCompactLayout ? mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system) + mQQsPaddingTop
+                                                                                      : mContext.getResources().getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system) + mQQsPaddingTop;
         mQSPanelContainer.setLayoutParams(layoutParams);
 
         mSideMargins = getResources().getDimensionPixelSize(R.dimen.notification_side_paddings);

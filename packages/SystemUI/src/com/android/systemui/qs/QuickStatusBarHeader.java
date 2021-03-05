@@ -211,7 +211,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
     private boolean mHasTopCutout = false;
     private boolean mCompactLayout;
-    private int mStatusBarPaddingTop = 0;
+    private int mQQsPaddingTop;
     private int mRoundedCornerPadding = 0;
     private final int BRIGHTNESS_EXP_PORTRAIT = 800;
     private final int BRIGHTNESS_EXP_LANDSCAPE = 0;
@@ -290,6 +290,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mSettings.setOnClickListener(this);
         mWeatherFL = findViewById(R.id.weather_first_line);
         mWeatherIcon = findViewById(R.id.weather_icon);
+        mQQsPaddingTop = mContext.getResources().getDimensionPixelSize(R.dimen.qqs_padding_top);
         updateResources();
 
         Rect tintArea = new Rect(0, 0, 0, 0);
@@ -433,9 +434,10 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     @Override
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        updateResources();
         mIsLandscape = newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE;
+        mQQsPaddingTop = mIsLandscape ? 0 : mContext.getResources().getDimensionPixelSize(R.dimen.qqs_padding_top);
         mQuickQsBrightnessExpFrac =mIsLandscape ? BRIGHTNESS_EXP_LANDSCAPE : BRIGHTNESS_EXP_PORTRAIT;
+        updateResources();
         if (mIsLandscape)
             mWeatherWidgetClass.dismissDialog();
         updateStyles(mIsLandscape);
@@ -666,16 +668,16 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
         mRoundedCornerPadding = resources.getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
-        mStatusBarPaddingTop = resources.getDimensionPixelSize(R.dimen.status_bar_padding_top);
         m24Clock = !mCompactLayout ? "<strong>HH</strong><br>mm" : m24ClockLand;
         m12Clock = !mCompactLayout ? "<strong>hh</strong><br>mm" : m12ClockLand;
         // Update height for a few views, especially due to landscape mode restricting space.
         /*mHeaderTextContainerView.getLayoutParams().height =
                 resources.getDimensionPixelSize(R.dimen.qs_header_tooltip_height);
         mHeaderTextContainerView.setLayoutParams(mHeaderTextContainerView.getLayoutParams());*/
-
-        mSystemIconsView.getLayoutParams().height = mCompactLayout ?  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system)
-                                                                                                                       :  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system);
+        Log.d("Dil3mm4", "msbpt " + String.valueOf(mQQsPaddingTop));
+        mSystemIconsView.getLayoutParams().height = mCompactLayout ?  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_horizontal_system) + mQQsPaddingTop
+                                                                                                                       :  resources.getDimensionPixelSize(R.dimen.quick_qs_offset_height_vertical_system) + mQQsPaddingTop;
+        mSystemIconsView.setPadding(0,mIsLandscape ? resources.getDimensionPixelSize(R.dimen.space_top_qs) / 3 : mQQsPaddingTop,0,0);
         mSystemIconsView.setLayoutParams(mSystemIconsView.getLayoutParams());
             RelativeLayout.LayoutParams lpQuickQsBrightness = (RelativeLayout.LayoutParams)
         mQuickQsBrightness.getLayoutParams();
@@ -839,19 +841,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
             int contentMarginRight = isLayoutRtl() ? mContentMarginStart : mContentMarginEnd;
             clockPaddingRight = Math.max(cutoutPadding - contentMarginRight - rightMargin, 0);
         }
-        //checkdis
-        mClockView.setPadding(clockPaddingLeft,
-                mWaterfallTopInset,
-                clockPaddingRight,
-                0);
-        mDateView.setPadding(clockPaddingLeft,
-                mWaterfallTopInset,
-                clockPaddingRight,
-                0);
-        mWeatherFL.setPadding(clockPaddingLeft,
-                mWaterfallTopInset,
-                clockPaddingRight,
-                0);
 
     }
 
