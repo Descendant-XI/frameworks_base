@@ -138,7 +138,6 @@ public class FaceService extends BiometricServiceBase {
 
         @Override
         public void onAuthenticated(int faceId, int userId, byte[] token) {
-            if (token == null) return;
             mHandler.post(new Runnable() {
                 @Override
                 public final void run() {
