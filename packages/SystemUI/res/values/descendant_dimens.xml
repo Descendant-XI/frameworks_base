@@ -60,7 +60,7 @@
     <dimen name="qs_header_tooltip_height">0dp</dimen>
 
     <!-- Notifications -->
-    <dimen name="notification_side_paddings">12dp</dimen>
+    <dimen name="notification_side_paddings">14dp</dimen>
 
     <!-- Weather extended widget -->
     <dimen name="weather_ex_widget_icon_size">26dp</dimen>
