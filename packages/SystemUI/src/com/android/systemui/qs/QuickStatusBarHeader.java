@@ -471,6 +471,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
              setMargins(mSettings,0,0,0,qqsIconsMarginBottomPortrait);
              setMargins(mEdit,0,0,qqsIconsMarginRight,qqsIconsMarginBottomPortrait);
         }
+        updateResources();
 
     }
 
@@ -664,8 +665,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
 
     private void updateResources() {
         Resources resources = mContext.getResources();
-        updateMinimumHeight();
-
         mRoundedCornerPadding = resources.getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
         m24Clock = !mCompactLayout ? "<strong>HH</strong><br>mm" : m24ClockLand;
@@ -700,6 +699,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         updateBrightnessAlphaAnimator();
         updateStatusIconAlphaAnimator();
         updateHeaderTextContainerAlphaAnimator();
+        updateMinimumHeight();
     }
 
     private void updateBrightnessAlphaAnimator() {
@@ -1076,7 +1076,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private void compactLayout() {
         mCompactLayout = DescendantSystemUIUtils.settingStatusBoolean("qs_compact_layout", mContext);
         updateResources();
-        updateStyles(mIsLandscape);
+        updateStyles(mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
     }
 
 }
