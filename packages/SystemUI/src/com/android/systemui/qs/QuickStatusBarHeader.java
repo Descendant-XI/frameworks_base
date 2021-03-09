@@ -228,8 +228,7 @@ public class QuickStatusBarHeader extends RelativeLayout implements
     private String m12Clock;
     private String m24ClockLand;
     private String m12ClockLand;
-    private String m24easterClock;
-    private String m12easterClock;
+
 
     private View mSpaceTop;
 
@@ -312,10 +311,8 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         m12ClockLand = "<strong>hh</strong>:mm";
         m24Clock = !mCompactLayout ? "<strong>HH</strong><br>mm" : m24ClockLand;
         m12Clock = !mCompactLayout ? "<strong>hh</strong><br>mm" : m12ClockLand;
-        m24easterClock = "<strong><font color='#0069ba'>HH</font></strong><br>mm";
-        m12easterClock = "<strong><font color='#0069ba'>hh</font></strong><br>mm";
-        mClockView.setFormat12Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m12easterClock) : Html.fromHtml(m12Clock));
-        mClockView.setFormat24Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m24easterClock) : Html.fromHtml(m24Clock));
+        mClockView.setFormat12Hour(Html.fromHtml(m12Clock));
+        mClockView.setFormat24Hour(Html.fromHtml(m24Clock));
         mClockView.setOnClickListener(this);
         mDateView = findViewById(R.id.date);
         mWeatherCity = findViewById(R.id.weather_city);
@@ -622,21 +619,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         }).alpha(0);
     }
 
-    private void easterCheck() {
-        if (mIsLandscape || !mCompactLayout) return;
-        mClockView.setFormat12Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m12easterClock) : Html.fromHtml(m12Clock));
-        mClockView.setFormat24Hour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) == 11 ? Html.fromHtml(m24easterClock) : Html.fromHtml(m24Clock));
-    }
-
-    private BroadcastReceiver mTickReceiver = new BroadcastReceiver(){
-        @Override
-            public void onReceive(Context context, Intent intent) {
-                    if(intent.getAction().compareTo(Intent.ACTION_TIME_TICK) == 0) {
-                                easterCheck();
-                    }
-            }
-    };
-
     public void dismissWeatherEx() {
         mWeatherWidgetClass.dismissDialog();
     }
@@ -797,7 +779,6 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         });
         mStatusBarIconController.addIconGroup(mIconManager);
         requestApplyInsets();
-        mContext.registerReceiver(mTickReceiver, new IntentFilter(Intent.ACTION_TIME_TICK));
     }
 
     @Override
