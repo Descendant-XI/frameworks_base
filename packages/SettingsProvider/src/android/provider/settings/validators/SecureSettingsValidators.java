@@ -183,7 +183,7 @@ public class SecureSettingsValidators {
         VALIDATORS.put(Secure.ASSIST_GESTURE_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, BOOLEAN_VALIDATOR);
         VALIDATORS.put(Secure.ASSIST_GESTURE_WAKE_ENABLED, BOOLEAN_VALIDATOR);
-        VALIDATORS.put(Secure.VR_DISPLAY_MODE, new DiscreteValueValidator(new String[] {"0", "1"}));
+        VALIDATORS.put(Secure.DOZE_ALWAYS_ON_AUTO_MODE, new DiscreteValueValidator(new String[] {"0", "1", "2", "3", "4"}));
         VALIDATORS.put(Secure.NOTIFICATION_BADGING, BOOLEAN_VALIDATOR);
         VALIDATORS.put(Secure.NOTIFICATION_DISMISS_RTL, BOOLEAN_VALIDATOR);
         VALIDATORS.put(Secure.QS_AUTO_ADDED_TILES, TILE_LIST_VALIDATOR);
