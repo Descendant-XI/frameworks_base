@@ -2036,6 +2036,7 @@ public final class SystemServer {
                 mSystemServiceManager.startService(LiveDisplayService.class);
                 t.traceEnd();
             }
+        }
 
         if (!isWatch) {
             t.traceBegin("StartMediaProjectionManager");
