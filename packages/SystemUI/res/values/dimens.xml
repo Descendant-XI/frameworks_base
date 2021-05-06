@@ -158,9 +158,6 @@
     <!-- a threshold in dp per second that is considered fast scrolling -->
     <dimen name="scroll_fast_threshold">1500dp</dimen>
 
-    <!-- Height of a the shelf with the notification icons -->
-    <dimen name="notification_shelf_height">32dp</dimen>
-
     <!-- Minimum height of a notification to be interactable -->
     <dimen name="notification_min_interaction_height">40dp</dimen>
 

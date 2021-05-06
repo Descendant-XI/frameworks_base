@@ -74,6 +74,9 @@
     <dimen name="weather_ex_widget_text_size">18dp</dimen>
     <dimen name="weather_ex_widget_margin_start">4dp</dimen>
 
+    <!-- Height of a the shelf with the notification icons -->
+    <dimen name="notification_shelf_height">40dp</dimen>
+
     <!-- QS Footer -->
     <!-- The height of the quick settings footer that holds the user switcher, settings icon,
     etc. -->
