@@ -6,6 +6,6 @@
     <color name="ringer_icon_tint">@color/accent_mirror</color>
     <color name="ripple_colors">#555555</color>
     <color name="weather_card">@*android:color/primary_dark_device_default_settings</color>
-    <color name="qs_tile_background_color_disabled">#0fffffff</color>
     <color name="brightness_bkg">#cc000000</color>
+
 </resources>
