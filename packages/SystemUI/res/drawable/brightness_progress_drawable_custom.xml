@@ -16,8 +16,8 @@
     <item android:id="@android:id/background">
         <shape android:shape="rectangle"
             android:tint="?android:attr/colorAccent">
-            <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
-                     android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
+            <corners android:topLeftRadius="0dip" android:topRightRadius="0dip"
+                     android:bottomLeftRadius="20dip " android:bottomRightRadius="20dip "/>
             <size android:height="@dimen/brightness_drawable_height" />
             <solid android:color="?android:attr/colorAccent" />
         </shape>
@@ -26,8 +26,8 @@
     <item>
         <shape android:shape="rectangle"
             android:tint="@color/brightness_bkg">
-            <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
-                     android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
+            <corners android:topLeftRadius="0dip" android:topRightRadius="0dip"
+                     android:bottomLeftRadius="20dip " android:bottomRightRadius="20dip "/>
             <size android:height="@dimen/brightness_drawable_height" />
             <solid android:color="@color/brightness_bkg" />
         </shape>
@@ -41,8 +41,8 @@
                 <item>
                     <shape android:shape="rectangle"
                         android:tint="?android:attr/colorAccent">
-                        <corners android:topLeftRadius="0dp" android:topRightRadius="0dp"
-                                 android:bottomLeftRadius="10dp " android:bottomRightRadius="10dp "/>
+                        <corners android:topLeftRadius="0dip" android:topRightRadius="0dip"
+                                 android:bottomLeftRadius="20dip " android:bottomRightRadius="20dip "/>
                         <size android:height="@dimen/brightness_drawable_height" />
                         <solid android:color="?android:attr/colorAccent" />
                     </shape>
