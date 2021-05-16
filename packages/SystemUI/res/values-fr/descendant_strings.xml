@@ -1,0 +1,104 @@
+<resources>
+    <string name="unknown_battery_level">Inconnu</string>
+    <!-- Change clockface -->
+    <string name="change_clock_face">Balayez pour changer le cadran d\'horloge</string>
+    <string name="clock_title_samsung" translatable="false">Samsung</string>
+    <string name="clock_title_samsung_bold" translatable="false">Samsung (épais)</string>
+    <string name="clock_title_squary_clock">Horloge Cal</string>
+    <string name="clock_title_squary_clock_extended">Horloge Squary étendue</string>
+    <!-- Descendant Health-->
+    <string name="descendant_health_appname">Santé Descendant</string>
+    <string name="descendant_health_eyestrain_title">Alerte de fatigue oculaire</string>
+    <string name="descendant_health_eyestrain_summary">Il semble que vous ayez utilisé votre téléphone pendant une heure en continu. \nEnvisagez de faire une pause, cela peut réduire l\’incidence de la fatigue oculaire.</string>
+    <string name="descendant_health_eyestrain_knowledge">https://fr.wikipedia.org/wiki/Fatigue_oculaire</string>
+    <string name="descendant_health_eyestrain_info">À propos de la fatigue oculaire</string>
+    <string name="descendant_health_eyestrain_nightlight">Configurer le rétroéclairage de nuit</string>
+
+    <string name="descendant_health_sleep_title">Conseiller en sommeil</string>
+    <string name="descendant_health_sleep_summary">Il semble qu\'une alarme va sonner. \nSi votre téléphone trouble votre sommeil avec des notifications, configurez Ne pas déranger.</string>
+    <string name="descendant_health_sleep_dnd">Configurer Ne pas déranger</string>
+
+    <!-- Descendant Guardia -->
+    <!-- Descendant Guardia -->
+    <string name="descendant_guardia_phone_perm">téléphone</string>
+    <string name="descendant_guardia_record_audio_perm">micro</string>
+    <string name="descendant_guardia_camera_perm">appareil photo</string>
+    <string name="descendant_guardia_gps_perm">GPS</string>
+    <string name="descendant_guardia_application_with_package_name">Application</string>
+    <string name="descendant_guardia_is_accessing">accède</string>
+    <string name="descendant_guardia_listening_state">Écoute des applications...</string>
+    <string name="descendant_guardia_clipboard_read">presse-papiers avec autorisation de lecture</string>
+    <string name="descendant_guardia_clipboard_write">presse-papiers avec autorisation d\'écriture</string>
+    <string name="descendant_guardia_monitoring">Surveillance</string>
+    <string name="descendant_guardia_detection">Detection</string>
+    <string name="descendant_guardia_appname">Descendant Guardia</string>
+    <string name="descendant_guardia_acknowledge">Reconnu</string>
+
+    <!-- Calendar qsbh -->
+    <string name="qsbh_calendar_noevents">Pas d\'évènement</string>
+    <string name="qsbh_calendar_events">Évènement</string>
+    <string name="qsbh_alarm_events">Alarme:</string>
+
+    <!-- Weather -->
+    <string name="weather_city_unknown">Recherche...</string>
+    <string name="weather_degrees_unknown">\?\? &#160;</string>
+    <string name="weather_enable_gps">Tapez pour activer</string>
+
+    <!-- Weather widget extended -->
+    <!-- CHAR LIMIT=12-->
+    <string name="weather_ex_widget_weather">Météo</string>
+    <string name="weather_ex_widget_temp">Temperature</string>
+    <string name="weather_ex_widget_temp_max">Max</string>
+    <string name="weather_ex_widget_temp_min">Min</string>
+    <string name="weather_ex_widget_wind">Vent</string>
+    <string name="weather_ex_widget_wind_speed">Vitesse</string>
+    <string name="weather_ex_widget_wind_degrees">Degrés</string>
+    <string name="weather_ex_widget_perception">Perception</string>
+    <string name="weather_ex_widget_perception_feels_like">Ressenti</string>
+    <string name="weather_ex_widget_perception_humidity">Humidite</string>
+    <string name="weather_ex_widget_sight">Site</string>
+    <string name="weather_ex_widget_sight_visibility">Visibilité</string>
+    <string name="weather_ex_widget_sight_cloudiness">Nébulosité</string>
+
+    <!-- Mono QS Tile -->
+    <string name="quick_settings_monotoggle_tile">Mode audio</string>
+    <string name="quick_settings_monotoggle_tile_mono">Audio mono</string>
+    <string name="quick_settings_monotoggle_tile_stereo">Audio stéréo</string>
+
+    <!-- Advance location quick setting tile -->
+    <string name="quick_settings_secondary_location_off"></string>
+    <string name="quick_settings_location_secondary_battery_saving">Économie de batterie</string>
+    <string name="accessibility_quick_settings_location_battery_saving">Localisation: mode d\'économie de batterie</string>
+    <string name="quick_settings_location_secondary_gps_only">Capteurs uniquement</string>
+    <string name="accessibility_quick_settings_location_gps_only">Localisation: mode capteurs uniquement</string>
+    <string name="quick_settings_location_secondary_high_accuracy">Haute précision</string>
+    <string name="accessibility_quick_settings_location_high_accuracy">Localisation: mode haute précision.</string>
+
+    <!-- Headphones Buddy -->
+    <string name="hp_buddy">Casque Buddy</string>
+    <string name="hp_buddy_left">Uniquement gauche</string>
+    <string name="hp_buddy_right">Uniquement droit</string>
+    <string name="hp_buddy_center">Les deux</string>
+    <string name="hp_buddy_not_connected">Connectez votre casque</string>
+
+    <!-- Autobrightness tile -->
+    <string name="quick_settings_autobrightness_label">Luminosite \nautomatique</string>
+
+    <!-- App Lock -->
+    <string name="applock_locked">&#160;est verrouillé</string>
+    <string name="applock_fingerprint_face">, empreinte digitale ou votre visage pour déverrouiller</string>
+    <string name="applock_face">&#160;ou votre visage pour déverrouiller</string>
+    <string name="applock_fingerprint">&#160;ou votre empreinte digitale pour déverrouiller</string>
+    <string name="applock_credential">&#160;pour déverrouiller</string>
+    <string name="applock_unlock">Déverrouiller</string>
+
+    <!-- statusbar icons -->
+    <string name="statusbar_items_title">Icônes de barre de statut</string>
+
+    <!-- Name of the VPN status bar icon. -->
+    <string name="status_bar_vpn">VPN</string>
+
+    <!-- Name of the volte/vowifi status bar icon. -->
+    <string name="status_bar_ims">VoLTE/VoWiFi</string>
+
+</resources>
