@@ -347,12 +347,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
                 com.android.internal.R.string.status_bar_microphone));
         ignored.add("zen");
         ignored.add("volume");
-        ignored.add("location");
-        ignored.add("bluetooth");
+        //ignored.add("location");
+        //ignored.add("bluetooth");
         ignored.add("alarm_clock");
         ignored.add("speakerphone");
-        ignored.add("vpn");
-        ignored.add("hotspot");
+        //ignored.add("hotspot");
         ignored.add("networktraffic");
         return ignored;
     }
@@ -480,6 +479,11 @@ public class QuickStatusBarHeader extends RelativeLayout implements
         mEdit.setImageTintList(ColorStateList.valueOf(textColor));
         mSettings.setImageTintList(ColorStateList.valueOf(textColor));
         mWeatherIcon.setImageTintList(ColorStateList.valueOf(textColor));
+        int colorForeground = Utils.getColorAttrDefaultColor(getContext(),
+        android.R.attr.colorForeground);
+        float intensity = getColorIntensity(colorForeground);
+        int fillColor = mDualToneHandler.getSingleColor(intensity);
+        mIconManager.setTint(fillColor);
     }
 
     private void showQSEdit(View view) {

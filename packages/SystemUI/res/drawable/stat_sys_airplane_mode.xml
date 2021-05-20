@@ -17,4 +17,5 @@
 */
 -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:tint="?android:attr/colorForeground"
     android:drawable="@*android:drawable/ic_qs_airplane" />
